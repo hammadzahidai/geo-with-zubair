@@ -159,6 +159,8 @@ const GlobalStyles = () => (
     .btn-ghost:hover {
       border-color: #d4a87a;
       color: #d4a87a;
+      background: rgba(212,168,122,0.06);
+      transform: translateY(-1px);
     }
 
     /* Service card */
@@ -183,9 +185,13 @@ const GlobalStyles = () => (
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       padding: 36px;
-      transition: border-color 0.25s ease;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .glass-card:hover { border-color: rgba(255,255,255,0.14); }
+    .glass-card:hover {
+      border-color: rgba(212,168,122,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.25);
+    }
 
     /* Why card */
     .why-card {
@@ -193,12 +199,14 @@ const GlobalStyles = () => (
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 16px;
       padding: 36px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      border-top: 2px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
     .why-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       background: rgba(255,255,255,0.05);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.2);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.22), 0 0 0 1px rgba(212,168,122,0.08);
+      border-top-color: rgba(212,168,122,0.5);
     }
 
     /* FAQ item */
@@ -208,9 +216,13 @@ const GlobalStyles = () => (
       border-radius: 12px;
       border-left: 3px solid transparent;
       overflow: hidden;
-      transition: border-color 0.25s ease, background 0.25s ease;
+      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
     }
-    .faq-item:hover { background: rgba(255,255,255,0.05); }
+    .faq-item:hover {
+      background: rgba(255,255,255,0.05);
+      border-left-color: rgba(212,168,122,0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
     .faq-item.open { border-left-color: #d4a87a; }
 
     /* Form inputs */
@@ -248,9 +260,15 @@ const GlobalStyles = () => (
       border-radius: 16px;
       padding: 32px;
       border: 1px solid rgba(255,255,255,0.06);
-      transition: background 0.25s ease;
+      border-top: 2px solid transparent;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
-    .testimonial-card:hover { background: rgba(255,255,255,0.05); }
+    .testimonial-card:hover {
+      background: rgba(255,255,255,0.055);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+      border-top-color: rgba(212,168,122,0.4);
+    }
 
     /* Metric card */
     .metric-card {
@@ -259,6 +277,14 @@ const GlobalStyles = () => (
       border-radius: 16px;
       padding: 40px 36px;
       text-align: center;
+      border-bottom: 2px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+    .metric-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.055);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.2), 0 0 24px rgba(212,168,122,0.06);
+      border-bottom-color: rgba(212,168,122,0.45);
     }
     @media (max-width: 480px) {
       .metric-card { padding: 24px 12px; }
@@ -347,9 +373,35 @@ const GlobalStyles = () => (
       letter-spacing: 0.03em;
       color: #a09890;
       text-decoration: none;
-      transition: color 0.2s ease;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.25s ease, transform 0.2s ease;
     }
-    .nav-link:hover { color: #d4a87a; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, #c8956c, #e8c896);
+      border-radius: 2px;
+      transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-link:hover {
+      color: #d4a87a;
+      transform: translateY(-1px);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Logo hover */
+    .nav-logo {
+      transition: transform 0.22s ease, filter 0.22s ease;
+    }
+    .nav-logo:hover {
+      transform: translateY(-1px);
+      filter: drop-shadow(0 0 8px rgba(212,168,122,0.35));
+    }
 
     /* Video container */
     .video-container {
@@ -536,6 +588,13 @@ const GlobalStyles = () => (
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
       text-align: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      cursor: default;
+    }
+    .mini-stat:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(212,168,122,0.25);
+      transform: translateY(-2px);
     }
     .mini-stat .num {
       font-family: 'Instrument Serif', serif;
@@ -610,9 +669,14 @@ const GlobalStyles = () => (
       border-radius: 16px;
       padding: 36px;
       border-left: 4px solid transparent;
-      transition: background 0.25s ease;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .opportunity-card:hover { background: rgba(255,255,255,0.05); }
+    .opportunity-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-left-color: rgba(212,168,122,0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+    }
 
     /* Star rating */
     .star { color: #d4a87a; }
@@ -635,6 +699,67 @@ const GlobalStyles = () => (
       background: linear-gradient(90deg, #d4a87a, #c08a58);
       border-radius: 2px;
       margin: 16px 0 24px;
+    }
+
+    /* Ambient section glow */
+    @keyframes ambientPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50%       { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+    }
+    .ambient-glow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-glow-top {
+      top: -80px;
+      width: 700px; height: 320px;
+      background: radial-gradient(ellipse, rgba(212,168,122,0.07) 0%, transparent 68%);
+      animation: ambientPulse 7s ease-in-out infinite;
+    }
+    .ambient-glow-bottom {
+      bottom: -60px;
+      width: 500px; height: 220px;
+      background: radial-gradient(ellipse, rgba(212,168,122,0.05) 0%, transparent 65%);
+      animation: ambientPulse 9s ease-in-out infinite reverse;
+    }
+
+    /* Subtle grid for non-hero sections */
+    .section-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,168,122,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,122,0.018) 1px, transparent 1px);
+      background-size: 72px 72px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* CTA button pulse rings */
+    @keyframes ripple {
+      0%   { transform: scale(1);   opacity: 0.35; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    .btn-pulse-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+    .btn-pulse-wrap::before,
+    .btn-pulse-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: rgba(212,168,122,0.25);
+      pointer-events: none;
+      animation: ripple 2.4s ease-out infinite;
+    }
+    .btn-pulse-wrap::after {
+      animation-delay: 1.2s;
     }
 
     /* Hero radial glow */
@@ -799,9 +924,11 @@ function Navbar({ onBookCall }) {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
-          <a href="#hero" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ color: '#d4a87a', fontSize: 16 }}>◆</span>
-            <span className="font-serif logo-gradient" style={{ fontSize: 22, fontWeight: 400, letterSpacing: '-0.01em' }}>Geophinx</span>
+            <span className="font-serif" style={{ fontSize: 22, fontWeight: 400, letterSpacing: '-0.01em' }}>
+              <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span>
+            </span>
           </a>
 
           {/* Desktop Nav */}
@@ -984,13 +1111,15 @@ function Hero({ onBookCall }) {
 
         {/* CTA Row */}
         <div className="reveal reveal-delay-2" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
-          <button
-            className="btn-copper"
-            style={{ padding: '16px 36px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 8 }}
-            onClick={onBookCall}
-          >
-            Claim Your AI Dominance <ArrowRight size={16} />
-          </button>
+          <div className="btn-pulse-wrap">
+            <button
+              className="btn-copper"
+              style={{ padding: '16px 36px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 8, position: 'relative', zIndex: 1 }}
+              onClick={onBookCall}
+            >
+              Claim Your AI Dominance <ArrowRight size={16} />
+            </button>
+          </div>
           <button
             className="btn-ghost"
             style={{ padding: '16px 36px', borderRadius: 12 }}
@@ -1219,8 +1348,9 @@ function Services() {
   ];
 
   return (
-    <section id="services" style={{ background: '#111111', padding: '80px 32px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+    <section id="services" style={{ background: '#111111', padding: '80px 32px', position: 'relative' }}>
+      <div className="section-grid" />
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
           <div className="label-tag" style={{ marginBottom: 16 }}>Our Services</div>
@@ -1267,8 +1397,9 @@ function Process() {
   ];
 
   return (
-    <section id="process" style={{ background: '#0f0f0f', padding: '80px 32px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+    <section id="process" style={{ background: '#0f0f0f', padding: '80px 32px', position: 'relative' }}>
+      <div className="section-grid" />
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
           <div className="label-tag" style={{ marginBottom: 16 }}>Our Process</div>
@@ -1495,13 +1626,14 @@ function VideoShowcase() {
         <div className="reveal video-grid">
           {/* Left — video embed */}
           <div style={{
-            borderRadius: 14,
-            overflow: 'hidden',
-            border: '1px solid rgba(255,255,255,0.08)',
-            boxShadow: '0 8px 48px rgba(0,0,0,0.4)',
+            borderRadius: 16,
             background: '#0a0a0a',
+            border: '1px solid rgba(212,168,122,0.18)',
+            borderTop: '2px solid rgba(212,168,122,0.42)',
+            boxShadow: '0 12px 56px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04)',
+            padding: '10px',
           }}>
-            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 10, overflow: 'hidden' }}>
               <iframe
                 src="https://www.youtube.com/embed/qlIpNr6Qq4c?rel=0&modestbranding=1"
                 title="Geophinx — Agency Overview"
@@ -1746,8 +1878,10 @@ function BookACall() {
   ];
 
   return (
-    <section ref={calRef} id="book-call" style={{ background: '#141414', padding: '56px 32px 48px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+    <section ref={calRef} id="book-call" style={{ background: '#141414', padding: '56px 32px 48px', position: 'relative', overflow: 'hidden' }}>
+      <div className="ambient-glow ambient-glow-top" />
+      <div className="ambient-glow ambient-glow-bottom" />
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         {/* Label */}
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 32 }}>
@@ -1994,7 +2128,9 @@ function Footer({ onBookCall }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
               <span style={{ color: '#d4a87a', fontSize: 14 }}>◆</span>
-              <span className="font-serif logo-gradient" style={{ fontSize: 20, fontWeight: 400 }}>Geophinx</span>
+              <span className="font-serif" style={{ fontSize: 20, fontWeight: 400 }}>
+                <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span>
+              </span>
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
               The Guardian of Your Brand's AI Search Presence. San Francisco's premier GEO agency.
@@ -2154,6 +2290,8 @@ function FloatingParticles() {
     const animate = () => {
       t += 0.008;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Move particles
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
@@ -2161,13 +2299,38 @@ function FloatingParticles() {
         if (p.x > canvas.width + 2) p.x = -2;
         if (p.y < -2) p.y = canvas.height + 2;
         if (p.y > canvas.height + 2) p.y = -2;
+      });
 
+      // Draw neural network connections
+      const MAX_DIST = 130;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            const alpha = (1 - dist / MAX_DIST) * 0.055;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(212,168,122,${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles on top
+      particles.forEach(p => {
         const opacity = p.baseOpacity * (0.7 + 0.3 * Math.sin(t + p.phase));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.color[0]},${p.color[1]},${p.color[2]},${opacity})`;
         ctx.fill();
       });
+
       animId = requestAnimationFrame(animate);
     };
     animate();
