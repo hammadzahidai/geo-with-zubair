@@ -164,6 +164,23 @@ const GlobalStyles = () => (
     }
 
     /* Service card */
+    .who-we-serve-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .industry-card {
+      background: #fff;
+      border: 1px solid rgba(200,149,108,0.15);
+      border-radius: 16px;
+      padding: 32px 28px;
+      border-top: 3px solid #c8956c;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .industry-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(200,149,108,0.12);
+    }
     .service-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
@@ -536,16 +553,25 @@ const GlobalStyles = () => (
     /* Calendly wrapper */
     .calendly-wrapper {
       background: #ffffff;
-      border-radius: 14px;
+      border-radius: 16px;
       border-top: 3px solid #d4a87a;
       box-shadow: 0 4px 30px rgba(100,80,60,0.08);
       overflow: hidden;
     }
     .calendly-wrapper-dark {
-      background: rgba(255,255,255,0.02);
-      box-shadow: 0 4px 40px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-top: 2px solid #d4a87a;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 0 0 1px rgba(212,168,122,0.25), 0 8px 48px rgba(0,0,0,0.5);
+      overflow: hidden;
+      position: relative;
+    }
+    .calendly-wrapper-dark::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #d4a87a 30%, #e8c896 50%, #d4a87a 70%, transparent);
+      z-index: 2;
     }
     .book-grid {
       display: grid;
@@ -555,6 +581,11 @@ const GlobalStyles = () => (
     }
     @media (max-width: 860px) {
       .book-grid { grid-template-columns: 1fr; gap: 28px; }
+      .edge-callout-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+      .who-we-serve-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .who-we-serve-grid { grid-template-columns: 1fr; }
     }
     .video-grid {
       display: grid;
@@ -568,11 +599,20 @@ const GlobalStyles = () => (
     .value-point {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 14px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14.5px;
-      color: #a09890;
-      line-height: 1.5;
+      font-size: 15px;
+      color: #c0b8b0;
+      line-height: 1.55;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .value-point:hover {
+      border-color: rgba(212,168,122,0.2);
+      background: rgba(212,168,122,0.04);
     }
     .value-point svg { flex-shrink: 0; margin-top: 2px; }
     .mini-stat-row {
@@ -583,22 +623,22 @@ const GlobalStyles = () => (
     .mini-stat {
       flex: 1;
       min-width: 90px;
-      padding: 14px 12px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
+      padding: 18px 12px;
+      background: rgba(212,168,122,0.06);
+      border: 1px solid rgba(212,168,122,0.15);
+      border-radius: 12px;
       text-align: center;
       transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
       cursor: default;
     }
     .mini-stat:hover {
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(212,168,122,0.25);
+      background: rgba(212,168,122,0.1);
+      border-color: rgba(212,168,122,0.3);
       transform: translateY(-2px);
     }
     .mini-stat .num {
       font-family: 'Instrument Serif', serif;
-      font-size: 20px;
+      font-size: 22px;
       color: #d4a87a;
       display: block;
       line-height: 1.2;
@@ -606,11 +646,14 @@ const GlobalStyles = () => (
     .mini-stat .lbl {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
-      color: #6b6560;
-      letter-spacing: 0.02em;
-      margin-top: 2px;
+      color: #8a8580;
+      letter-spacing: 0.03em;
+      margin-top: 4px;
       display: block;
     }
+
+    /* Section readability removed — filter: brightness on sections forces
+       GPU compositing layers per section and causes scroll jank */
 
     /* Floating mobile CTA */
     .mobile-fab {
@@ -656,8 +699,8 @@ const GlobalStyles = () => (
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(212,168,122,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,168,122,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(212,168,122,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,122,0.055) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
     }
@@ -732,8 +775,8 @@ const GlobalStyles = () => (
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(212,168,122,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,168,122,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(212,168,122,0.065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,122,0.065) 1px, transparent 1px);
       background-size: 72px 72px;
       pointer-events: none;
       z-index: 0;
@@ -770,7 +813,6 @@ const GlobalStyles = () => (
       width: 1100px; height: 600px;
       background: radial-gradient(ellipse at center top, rgba(212,168,122,0.18) 0%, rgba(212,168,122,0.06) 40%, transparent 70%);
       pointer-events: none;
-      animation: ambientPulse 10s ease-in-out infinite;
     }
 
     /* Hero floating orbs */
@@ -907,8 +949,8 @@ function Navbar({ onBookCall }) {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ color: '#d4a87a', fontSize: 16 }}>◆</span>
-            <span className="font-serif" style={{ fontSize: 22, fontWeight: 400, letterSpacing: '-0.01em' }}>
+            <span style={{ color: '#d4a87a', fontSize: 20 }}>◆</span>
+            <span className="font-serif" style={{ fontSize: 28, fontWeight: 400, letterSpacing: '-0.01em' }}>
               <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span>
             </span>
           </a>
@@ -1052,15 +1094,28 @@ function Hero({ onBookCall }) {
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 52 }}>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: 18,
-            lineHeight: 1.7,
-            color: '#a09890',
-            maxWidth: 640,
-            margin: '0 auto',
+            fontSize: 17,
+            lineHeight: 1.55,
+            color: '#9a928a',
+            maxWidth: 580,
+            margin: '0 auto 18px',
+            letterSpacing: '0.01em',
           }}>
-            When a potential client asks ChatGPT "best divorce lawyer in San Francisco" or "top beauty
-            spa near me" — does your business come up confidently and consistently? Showing up once
-            isn't enough. <strong style={{ color: '#f0ece4' }}>Geophinx makes AI recommend you — every time, ahead of your competitors.</strong>
+            When a potential client asks ChatGPT "best divorce lawyer in San Francisco"
+            or "top beauty spa near me" — does your business come up confidently?
+            Generative Engine Optimization (GEO) is how you change that.
+          </p>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 18,
+            fontWeight: 600,
+            lineHeight: 1.45,
+            color: '#f0ece4',
+            maxWidth: 500,
+            margin: '0 auto',
+            letterSpacing: '-0.01em',
+          }}>
+            Geophinx makes AI recommend you —<br />every time, ahead of your competitors.
           </p>
         </div>
 
@@ -1161,10 +1216,10 @@ function TheOpportunity() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                'AI chatbots are replacing Google for millions of users every day',
-                "Customers ask ChatGPT 'What's the best [your product]?' — and your brand isn't in the answer",
-                'Traditional SEO alone cannot protect you — organic click-through rates are plummeting',
-                'Your competitors who optimize first will own AI recommendations for years to come',
+                'AI chatbots like ChatGPT and Perplexity are replacing Google for millions of users every day',
+                "Customers ask ChatGPT 'What's the best [your service] near me?' — and your brand isn't in the answer",
+                'Traditional SEO alone cannot protect you — Google AI Overviews are cutting organic click-through rates',
+                'Businesses that invest in GEO now will own AI recommendations in their market for years to come',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#c45c45', flexShrink: 0, marginTop: 7 }} />
@@ -1184,10 +1239,10 @@ function TheOpportunity() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                'Brands optimized for AI search get recommended to millions of potential customers — for free',
-                'GEO today is like SEO in 2005 — the early movers are winning everything',
-                'A single AI citation builds more trust than an entire ad campaign',
-                'One ChatGPT recommendation can deliver thousands of qualified leads overnight',
+                'Brands with strong GEO scores get recommended by ChatGPT, Google AI, and Perplexity — for free, at scale',
+                'Generative Engine Optimization today is like SEO in 2005 — the early movers capture everything',
+                'A single AI citation in ChatGPT or Google AI Overviews builds more trust than an entire ad campaign',
+                'One AI recommendation to a high-intent searcher converts faster than any paid lead',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#d4a87a', flexShrink: 0, marginTop: 7 }} />
@@ -1199,7 +1254,7 @@ function TheOpportunity() {
         </div>
 
         {/* Bottom Stats */}
-        <div className="reveal reveal-delay-3" style={{ display: 'flex', gap: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div className="reveal reveal-delay-3" style={{ display: 'flex', gap: 1, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}>
           {[
             { num: '67%', label: 'of users trust AI recommendations over traditional advertising', color: '#d4a87a' },
             { num: '4.2B', label: 'AI search queries per month — growing 300% year over year', color: '#d4a87a' },
@@ -1217,13 +1272,195 @@ function TheOpportunity() {
           ))}
         </div>
 
+        {/* Competitive Edge Callout */}
+        <div className="reveal" style={{
+          background: 'linear-gradient(160deg, rgba(212,168,122,0.07) 0%, rgba(15,15,15,0.6) 60%)',
+          border: '1px solid rgba(212,168,122,0.2)',
+          borderRadius: 20,
+          padding: '56px 48px 48px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
+          {/* Ambient glow */}
+          <div style={{
+            position: 'absolute', top: -80, left: '50%', transform: 'translateX(-50%)',
+            width: 500, height: 260,
+            background: 'radial-gradient(ellipse, rgba(212,168,122,0.12) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }} />
+
+          {/* Centered headline */}
+          <div style={{ textAlign: 'center', marginBottom: 44, position: 'relative', zIndex: 1 }}>
+            <div className="label-tag" style={{ marginBottom: 16, color: '#d4a87a', display: 'inline-block' }}>Your Competitive Edge</div>
+            <h3 className="font-serif" style={{ fontSize: 'clamp(28px, 4vw, 42px)', color: '#f0ece4', fontWeight: 400, lineHeight: 1.25, margin: '0 auto', maxWidth: 680 }}>
+              The businesses that start GEO today<br />will be <em style={{ color: '#d4a87a' }}>impossible to displace</em> in 12 months.
+            </h3>
+          </div>
+
+          {/* 3 cards in a row */}
+          <div className="edge-callout-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, position: 'relative', zIndex: 1 }}>
+            {[
+              { icon: <Zap size={18} />, title: 'First-Mover Lock-In', desc: "AI models build long-term trust with brands they've cited before. The earlier you optimize, the deeper your AI authority compounds." },
+              { icon: <Target size={18} />, title: 'Outrank Sleeping Competitors', desc: 'Most local businesses have zero GEO presence. Own the AI answer before your competitor even knows the question exists.' },
+              { icon: <TrendingUp size={18} />, title: 'AI as a 24/7 Sales Rep', desc: 'Every time ChatGPT recommends your law firm, spa, or clinic — it\'s a warm referral from a customer already looking to buy.' },
+            ].map((pt) => (
+              <div key={pt.title} style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(212,168,122,0.15)',
+                borderRadius: 14,
+                padding: '28px 24px',
+                display: 'flex', flexDirection: 'column', gap: 12,
+              }}>
+                <div style={{
+                  width: 40, height: 40, borderRadius: 10, flexShrink: 0,
+                  background: 'rgba(212,168,122,0.1)',
+                  border: '1px solid rgba(212,168,122,0.22)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#d4a87a',
+                }}>
+                  {pt.icon}
+                </div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4', lineHeight: 1.3 }}>{pt.title}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#8a8580', lineHeight: 1.65 }}>{pt.desc}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div style={{ textAlign: 'center', marginTop: 36, position: 'relative', zIndex: 1 }}>
+            <button
+              onClick={() => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' })}
+              style={{
+                background: 'linear-gradient(135deg, #d4a87a, #c8956c)',
+                color: '#0f0f0f',
+                border: 'none',
+                borderRadius: 10,
+                padding: '13px 36px',
+                fontSize: 15,
+                fontWeight: 700,
+                fontFamily: "'DM Sans', sans-serif",
+                cursor: 'pointer',
+                letterSpacing: '0.01em',
+              }}
+            >
+              Claim Your Edge — Book a Free Audit →
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
   );
 }
 
 /* ─────────────────────────────────────────────
-   SECTION 4: WHAT IS GEO — DARK
+   SECTION 4: WHO WE SERVE — LIGHT
+───────────────────────────────────────────── */
+function WhoWeServe() {
+  const industries = [
+    {
+      icon: '✨',
+      title: 'Med Spas & Cosmetic Clinics',
+      tagline: 'When someone asks "best med spa near me" — you need to be the name that comes up.',
+      examples: ['Botox & filler clinics', 'Laser treatment centers', 'IV therapy lounges'],
+    },
+    {
+      icon: '⚖️',
+      title: 'Law Firms',
+      tagline: 'AI is the first place injured clients, immigrants, and entrepreneurs look for help.',
+      examples: ['Personal injury', 'Immigration law', 'Business & contract law'],
+    },
+    {
+      icon: '🦷',
+      title: 'Cosmetic & Multi-Location Dentists',
+      tagline: 'Patients search by procedure and neighborhood — be the answer they trust.',
+      examples: ['Invisalign & veneers', 'Implant specialists', 'Multi-location practices'],
+    },
+    {
+      icon: '🏡',
+      title: 'Real Estate Teams & Brokerages',
+      tagline: 'Buyers and sellers ask AI for agent recommendations before they call anyone.',
+      examples: ['Buyer & seller agents', 'Luxury property teams', 'Regional brokerages'],
+    },
+    {
+      icon: '🔨',
+      title: 'Luxury Home Services',
+      tagline: 'High-ticket homeowners research contractors on ChatGPT before requesting a quote.',
+      examples: ['Custom remodeling', 'Solar installation', 'Outdoor living & landscaping'],
+    },
+  ];
+
+  return (
+    <section id="who-we-serve" style={{ background: '#faf9f7', padding: '96px 0' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div style={{
+            display: 'inline-block',
+            background: 'rgba(200,149,108,0.1)',
+            border: '1px solid rgba(200,149,108,0.3)',
+            borderRadius: '100px',
+            padding: '6px 20px',
+            marginBottom: '20px',
+          }}>
+            <span style={{ color: '#c8956c', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Who We Serve</span>
+          </div>
+          <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 'clamp(32px,4vw,48px)', color: '#1a1a1a', marginBottom: '16px', lineHeight: 1.2 }}>
+            Built for Local Service Businesses<br />
+            <em style={{ color: '#c8956c' }}>That Can't Afford to Be Invisible</em>
+          </h2>
+          <p style={{ color: '#666', fontSize: '18px', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7 }}>
+            We specialize in the industries where AI search drives real revenue — and where being the first name mentioned changes everything.
+          </p>
+        </div>
+
+        {/* Industry Cards Grid */}
+        <div className="who-we-serve-grid">
+          {industries.map((ind, i) => (
+            <div key={i} className="industry-card">
+              <div style={{ fontSize: '36px', marginBottom: '16px', lineHeight: 1 }}>{ind.icon}</div>
+              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: '22px', color: '#1a1a1a', marginBottom: '10px', lineHeight: 1.3 }}>{ind.title}</h3>
+              <p style={{ color: '#555', fontSize: '15px', lineHeight: 1.65, marginBottom: '16px' }}>{ind.tagline}</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {ind.examples.map((ex, j) => (
+                  <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#888', fontSize: '13px', marginBottom: '6px' }}>
+                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#c8956c', flexShrink: 0 }} />
+                    {ex}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA nudge */}
+        <div style={{ textAlign: 'center', marginTop: '56px' }}>
+          <p style={{ color: '#888', fontSize: '15px', marginBottom: '20px' }}>Don't see your industry? If AI search drives clients to your competitors, we can help.</p>
+          <a href="#contact" style={{
+            display: 'inline-block',
+            background: 'transparent',
+            border: '1.5px solid #c8956c',
+            color: '#c8956c',
+            padding: '12px 32px',
+            borderRadius: '8px',
+            fontSize: '15px',
+            fontWeight: 600,
+            textDecoration: 'none',
+            transition: 'background 0.2s, color 0.2s',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#c8956c'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#c8956c'; }}
+          >
+            Check If We're a Fit →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SECTION 5: WHAT IS GEO — DARK
 ───────────────────────────────────────────── */
 function WhatIsGeo() {
   const cards = [
@@ -1234,8 +1471,8 @@ function WhatIsGeo() {
     },
     {
       icon: <Target size={20} />,
-      title: 'GEO = Being THE Answer',
-      body: "AI search gives one definitive recommendation. If that recommendation isn't your brand, you simply don't exist in the conversation.",
+      title: 'GEO = Being THE Recommended Answer',
+      body: "AI search gives one definitive recommendation. If that recommendation isn't your brand, you simply don't exist in the conversation — no matter how good your traditional SEO is.",
     },
     {
       icon: <Shield size={20} />,
@@ -1249,12 +1486,12 @@ function WhatIsGeo() {
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="label-tag" style={{ marginBottom: 16 }}>Understanding GEO</div>
+          <div className="label-tag" style={{ marginBottom: 16 }}>What Is GEO?</div>
           <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
-            The New Language of Search
+            Generative Engine Optimization Explained
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 560, margin: '0 auto' }}>
-            Generative Engine Optimization is how your brand becomes the AI's answer.
+            GEO is the practice of optimizing your brand so AI models — ChatGPT, Google AI Overviews, Perplexity — recommend you by name.
           </p>
         </div>
 
@@ -1297,12 +1534,12 @@ function Services() {
     {
       icon: <Code2 size={20} />,
       title: 'Structured Data & Schema',
-      desc: 'Advanced schema markup, entity optimization, and knowledge graph integration for maximum AI comprehension.',
+      desc: 'Advanced schema markup, entity optimization, and knowledge graph signals that help AI models understand and cite your business with confidence.',
     },
     {
       icon: <Globe2 size={20} />,
       title: 'Authority Building & Digital PR',
-      desc: 'Get your business mentioned on the websites and directories that AI tools trust — so they confidently recommend you by name.',
+      desc: 'Build the AI citations and brand mentions across authoritative sources that make ChatGPT and Google AI trust — and recommend — your business by name.',
     },
     {
       icon: <Shield size={20} />,
@@ -1312,7 +1549,7 @@ function Services() {
     {
       icon: <BarChart3 size={20} />,
       title: 'Monitoring & Reporting',
-      desc: 'Clear monthly reports showing exactly how often AI tools mention your business, where you appear, and how you\'re growing.',
+      desc: 'Track your GEO score, AI citation frequency, and brand mention growth across ChatGPT, Perplexity, and Google AI with clear monthly dashboards.',
     },
   ];
 
@@ -1324,11 +1561,11 @@ function Services() {
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
           <div className="label-tag" style={{ marginBottom: 16 }}>Our Services</div>
           <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
-            Comprehensive GEO Solutions
+            Full-Service GEO & AI Search Optimization
           </h2>
           <div className="copper-divider" style={{ margin: '16px auto 24px' }} />
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 600, margin: '0 auto' }}>
-            End-to-end Generative Engine Optimization. Every service engineered to make AI search engines work for your brand.
+            End-to-end Generative Engine Optimization — every service engineered to make ChatGPT, Google AI, and Perplexity recommend your business.
           </p>
         </div>
 
@@ -1360,9 +1597,9 @@ function Process() {
   const steps = [
     { num: '01', title: 'Discovery & AI Audit', desc: "We check how your business currently appears across ChatGPT, Google AI, and Perplexity — and find exactly where you're missing out." },
     { num: '02', title: 'Strategy Blueprint', desc: 'Custom GEO roadmap tailored to your industry, competitors, and growth targets. No cookie-cutter plans.' },
-    { num: '03', title: 'Content & Technical Optimization', desc: 'Execute content restructuring, schema implementation, and technical GEO upgrades across your entire digital presence.' },
-    { num: '04', title: 'Authority & Outreach', desc: 'Strategic PR, citation-building, and authority establishment to make your brand an AI-trusted source across platforms.' },
-    { num: '05', title: 'Monitor, Report, Scale', desc: 'Continuous tracking, monthly dashboards, and iterative optimization for compounding AI visibility growth.' },
+    { num: '03', title: 'GEO Content & Technical Optimization', desc: 'Restructure content, implement schema markup, and deploy technical GEO upgrades so AI models can easily parse, trust, and cite your business.' },
+    { num: '04', title: 'AI Citation & Authority Building', desc: 'Earn brand mentions and citations across the authoritative sources ChatGPT, Perplexity, and Google AI rely on when forming recommendations.' },
+    { num: '05', title: 'Monitor GEO Score & Scale', desc: 'Track AI citation frequency, GEO score, and brand mention growth monthly — then iterate to compound your AI search visibility over time.' },
   ];
 
   return (
@@ -1459,17 +1696,17 @@ function VideoShowcase() {
           </h2>
         </div>
 
-        <div className="reveal video-grid">
-          {/* Left — video embed */}
+        {/* Centered video */}
+        <div className="reveal" style={{ maxWidth: 720, margin: '0 auto' }}>
           <div style={{
-            borderRadius: 16,
+            borderRadius: 18,
             background: '#0a0a0a',
-            border: '1px solid rgba(212,168,122,0.18)',
-            borderTop: '2px solid rgba(212,168,122,0.42)',
-            boxShadow: '0 12px 56px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04)',
+            border: '1px solid rgba(212,168,122,0.22)',
+            borderTop: '2px solid rgba(212,168,122,0.55)',
+            boxShadow: '0 0 0 1px rgba(255,255,255,0.04), 0 20px 80px rgba(0,0,0,0.7), 0 0 60px rgba(212,168,122,0.08)',
             padding: '10px',
           }}>
-            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 10, overflow: 'hidden' }}>
+            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 12, overflow: 'hidden' }}>
               <iframe
                 src="https://www.youtube.com/embed/qlIpNr6Qq4c?rel=0&modestbranding=1"
                 title="Geophinx — Agency Overview"
@@ -1484,38 +1721,35 @@ function VideoShowcase() {
               />
             </div>
           </div>
+        </div>
 
-          {/* Right — context */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, justifyContent: 'center' }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15.5, color: '#a09890', lineHeight: 1.65 }}>
-              See how we turn invisible brands into AI-recommended leaders — real strategies, real results.
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {highlights.map((h, i) => (
-                <div key={i} style={{
-                  display: 'flex', alignItems: 'center', gap: 12,
-                  fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#c0b8b0',
-                }}>
-                  <span style={{ color: '#d4a87a', flexShrink: 0 }}>{h.icon}</span>
-                  {h.text}
-                </div>
-              ))}
+        {/* Highlights row below video */}
+        <div className="reveal" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px 40px', marginTop: 36 }}>
+          {highlights.map((h, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#b0a898',
+            }}>
+              <span style={{ color: '#d4a87a', flexShrink: 0 }}>{h.icon}</span>
+              {h.text}
             </div>
+          ))}
+        </div>
 
-            <button
-              onClick={() => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' })}
-              className="copper-link"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600,
-                color: '#d4a87a', background: 'none', border: 'none', cursor: 'pointer',
-                padding: 0, marginTop: 4,
-              }}
-            >
-              Book your strategy session <ArrowRight size={15} />
-            </button>
-          </div>
+        {/* CTA */}
+        <div className="reveal" style={{ textAlign: 'center', marginTop: 28 }}>
+          <button
+            onClick={() => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' })}
+            className="copper-link"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600,
+              color: '#d4a87a', background: 'none', border: 'none', cursor: 'pointer',
+              padding: 0,
+            }}
+          >
+            Book your strategy session <ArrowRight size={15} />
+          </button>
         </div>
 
       </div>
@@ -1536,11 +1770,11 @@ function FAQ() {
     },
     {
       q: 'How is GEO different from traditional SEO?',
-      a: 'SEO focuses on ranking in traditional search results — the blue links. GEO focuses on getting your brand recommended inside AI-generated answers, summaries, and conversations. Both matter, but GEO is the new frontier where visibility is won or lost.',
+      a: 'SEO (Search Engine Optimization) focuses on ranking in traditional search results — the blue links on Google. GEO (Generative Engine Optimization) focuses on getting your brand recommended inside AI-generated answers on ChatGPT, Google AI Overviews, and Perplexity. Both matter, but GEO is the new frontier where local business visibility is won or lost.',
     },
     {
       q: 'How long until we see results?',
-      a: 'Most clients see measurable improvements in AI visibility within 60-90 days. Significant brand mention increases typically occur within 4-6 months, with compounding growth continuing thereafter.',
+      a: 'Most clients see measurable improvements in AI search visibility within 60–90 days — including more frequent brand mentions in ChatGPT and Perplexity. Significant GEO score increases typically occur within 4–6 months, with compounding growth continuing thereafter.',
     },
     {
       q: 'What AI platforms do you optimize for?',
@@ -1659,17 +1893,21 @@ function BookACall() {
   ];
 
   return (
-    <section ref={calRef} id="book-call" style={{ background: '#141414', padding: '56px 32px 48px', position: 'relative', overflow: 'hidden' }}>
+    <section ref={calRef} id="book-call" style={{ background: '#0f0f0f', padding: '80px 32px 72px', position: 'relative', overflow: 'hidden' }}>
+      <div className="section-grid" />
       <div className="ambient-glow ambient-glow-top" />
       <div className="ambient-glow ambient-glow-bottom" />
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         {/* Label */}
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div className="label-tag" style={{ marginBottom: 12 }}>Book Your Session</div>
-          <h2 className="headline-section h-dark" style={{ margin: '0 auto 10px', maxWidth: 540 }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div className="label-tag" style={{ marginBottom: 14 }}>Book Your Session</div>
+          <h2 className="headline-section h-dark" style={{ margin: '0 auto 12px', maxWidth: 560 }}>
             Your Free GEO Strategy Session
           </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#6b6560', margin: '0 auto', maxWidth: 420 }}>
+            30 minutes. No pitch. Just a clear picture of where you stand and how to get ahead.
+          </p>
         </div>
 
         {/* Two-column grid */}
@@ -1915,7 +2153,7 @@ function Footer({ onBookCall }) {
               </span>
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
-              Helping local businesses and service professionals get recommended by ChatGPT, Google AI, and Perplexity.
+              Generative Engine Optimization (GEO) for local service businesses — get recommended by ChatGPT, Google AI Overviews, and Perplexity.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
               {[
@@ -2054,14 +2292,14 @@ function FloatingParticles() {
       [255, 245, 230],
     ];
 
-    const particles = Array.from({ length: 120 }, () => {
+    const particles = Array.from({ length: 40 }, () => {
       const c = COLORS[Math.floor(Math.random() * COLORS.length)];
       return {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         r: Math.random() * 1.8 + 0.5,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
         baseOpacity: Math.random() * 0.22 + 0.08,
         phase: Math.random() * Math.PI * 2,
         color: c,
@@ -2069,53 +2307,58 @@ function FloatingParticles() {
     });
 
     let t = 0;
-    const animate = () => {
+    let lastFrame = 0;
+    const FPS = 24;
+    const INTERVAL = 1000 / FPS;
+    const MAX_DIST_SQ = 110 * 110; // use squared distance — avoids Math.sqrt
+
+    const animate = (now) => {
+      animId = requestAnimationFrame(animate);
+      if (document.hidden || now - lastFrame < INTERVAL) return;
+      lastFrame = now;
       t += 0.008;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Move particles
-      particles.forEach(p => {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < -2) p.x = canvas.width + 2;
-        if (p.x > canvas.width + 2) p.x = -2;
+        else if (p.x > canvas.width + 2) p.x = -2;
         if (p.y < -2) p.y = canvas.height + 2;
-        if (p.y > canvas.height + 2) p.y = -2;
-      });
+        else if (p.y > canvas.height + 2) p.y = -2;
+      }
 
-      // Draw neural network connections
-      const MAX_DIST = 160;
+      // Batch all connections into a single stroke call
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(212,168,122,0.07)';
+      ctx.lineWidth = 0.6;
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
           const q = particles[j];
           const dx = p.x - q.x;
           const dy = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.11;
-            ctx.beginPath();
+          if (dx * dx + dy * dy < MAX_DIST_SQ) {
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(212,168,122,${alpha})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
           }
         }
       }
+      ctx.stroke();
 
-      // Draw particles on top
-      particles.forEach(p => {
+      // Draw particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         const opacity = p.baseOpacity * (0.7 + 0.3 * Math.sin(t + p.phase));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.color[0]},${p.color[1]},${p.color[2]},${opacity})`;
         ctx.fill();
-      });
-
-      animId = requestAnimationFrame(animate);
+      }
     };
-    animate();
+    animId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animId);
@@ -2133,6 +2376,7 @@ function FloatingParticles() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 0,
+        willChange: 'transform',
       }}
     />
   );
@@ -2158,6 +2402,7 @@ export default function App() {
       <VideoShowcase />
       <BookACall />
       <TheOpportunity />
+      <WhoWeServe />
       <WhatIsGeo />
       <Services />
       <Process />
