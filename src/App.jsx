@@ -715,15 +715,15 @@ const GlobalStyles = () => (
       z-index: 0;
     }
     .ambient-glow-top {
-      top: -80px;
-      width: 700px; height: 320px;
-      background: radial-gradient(ellipse, rgba(212,168,122,0.07) 0%, transparent 68%);
+      top: -100px;
+      width: 900px; height: 400px;
+      background: radial-gradient(ellipse, rgba(212,168,122,0.13) 0%, transparent 68%);
       animation: ambientPulse 7s ease-in-out infinite;
     }
     .ambient-glow-bottom {
-      bottom: -60px;
-      width: 500px; height: 220px;
-      background: radial-gradient(ellipse, rgba(212,168,122,0.05) 0%, transparent 65%);
+      bottom: -80px;
+      width: 650px; height: 280px;
+      background: radial-gradient(ellipse, rgba(212,168,122,0.09) 0%, transparent 65%);
       animation: ambientPulse 9s ease-in-out infinite reverse;
     }
 
@@ -732,8 +732,8 @@ const GlobalStyles = () => (
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(212,168,122,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,168,122,0.018) 1px, transparent 1px);
+        linear-gradient(rgba(212,168,122,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,122,0.04) 1px, transparent 1px);
       background-size: 72px 72px;
       pointer-events: none;
       z-index: 0;
@@ -767,9 +767,10 @@ const GlobalStyles = () => (
       position: absolute;
       top: 0; left: 50%;
       transform: translateX(-50%);
-      width: 800px; height: 500px;
-      background: radial-gradient(ellipse at center top, rgba(212,168,122,0.09) 0%, transparent 70%);
+      width: 1100px; height: 600px;
+      background: radial-gradient(ellipse at center top, rgba(212,168,122,0.18) 0%, rgba(212,168,122,0.06) 40%, transparent 70%);
       pointer-events: none;
+      animation: ambientPulse 10s ease-in-out infinite;
     }
 
     /* Hero floating orbs */
@@ -880,24 +881,6 @@ function useScrollReveal() {
   }, []);
 }
 
-function useCountUp(target, isVisible, duration = 1800) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!isVisible) return;
-    let startTime = null;
-    let raf;
-    const animate = (ts) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) raf = requestAnimationFrame(animate);
-    };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [isVisible, target, duration]);
-  return count;
-}
-
 /* ─────────────────────────────────────────────
    SECTION 1: NAVBAR
 ───────────────────────────────────────────── */
@@ -914,7 +897,6 @@ function Navbar({ onBookCall }) {
   const links = [
     { label: 'Services', href: '#services' },
     { label: 'Process', href: '#process' },
-    { label: 'Results', href: '#results' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -1041,19 +1023,6 @@ function Hero({ onBookCall }) {
 
       <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
 
-        {/* Badge */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 48 }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            border: '1px solid rgba(212,168,122,0.25)',
-            borderRadius: 100,
-            padding: '8px 18px',
-          }}>
-            <span style={{ color: '#d4a87a', fontSize: 10 }}>◆</span>
-            <span className="label-tag" style={{ fontSize: 10 }}>San Francisco's Premier GEO Agency</span>
-          </div>
-        </div>
-
         {/* Hero Headline */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <h1 className="headline-hero" style={{ color: '#ffffff' }}>
@@ -1089,9 +1058,9 @@ function Hero({ onBookCall }) {
             maxWidth: 640,
             margin: '0 auto',
           }}>
-            When your customers ask ChatGPT, Google AI, or Perplexity for a recommendation,
-            which brand do they hear? If it's not yours, you're losing deals to competitors
-            every single day. <strong style={{ color: '#f0ece4' }}>Geophinx makes AI always recommend you.</strong>
+            When a potential client asks ChatGPT "best divorce lawyer in San Francisco" or "top beauty
+            spa near me" — does your business come up confidently and consistently? Showing up once
+            isn't enough. <strong style={{ color: '#f0ece4' }}>Geophinx makes AI recommend you — every time, ahead of your competitors.</strong>
           </p>
         </div>
 
@@ -1322,8 +1291,8 @@ function Services() {
     },
     {
       icon: <Brain size={20} />,
-      title: 'LLM Content Optimization',
-      desc: 'Strategic content restructuring so AI engines cite, recommend, and prioritize your brand in every generated answer.',
+      title: 'AI Content Optimization',
+      desc: 'We rewrite and restructure your content so ChatGPT, Perplexity, and Google AI recommend your business when customers ask for what you offer.',
     },
     {
       icon: <Code2 size={20} />,
@@ -1333,17 +1302,17 @@ function Services() {
     {
       icon: <Globe2 size={20} />,
       title: 'Authority Building & Digital PR',
-      desc: 'Earn citations from sources AI trusts. Strategic placements that make LLMs reference your brand by name.',
+      desc: 'Get your business mentioned on the websites and directories that AI tools trust — so they confidently recommend you by name.',
     },
     {
       icon: <Shield size={20} />,
       title: 'Technical GEO Infrastructure',
-      desc: 'AI crawler optimization, LLMs.txt creation, entity mapping, and the technical foundation for generative search dominance.',
+      desc: 'Behind-the-scenes technical setup that helps AI tools find, understand, and trust your website — so they recommend you with confidence.',
     },
     {
       icon: <BarChart3 size={20} />,
       title: 'Monitoring & Reporting',
-      desc: 'Real-time dashboards tracking brand mentions, citation frequency, and visibility across all AI platforms.',
+      desc: 'Clear monthly reports showing exactly how often AI tools mention your business, where you appear, and how you\'re growing.',
     },
   ];
 
@@ -1389,7 +1358,7 @@ function Services() {
 ───────────────────────────────────────────── */
 function Process() {
   const steps = [
-    { num: '01', title: 'Discovery & AI Audit', desc: "We map your brand's current AI search presence across every major LLM and generative platform. Full gap analysis delivered." },
+    { num: '01', title: 'Discovery & AI Audit', desc: "We check how your business currently appears across ChatGPT, Google AI, and Perplexity — and find exactly where you're missing out." },
     { num: '02', title: 'Strategy Blueprint', desc: 'Custom GEO roadmap tailored to your industry, competitors, and growth targets. No cookie-cutter plans.' },
     { num: '03', title: 'Content & Technical Optimization', desc: 'Execute content restructuring, schema implementation, and technical GEO upgrades across your entire digital presence.' },
     { num: '04', title: 'Authority & Outreach', desc: 'Strategic PR, citation-building, and authority establishment to make your brand an AI-trusted source across platforms.' },
@@ -1470,140 +1439,7 @@ function Process() {
 }
 
 /* ─────────────────────────────────────────────
-   SECTION 7: RESULTS — LIGHT
-───────────────────────────────────────────── */
-function MetricNumber({ target, suffix = '', prefix = '' }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  const count = useCountUp(target, visible);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <span ref={ref} className="font-serif text-copper" style={{ fontSize: 'clamp(48px, 7vw, 72px)', lineHeight: 1 }}>
-      {prefix}{count.toLocaleString()}{suffix}
-    </span>
-  );
-}
-
-function Results() {
-  const testimonials = [
-    {
-      quote: "Geophinx transformed our AI search presence. We went from invisible to being the #1 recommended brand in our category across ChatGPT and Perplexity.",
-      author: 'Sarah Chen',
-      role: 'VP Marketing, TechScale',
-    },
-    {
-      quote: "Their GEO strategy delivered 5x more qualified leads than our traditional SEO campaigns. The team's expertise in AI search is unmatched.",
-      author: 'Marcus Rivera',
-      role: 'CMO, DataBridge AI',
-    },
-    {
-      quote: "Within 3 months, our brand was being cited in 78% of relevant AI-generated responses. Geophinx is the real deal.",
-      author: 'Priya Nakamura',
-      role: 'Founder, CloudNine SaaS',
-    },
-  ];
-
-  const logos = ['TechScale', 'DataBridge AI', 'CloudNine', 'QuantumLeap', 'NexaFlow', 'VeloCity', 'BrightPath', 'CoreSignal'];
-
-  return (
-    <section id="results" style={{ background: '#161616', padding: '80px 32px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="label-tag" style={{ marginBottom: 16 }}>Results</div>
-          <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
-            Real Results. Real Revenue.
-          </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', margin: '0 auto' }}>
-            The numbers behind our client transformations.
-          </p>
-        </div>
-
-        {/* Metric Cards */}
-        <div className="metric-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 48 }}>
-          {[
-            { target: 347, suffix: '%', label: 'Average increase in AI search visibility' },
-            { target: 12, suffix: 'M+', label: 'AI-generated brand mentions delivered' },
-            { target: 89, suffix: '%', label: 'Client retention rate' },
-          ].map((m, i) => (
-            <div key={m.label} className={`reveal reveal-delay-${i + 1} metric-card`}>
-              <MetricNumber target={m.target} suffix={m.suffix} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', marginTop: 14, lineHeight: 1.5 }}>
-                {m.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Testimonials */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginBottom: 80 }}>
-          {testimonials.map((t, i) => (
-            <div key={t.author} className={`reveal reveal-delay-${i + 1} testimonial-card`}>
-              <div style={{ display: 'flex', gap: 3, marginBottom: 20 }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={14} className="star" fill="#d4a87a" />)}
-              </div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#a09890', lineHeight: 1.7, marginBottom: 24, fontStyle: 'italic' }}>
-                "{t.quote}"
-              </p>
-              <div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, color: '#f0ece4' }}>{t.author}</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#8a8580', marginTop: 2 }}>{t.role}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Logo carousel */}
-        <div className="reveal">
-          <div className="label-tag" style={{ textAlign: 'center', marginBottom: 28, color: '#8a8580' }}>
-            Trusted By Innovative Companies
-          </div>
-          <div style={{ overflow: 'hidden', position: 'relative' }}>
-            <div style={{
-              position: 'absolute', left: 0, top: 0, bottom: 0, width: 80,
-              background: 'linear-gradient(90deg, #161616, transparent)', zIndex: 1,
-            }} />
-            <div style={{
-              position: 'absolute', right: 0, top: 0, bottom: 0, width: 80,
-              background: 'linear-gradient(270deg, #161616, transparent)', zIndex: 1,
-            }} />
-            <div className="marquee-track">
-              {[...logos, ...logos].map((logo, i) => (
-                <span
-                  key={i}
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: '#8a8580',
-                    padding: '0 40px',
-                    whiteSpace: 'nowrap',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  {logo}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   SECTION 8: VIDEO SHOWCASE — DARK
+   SECTION 7: VIDEO SHOWCASE — DARK
 ───────────────────────────────────────────── */
 function VideoShowcase() {
   const highlights = [
@@ -1688,74 +1524,15 @@ function VideoShowcase() {
 }
 
 /* ─────────────────────────────────────────────
-   SECTION 9: WHY GEOPHINX — LIGHT
-───────────────────────────────────────────── */
-function WhyGeophinx() {
-  const features = [
-    {
-      icon: <Sparkles size={20} />,
-      title: 'AI-Native Team',
-      desc: "We don't just optimize for AI — we build with it. Our team includes former ML engineers, data scientists, and search strategists from top Silicon Valley firms.",
-    },
-    {
-      icon: <MapPin size={20} />,
-      title: 'SF Based, Global Reach',
-      desc: 'Headquartered in the heart of San Francisco. We partner with ambitious companies — from funded startups to Fortune 500 enterprises — worldwide.',
-    },
-    {
-      icon: <Database size={20} />,
-      title: 'Data-Driven, Always',
-      desc: 'Every recommendation backed by real data. We track AI mentions, citation frequency, and brand sentiment across every major LLM in real time.',
-    },
-    {
-      icon: <FileText size={20} />,
-      title: 'Transparent Reporting',
-      desc: "Monthly executive dashboards you'll actually read. Real-time visibility into your AI search performance with clear, actionable insights.",
-    },
-  ];
-
-  return (
-    <section id="why" style={{ background: '#111111', padding: '80px 32px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="label-tag" style={{ marginBottom: 16 }}>Why Geophinx</div>
-          <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
-            Why San Francisco's Leading Brands Choose Us
-          </h2>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-          {features.map((f, i) => (
-            <div key={f.title} className={`reveal reveal-delay-${i + 1} why-card`}>
-              <div className="icon-container" style={{ marginBottom: 22 }}>
-                <span style={{ color: '#d4a87a' }}>{f.icon}</span>
-              </div>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 17, fontWeight: 600, color: '#f0ece4', marginBottom: 12 }}>
-                {f.title}
-              </h3>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7 }}>
-                {f.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   SECTION 10: FAQ — LIGHT (WARMER)
+   SECTION 9: FAQ — LIGHT (WARMER)
 ───────────────────────────────────────────── */
 function FAQ() {
   const [openIdx, setOpenIdx] = useState(null);
 
   const items = [
     {
-      q: 'What exactly is Generative Engine Optimization?',
-      a: "GEO is the practice of optimizing your brand's digital presence so AI platforms like ChatGPT, Google AI Overviews, Perplexity, and Claude recommend, cite, and reference your business in their generated answers. It's the critical next evolution beyond traditional SEO.",
+      q: 'What exactly is AI Search Optimization?',
+      a: "When someone types 'best family lawyer in Chicago' or 'top med spa near me' into ChatGPT or Google AI, the AI recommends specific businesses. AI Search Optimization (also called GEO) is the process of making sure your business is the one it recommends — not your competitor's.",
     },
     {
       q: 'How is GEO different from traditional SEO?',
@@ -1770,8 +1547,12 @@ function FAQ() {
       a: 'We optimize across ChatGPT, Google AI Overviews, Perplexity, Claude, Gemini, Microsoft Copilot, and emerging platforms. Our strategies are platform-agnostic and built to remain effective as the landscape evolves.',
     },
     {
-      q: 'Do you work with startups or only enterprise?',
-      a: 'We partner with ambitious companies at every stage — from Series A startups to Fortune 500 enterprises. Our strategies scale to match your budget, industry, and growth trajectory.',
+      q: 'Do you work with small and local businesses?',
+      a: "Absolutely — that's our sweet spot. We work with law firms, medical practices, salons, spas, dental offices, financial advisors, and other local service businesses. AI search is where your next client is looking, and we help make sure they find you.",
+    },
+    {
+      q: 'My business already shows up in ChatGPT — do I still need GEO?',
+      a: "Yes — and this is one of the most common situations we see. Appearing occasionally in AI results is very different from having a strong GEO score. A weak GEO presence means you show up inconsistently, get mentioned after competitors, or disappear entirely on certain queries. We audit your current AI visibility and systematically improve how often, how prominently, and how confidently AI tools recommend your business.",
     },
     {
       q: 'What does pricing look like?',
@@ -2078,6 +1859,7 @@ function Contact() {
                     required
                   >
                     <option value="" disabled>Select your budget range</option>
+                    <option value="2.5-5k">$2.5K – $5K</option>
                     <option value="5-10k">$5K – $10K</option>
                     <option value="10-25k">$10K – $25K</option>
                     <option value="25-50k">$25K – $50K</option>
@@ -2115,8 +1897,8 @@ function Contact() {
    SECTION 13: FOOTER — DARK
 ───────────────────────────────────────────── */
 function Footer({ onBookCall }) {
-  const quickLinks = ['Services', 'Process', 'Results', 'FAQ', 'Contact'];
-  const services = ['AI Search Audit', 'LLM Content Optimization', 'Structured Data', 'Authority Building', 'Technical GEO', 'Monitoring'];
+  const quickLinks = ['Services', 'Process', 'FAQ', 'Contact'];
+  const services = ['AI Search Audit', 'AI Content Optimization', 'Structured Data', 'Authority Building', 'Technical GEO', 'Monitoring'];
 
   return (
     <footer style={{ background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.05)', padding: '80px 32px 0' }}>
@@ -2133,7 +1915,7 @@ function Footer({ onBookCall }) {
               </span>
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
-              The Guardian of Your Brand's AI Search Presence. San Francisco's premier GEO agency.
+              Helping local businesses and service professionals get recommended by ChatGPT, Google AI, and Perplexity.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
               {[
@@ -2272,15 +2054,15 @@ function FloatingParticles() {
       [255, 245, 230],
     ];
 
-    const particles = Array.from({ length: 85 }, () => {
+    const particles = Array.from({ length: 120 }, () => {
       const c = COLORS[Math.floor(Math.random() * COLORS.length)];
       return {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        r: Math.random() * 1.4 + 0.4,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        baseOpacity: Math.random() * 0.13 + 0.04,
+        r: Math.random() * 1.8 + 0.5,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        baseOpacity: Math.random() * 0.22 + 0.08,
         phase: Math.random() * Math.PI * 2,
         color: c,
       };
@@ -2302,7 +2084,7 @@ function FloatingParticles() {
       });
 
       // Draw neural network connections
-      const MAX_DIST = 130;
+      const MAX_DIST = 160;
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
@@ -2311,12 +2093,12 @@ function FloatingParticles() {
           const dy = p.y - q.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.055;
+            const alpha = (1 - dist / MAX_DIST) * 0.11;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
             ctx.strokeStyle = `rgba(212,168,122,${alpha})`;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
@@ -2379,8 +2161,6 @@ export default function App() {
       <WhatIsGeo />
       <Services />
       <Process />
-      <Results />
-      <WhyGeophinx />
       <FAQ />
       <Contact />
       <Footer onBookCall={scrollToBookCall} />
