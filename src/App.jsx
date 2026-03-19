@@ -1973,7 +1973,7 @@ function BookACall() {
             )}
             <div
               className="calendly-inline-widget"
-              data-url="https://calendly.com/hammad-zahid-finz/30min"
+              data-url="https://calendly.com/aiworkshopdevelopment/30min?month=2026-03"
               style={{
                 width: '100%',
                 height: '580px',
