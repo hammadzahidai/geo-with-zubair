@@ -949,8 +949,8 @@ function Navbar({ onBookCall }) {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ color: '#d4a87a', fontSize: 20 }}>◆</span>
-            <span className="font-serif" style={{ fontSize: 28, fontWeight: 400, letterSpacing: '-0.01em' }}>
+            <span style={{ color: '#d4a87a', fontSize: 25 }}>◆</span>
+            <span className="font-serif" style={{ fontSize: 35, fontWeight: 400, letterSpacing: '-0.01em' }}>
               <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span>
             </span>
           </a>
@@ -1101,9 +1101,8 @@ function Hero({ onBookCall }) {
             margin: '0 auto 18px',
             letterSpacing: '0.01em',
           }}>
-            When a potential client asks ChatGPT "best divorce lawyer in San Francisco"
-            or "top beauty spa near me" — does your business come up confidently?
-            Generative Engine Optimization (GEO) is how you change that.
+            Your customers are asking ChatGPT and Google AI to recommend businesses like yours.
+            Are you showing up — or are your competitors?
           </p>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
@@ -2308,13 +2307,24 @@ function FloatingParticles() {
 
     let t = 0;
     let lastFrame = 0;
-    const FPS = 24;
+    const FPS = 18;
     const INTERVAL = 1000 / FPS;
-    const MAX_DIST_SQ = 110 * 110; // use squared distance — avoids Math.sqrt
+    const MAX_DIST_SQ = 100 * 100; // use squared distance — avoids Math.sqrt
+
+    // Pause canvas when hero is off-screen (improves scroll performance)
+    let heroVisible = true;
+    const heroEl = document.getElementById('hero');
+    if (heroEl) {
+      const observer = new IntersectionObserver(
+        ([entry]) => { heroVisible = entry.isIntersecting; },
+        { threshold: 0 }
+      );
+      observer.observe(heroEl);
+    }
 
     const animate = (now) => {
       animId = requestAnimationFrame(animate);
-      if (document.hidden || now - lastFrame < INTERVAL) return;
+      if (document.hidden || !heroVisible || now - lastFrame < INTERVAL) return;
       lastFrame = now;
       t += 0.008;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -2376,7 +2386,6 @@ function FloatingParticles() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 0,
-        willChange: 'transform',
       }}
     />
   );
