@@ -4,7 +4,7 @@ import {
   ChevronDown, Play, Star, Menu, X, Mail, Phone, MapPin,
   ArrowRight, Target, TrendingUp, Users, Award, Search,
   Sparkles, Check, CircleCheck, Linkedin, Twitter, Instagram, ExternalLink,
-  MessageSquare, Zap, Database, FileText
+  MessageSquare, Zap, Database, FileText, DollarSign, BarChart2
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -510,18 +510,44 @@ const GlobalStyles = () => (
 
     /* Stat hero card */
     .stat-hero-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 24px 28px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.055) 0%, rgba(212,168,122,0.04) 100%);
+      border: 1px solid rgba(212,168,122,0.15);
+      border-radius: 16px;
+      padding: 28px 24px 22px;
       flex: 1;
       min-width: 0;
-      transition: border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .stat-hero-card:hover { border-color: rgba(212,168,122,0.25); }
+    .stat-hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--card-accent, #d4a87a) 40%, var(--card-accent-light, #f0dcc0) 60%, transparent);
+    }
+    .stat-hero-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,168,122,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .stat-hero-card:hover {
+      border-color: rgba(212,168,122,0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(212,168,122,0.12), 0 0 0 1px rgba(212,168,122,0.2);
+    }
+    .stat-num-gradient {
+      background: linear-gradient(135deg, #f0dcc0 0%, #d4a87a 45%, #c8956c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     @media (max-width: 480px) {
-      .stat-hero-card { padding: 18px 16px; }
-      .stat-hero-card .font-serif { font-size: 28px !important; }
+      .stat-hero-card { padding: 20px 16px; }
+      .stat-hero-card .font-serif { font-size: 30px !important; }
     }
 
     /* Copper icon container */
@@ -1101,8 +1127,8 @@ function Hero({ onBookCall }) {
             margin: '0 auto 18px',
             letterSpacing: '0.01em',
           }}>
-            Your customers are asking ChatGPT and Google AI to recommend businesses like yours.
-            Are you showing up — or are your competitors?
+            People ask ChatGPT "best dentist near me" and book whoever AI recommends.
+            Not there? A competitor just got your client.
           </p>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
@@ -1114,20 +1140,26 @@ function Hero({ onBookCall }) {
             margin: '0 auto',
             letterSpacing: '-0.01em',
           }}>
-            Geophinx makes AI recommend you —<br />every time, ahead of your competitors.
+            We make AI recommend you. Every time.
           </p>
         </div>
 
         {/* Stat Cards */}
-        <div className="reveal reveal-delay-1" style={{ display: 'flex', gap: 16, marginBottom: 52, flexWrap: 'wrap' }}>
+        <div className="reveal reveal-delay-1" style={{ display: 'flex', gap: 14, marginBottom: 52, flexWrap: 'wrap' }}>
           {[
-            { num: '40%', label: 'AI-Answered Searches' },
-            { num: '$2.1T', label: 'AI Revenue by 2027' },
-            { num: '347%', label: 'Client Visibility Lift' },
+            { num: '40%', label: 'of all searches', sub: 'now AI-answered', icon: <TrendingUp size={16} />, accent: '#d4a87a', accentLight: '#f0dcc0' },
+            { num: '$2.1T', label: 'AI-driven revenue', sub: 'projected by 2027', icon: <DollarSign size={16} />, accent: '#7ac4d4', accentLight: '#b0e4f0' },
+            { num: '3.5×', label: 'more visibility', sub: 'for GEO-optimized businesses', icon: <BarChart2 size={16} />, accent: '#a47ad4', accentLight: '#d0b0f0' },
           ].map((s) => (
-            <div key={s.num} className="stat-hero-card" style={{ textAlign: 'center' }}>
-              <div className="font-serif text-copper" style={{ fontSize: 36, fontWeight: 400, marginBottom: 6 }}>{s.num}</div>
-              <div style={{ fontSize: 12, color: '#8a8580', fontFamily: "'DM Sans', sans-serif", lineHeight: 1.4 }}>{s.label}</div>
+            <div key={s.num} className="stat-hero-card" style={{ textAlign: 'center', '--card-accent': s.accent, '--card-accent-light': s.accentLight }}>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: 8, background: `rgba(${s.accent === '#d4a87a' ? '212,168,122' : s.accent === '#7ac4d4' ? '122,196,212' : '164,122,212'},0.15)`, color: s.accent }}>
+                  {s.icon}
+                </span>
+              </div>
+              <div className="font-serif stat-num-gradient" style={{ fontSize: 38, fontWeight: 400, marginBottom: 4, lineHeight: 1, background: `linear-gradient(135deg, ${s.accentLight} 0%, ${s.accent} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{s.num}</div>
+              <div style={{ fontSize: 13, color: '#d4c8b8', fontFamily: "'DM Sans', sans-serif", lineHeight: 1.3, fontWeight: 500 }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: '#6a6560', fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>{s.sub}</div>
             </div>
           ))}
         </div>
@@ -1938,21 +1970,6 @@ function BookACall() {
               ))}
             </div>
 
-            {/* Fallback email */}
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              padding: '12px 18px',
-              background: 'rgba(255,255,255,0.03)', borderRadius: 10,
-              border: '1px solid rgba(255,255,255,0.06)',
-            }}>
-              <Mail size={15} style={{ color: '#d4a87a', flexShrink: 0 }} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#8a8580', margin: 0 }}>
-                Prefer email?{' '}
-                <a href="mailto:hello@geophinx.agency" className="copper-link" style={{ color: '#d4a87a', textDecoration: 'none', fontWeight: 500 }}>
-                  hello@geophinx.agency
-                </a>
-              </p>
-            </div>
           </div>
 
           {/* Right — Calendly embed */}
@@ -2023,29 +2040,6 @@ function Contact() {
               Not ready to book a call? Drop us a message and we'll get back to you within 24 hours with a personalized response.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              {[
-                { icon: <Mail size={16} />, text: 'hello@geophinx.agency', href: 'mailto:hello@geophinx.agency' },
-                { icon: <Phone size={16} />, text: '+1 (415) 555-0192', href: 'tel:+14155550192' },
-                { icon: <MapPin size={16} />, text: '548 Market St, San Francisco, CA 94104' },
-              ].map((item) => (
-                <div key={item.text} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <div className="icon-container" style={{ width: 36, height: 36, borderRadius: 9, flexShrink: 0 }}>
-                    <span style={{ color: '#d4a87a' }}>{item.icon}</span>
-                  </div>
-                  {item.href ? (
-                    <a href={item.href} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#a09890', textDecoration: 'none', paddingTop: 9 }}
-                      onMouseEnter={e => e.target.style.color = '#d4a87a'}
-                      onMouseLeave={e => e.target.style.color = '#a09890'}
-                    >
-                      {item.text}
-                    </a>
-                  ) : (
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#a09890', paddingTop: 9, lineHeight: 1.5 }}>{item.text}</span>
-                  )}
-                </div>
-              ))}
-            </div>
 
             <button
               onClick={scrollToCalendly}
@@ -2193,24 +2187,6 @@ function Footer({ onBookCall }) {
             </div>
           </div>
 
-          {/* Contact */}
-          <div>
-            <div className="label-tag" style={{ color: '#6b6560', marginBottom: 20 }}>Contact</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {[
-                { icon: <Mail size={13} />, text: 'hello@geophinx.agency' },
-                { icon: <Phone size={13} />, text: '+1 (415) 555-0192' },
-                { icon: <MapPin size={13} />, text: '548 Market St\nSan Francisco, CA 94104' },
-              ].map((item) => (
-                <div key={item.text} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ color: '#d4a87a', marginTop: 1, flexShrink: 0 }}>{item.icon}</span>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.5, whiteSpace: 'pre-line' }}>
-                    {item.text}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Copyright bar */}
