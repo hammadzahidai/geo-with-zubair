@@ -1709,85 +1709,6 @@ function Process() {
 /* ─────────────────────────────────────────────
    SECTION 7: VIDEO SHOWCASE — DARK
 ───────────────────────────────────────────── */
-function VideoShowcase() {
-  const highlights = [
-    { icon: <Eye size={16} />, text: 'Full AI visibility audit walkthrough' },
-    { icon: <BarChart3 size={16} />, text: 'Real client results & case studies' },
-    { icon: <Target size={16} />, text: 'Our proven GEO framework explained' },
-  ];
-
-  return (
-    <section style={{ background: '#141414', padding: '56px 32px 48px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div className="label-tag" style={{ marginBottom: 12 }}>See It In Action</div>
-          <h2 className="headline-section h-dark" style={{ margin: '0 auto 10px', maxWidth: 540 }}>
-            Watch GEO Transform Brands
-          </h2>
-        </div>
-
-        {/* Centered video */}
-        <div className="reveal" style={{ maxWidth: 720, margin: '0 auto' }}>
-          <div style={{
-            borderRadius: 18,
-            background: '#0a0a0a',
-            border: '1px solid rgba(212,168,122,0.22)',
-            borderTop: '2px solid rgba(212,168,122,0.55)',
-            boxShadow: '0 0 0 1px rgba(255,255,255,0.04), 0 20px 80px rgba(0,0,0,0.7), 0 0 60px rgba(212,168,122,0.08)',
-            padding: '10px',
-          }}>
-            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 12, overflow: 'hidden' }}>
-              <iframe
-                src="https://www.youtube.com/embed/qlIpNr6Qq4c?rel=0&modestbranding=1"
-                title="Geophinx — Agency Overview"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-                style={{
-                  position: 'absolute', top: 0, left: 0,
-                  width: '100%', height: '100%',
-                  border: 'none',
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Highlights row below video */}
-        <div className="reveal" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px 40px', marginTop: 36 }}>
-          {highlights.map((h, i) => (
-            <div key={i} style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#b0a898',
-            }}>
-              <span style={{ color: '#d4a87a', flexShrink: 0 }}>{h.icon}</span>
-              {h.text}
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="reveal" style={{ textAlign: 'center', marginTop: 28 }}>
-          <button
-            onClick={() => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' })}
-            className="copper-link"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600,
-              color: '#d4a87a', background: 'none', border: 'none', cursor: 'pointer',
-              padding: 0,
-            }}
-          >
-            Book your strategy session <ArrowRight size={15} />
-          </button>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
 /* ─────────────────────────────────────────────
    SECTION 9: FAQ — LIGHT (WARMER)
 ───────────────────────────────────────────── */
@@ -2384,7 +2305,6 @@ export default function App() {
       <Navbar onBookCall={scrollToBookCall} />
 
       <Hero onBookCall={scrollToBookCall} />
-      <VideoShowcase />
       <BookACall />
       <TheOpportunity />
       <WhoWeServe />
