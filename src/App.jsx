@@ -729,7 +729,7 @@ const GlobalStyles = () => (
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
 
-    /* Floating mobile CTA — full-width bottom bar */
+    /* Floating mobile CTA — slides up on scroll */
     .mobile-fab {
       display: none;
     }
@@ -743,6 +743,15 @@ const GlobalStyles = () => (
         z-index: 999;
         padding: 12px 20px 28px;
         background: linear-gradient(to top, rgba(10,10,10,0.98) 60%, transparent);
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+        pointer-events: none;
+      }
+      .mobile-fab.mobile-fab-visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
       .mobile-fab button {
         width: 100%;
@@ -2383,8 +2392,16 @@ function Footer({ onBookCall }) {
    MOBILE FAB
 ───────────────────────────────────────────── */
 function MobileFAB({ onBookCall }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 480);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <div className="mobile-fab">
+    <div className={`mobile-fab ${visible ? 'mobile-fab-visible' : ''}`}>
       <button
         className="btn-copper"
         style={{ padding: '14px 22px', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, boxShadow: '0 4px 24px rgba(212,168,122,0.3)' }}
