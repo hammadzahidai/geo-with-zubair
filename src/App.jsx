@@ -287,21 +287,16 @@ const GlobalStyles = () => (
       border-top-color: rgba(212,168,122,0.4);
     }
 
-    /* Stat cards row — always 3 columns */
+    /* Stat cards row */
     .stat-cards-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 12px;
       margin-bottom: 52px;
     }
-    @media (max-width: 480px) {
-      .stat-cards-row { gap: 8px; }
-      .stat-hero-card { padding: 14px 10px 12px !important; }
-      .stat-hero-card .stat-num { font-size: 24px !important; }
-      .stat-hero-card .stat-icon { width: 26px !important; height: 26px !important; margin-bottom: 8px !important; }
-      .stat-hero-card .stat-icon svg { width: 13px !important; height: 13px !important; }
-      .stat-hero-card .stat-label { font-size: 11px !important; }
-      .stat-hero-card .stat-sub { font-size: 10px !important; }
+    @media (max-width: 560px) {
+      .stat-cards-row { grid-template-columns: 1fr; gap: 8px; }
+      .stat-hero-card { flex-direction: row !important; align-items: center !important; text-align: left !important; padding: 14px 16px !important; }
     }
 
     /* Metric card */
@@ -525,41 +520,51 @@ const GlobalStyles = () => (
       fill: currentColor;
     }
 
-    /* Stat hero card */
+    /* Stat hero card — horizontal layout */
     .stat-hero-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.055) 0%, rgba(212,168,122,0.04) 100%);
-      border: 1px solid rgba(212,168,122,0.15);
-      border-radius: 16px;
-      padding: 22px 18px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,168,122,0.14);
+      border-left: 3px solid var(--card-accent, #d4a87a);
+      border-radius: 12px;
+      padding: 18px 20px;
       min-width: 0;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
-    }
-    .stat-hero-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--card-accent, #d4a87a) 40%, var(--card-accent-light, #f0dcc0) 60%, transparent);
-    }
-    .stat-hero-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(212,168,122,0.07) 0%, transparent 65%);
-      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
     }
     .stat-hero-card:hover {
-      border-color: rgba(212,168,122,0.3);
+      background: rgba(255,255,255,0.06);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(212,168,122,0.1);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
     }
-    .stat-num-gradient {
-      background: linear-gradient(135deg, #f0dcc0 0%, #d4a87a 45%, #c8956c 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .stat-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+    }
+    .stat-card-text { flex: 1; min-width: 0; }
+    .stat-card-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+    .stat-card-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #a09890;
+      line-height: 1.3;
+    }
+    .stat-card-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #5a5550;
+      margin-top: 1px;
     }
 
     /* Copper icon container */
@@ -1116,17 +1121,19 @@ function Hero({ onBookCall }) {
         {/* Stat Cards */}
         <div className="reveal reveal-delay-1 stat-cards-row">
           {[
-            { num: '40%', label: 'of all searches', sub: 'now AI-answered', icon: <TrendingUp size={16} />, accent: '#d4a87a', accentLight: '#f0dcc0', rgb: '212,168,122' },
-            { num: '$2.1T', label: 'AI-driven revenue', sub: 'projected by 2027', icon: <DollarSign size={16} />, accent: '#7ac4d4', accentLight: '#b0e4f0', rgb: '122,196,212' },
-            { num: '3.5×', label: 'more visibility', sub: 'for GEO-optimized', icon: <BarChart2 size={16} />, accent: '#a47ad4', accentLight: '#d0b0f0', rgb: '164,122,212' },
+            { num: '40%', label: 'of searches are AI-answered', sub: 'and growing fast', icon: <TrendingUp size={18} />, accent: '#d4a87a', rgb: '212,168,122' },
+            { num: '$2.1T', label: 'AI-driven revenue by 2027', sub: 'across all industries', icon: <DollarSign size={18} />, accent: '#7ac4d4', rgb: '122,196,212' },
+            { num: '3.5×', label: 'more visibility for GEO businesses', sub: 'vs. non-optimized competitors', icon: <BarChart2 size={18} />, accent: '#a47ad4', rgb: '164,122,212' },
           ].map((s) => (
-            <div key={s.num} className="stat-hero-card" style={{ textAlign: 'center', '--card-accent': s.accent, '--card-accent-light': s.accentLight }}>
-              <div className="stat-icon" style={{ display: 'flex', justifyContent: 'center', marginBottom: 10, width: 32, height: 32, borderRadius: 8, background: `rgba(${s.rgb},0.15)`, color: s.accent, alignItems: 'center', margin: '0 auto 10px' }}>
+            <div key={s.num} className="stat-hero-card" style={{ '--card-accent': s.accent }}>
+              <div className="stat-card-icon" style={{ color: s.accent, background: `rgba(${s.rgb},0.12)` }}>
                 {s.icon}
               </div>
-              <div className="font-serif stat-num" style={{ fontSize: 34, fontWeight: 400, marginBottom: 4, lineHeight: 1, background: `linear-gradient(135deg, ${s.accentLight} 0%, ${s.accent} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{s.num}</div>
-              <div className="stat-label" style={{ fontSize: 12, color: '#d4c8b8', fontFamily: "'DM Sans', sans-serif", lineHeight: 1.3, fontWeight: 500 }}>{s.label}</div>
-              <div className="stat-sub" style={{ fontSize: 11, color: '#6a6560', fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>{s.sub}</div>
+              <div className="stat-card-text">
+                <div className="stat-card-num" style={{ background: `linear-gradient(135deg, #fff 0%, ${s.accent} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{s.num}</div>
+                <div className="stat-card-label">{s.label}</div>
+                <div className="stat-card-sub">{s.sub}</div>
+              </div>
             </div>
           ))}
         </div>
