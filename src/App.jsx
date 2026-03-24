@@ -910,6 +910,21 @@ const GlobalStyles = () => (
       border-radius: 13px;
     }
 
+    /* Opportunity stats grid */
+    .opp-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    @media (max-width: 600px) {
+      .opp-stats-grid { grid-template-columns: 1fr; }
+      .opp-stats-grid .opp-stat { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .opp-stats-grid .opp-stat:last-child { border-bottom: none; }
+    }
+
     /* GEO mockup grid */
     .geo-mockup-grid {
       display: grid;
@@ -1326,20 +1341,20 @@ function TheOpportunity() {
         </div>
 
         {/* Bottom Stats */}
-        <div className="reveal reveal-delay-3" style={{ display: 'flex', gap: 1, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}>
+        <div className="reveal reveal-delay-3 opp-stats-grid" style={{ marginBottom: 48 }}>
           {[
-            { num: '67%', label: 'of users trust AI recommendations over traditional advertising', color: '#d4a87a' },
-            { num: '4.2B', label: 'AI search queries per month — growing 300% year over year', color: '#d4a87a' },
-            { num: '0%', label: 'of your competitors are optimized for this. Your window is now.', color: '#c45c45' },
+            { num: '67%', label: 'trust AI recommendations', sub: 'over traditional advertising', color: '#d4a87a' },
+            { num: '4.2B', label: 'AI search queries/month', sub: 'growing 300% year over year', color: '#d4a87a' },
+            { num: '0%', label: 'of competitors optimized', sub: 'Your window is wide open.', color: '#c45c45' },
           ].map((s, i) => (
             <div key={s.num} className="opp-stat" style={{
-              flex: 1, minWidth: 220,
-              padding: '40px 32px',
+              padding: '36px 24px',
               textAlign: 'center',
               borderRight: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
             }}>
-              <div className="font-serif opp-stat-num" style={{ fontSize: 48, color: s.color, lineHeight: 1, marginBottom: 12 }}>{s.num}</div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.6 }}>{s.label}</p>
+              <div className="font-serif opp-stat-num" style={{ fontSize: 44, color: s.color, lineHeight: 1, marginBottom: 8 }}>{s.num}</div>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#c0b8b0', lineHeight: 1.4, marginBottom: 4 }}>{s.label}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#5a5550', lineHeight: 1.4 }}>{s.sub}</p>
             </div>
           ))}
         </div>
