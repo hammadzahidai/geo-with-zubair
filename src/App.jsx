@@ -910,6 +910,16 @@ const GlobalStyles = () => (
       border-radius: 13px;
     }
 
+    /* GEO mockup grid */
+    .geo-mockup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) {
+      .geo-mockup-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Mobile overrides ── */
     /* Mobile-only hero CTA — hidden on desktop */
     .hero-mobile-cta { display: none; }
@@ -1418,6 +1428,158 @@ function TheOpportunity() {
 /* ─────────────────────────────────────────────
    SECTION 4: WHO WE SERVE — LIGHT
 ───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   SECTION: GEO IN ACTION — ChatGPT mockup
+───────────────────────────────────────────── */
+function GEOInAction() {
+  useScrollReveal();
+
+  const ChatWindow = ({ label, labelColor, messages }) => (
+    <div style={{
+      background: '#0d0d0d',
+      border: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.25)' : 'rgba(212,168,122,0.25)'}`,
+      borderRadius: 16,
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+      {/* Window chrome */}
+      <div style={{
+        background: labelColor === 'bad' ? 'rgba(196,92,69,0.08)' : 'rgba(212,168,122,0.08)',
+        borderBottom: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.2)' : 'rgba(212,168,122,0.2)'}`,
+        padding: '10px 16px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+      }}>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3a3530' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3a3530' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3a3530' }} />
+        </div>
+        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#5a5550', marginLeft: 4 }}>
+          ChatGPT
+        </span>
+        <span style={{
+          marginLeft: 'auto',
+          fontSize: 11,
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 600,
+          padding: '2px 10px',
+          borderRadius: 100,
+          background: labelColor === 'bad' ? 'rgba(196,92,69,0.15)' : 'rgba(212,168,122,0.15)',
+          color: labelColor === 'bad' ? '#c45c45' : '#d4a87a',
+          letterSpacing: '0.06em',
+          textTransform: 'uppercase',
+        }}>
+          {labelColor === 'bad' ? '✗ Without GEO' : '✓ With Geophinx'}
+        </span>
+      </div>
+
+      {/* Chat messages */}
+      <div style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: 16, flex: 1 }}>
+        {messages.map((msg, i) => (
+          <div key={i} style={{
+            display: 'flex',
+            gap: 10,
+            flexDirection: msg.role === 'user' ? 'row-reverse' : 'row',
+            alignItems: 'flex-start',
+          }}>
+            {/* Avatar */}
+            <div style={{
+              width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
+              background: msg.role === 'user' ? 'rgba(212,168,122,0.2)' : '#1a1a1a',
+              border: msg.role === 'user' ? '1px solid rgba(212,168,122,0.3)' : '1px solid rgba(255,255,255,0.1)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 13,
+            }}>
+              {msg.role === 'user' ? '👤' : '🤖'}
+            </div>
+            {/* Bubble */}
+            <div style={{
+              maxWidth: '82%',
+              background: msg.role === 'user' ? 'rgba(212,168,122,0.1)' : 'rgba(255,255,255,0.04)',
+              border: msg.role === 'user' ? '1px solid rgba(212,168,122,0.2)' : '1px solid rgba(255,255,255,0.07)',
+              borderRadius: msg.role === 'user' ? '14px 4px 14px 14px' : '4px 14px 14px 14px',
+              padding: '10px 14px',
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 13,
+              lineHeight: 1.65,
+              color: msg.role === 'user' ? '#d4c8b8' : '#a09890',
+            }}>
+              {msg.content}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const beforeMessages = [
+    { role: 'user', content: 'What\'s the best med spa for Botox near San Francisco?' },
+    { role: 'ai', content: (
+      <span>
+        Here are some well-known med spas in the San Francisco area:
+        <br /><br />
+        1. Pacific Dermatology Center<br />
+        2. Marina Laser & Aesthetics<br />
+        3. Hayes Valley MedSpa<br />
+        4. Nob Hill Aesthetics<br />
+        <br />
+        <span style={{ color: '#5a5550', fontSize: 12 }}>— Your business not mentioned —</span>
+      </span>
+    )},
+  ];
+
+  const afterMessages = [
+    { role: 'user', content: 'What\'s the best med spa for Botox near San Francisco?' },
+    { role: 'ai', content: (
+      <span>
+        Based on expertise, patient reviews, and trusted sources, I'd recommend:
+        <br /><br />
+        <span style={{ color: '#d4a87a', fontWeight: 600 }}>⭐ Luxe Glow Med Spa</span>
+        <span style={{ color: '#c0b8b0' }}> — San Francisco's top-rated Botox clinic. Board-certified practitioners, natural results, and 200+ five-star reviews. Frequently cited as the go-to destination for cosmetic treatments in the Bay Area.</span>
+        <br /><br />
+        <span style={{ color: '#7a7268', fontSize: 12 }}>
+          You can book a free consultation directly on their website.
+        </span>
+      </span>
+    )},
+  ];
+
+  return (
+    <section style={{ background: '#0f0f0f', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
+      <div className="section-grid" />
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+        {/* Header */}
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div className="label-tag" style={{ marginBottom: 14 }}>GEO In Action</div>
+          <h2 className="headline-section h-dark" style={{ maxWidth: 620, margin: '0 auto 14px' }}>
+            One Search. One Winner.<br />Make Sure It's You.
+          </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 480, margin: '0 auto' }}>
+            This is a real-world example of how AI answers a local search query — before and after GEO optimization.
+          </p>
+        </div>
+
+        {/* Mockup grid */}
+        <div className="reveal geo-mockup-grid">
+          <ChatWindow labelColor="bad" messages={beforeMessages} />
+          <ChatWindow labelColor="good" messages={afterMessages} />
+        </div>
+
+        {/* Arrow / caption */}
+        <div className="reveal" style={{ textAlign: 'center', marginTop: 32 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#4a4540' }}>
+            * Business names are illustrative. Results vary by market and industry.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WhoWeServe() {
   const industries = [
     {
@@ -2316,6 +2478,7 @@ export default function App() {
       <Hero onBookCall={scrollToBookCall} />
       <BookACall />
       <TheOpportunity />
+      <GEOInAction />
       <WhoWeServe />
       <WhatIsGeo />
       <Services />
