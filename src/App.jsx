@@ -383,15 +383,28 @@ const GlobalStyles = () => (
       left: 0;
       right: 0;
       z-index: 100;
-      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
-      padding: 20px 0;
+      padding: 18px 0;
+      background: rgba(15,15,15,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,168,122,0.08);
+      transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .navbar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,122,0.35) 30%, rgba(232,200,150,0.5) 50%, rgba(212,168,122,0.35) 70%, transparent);
+      pointer-events: none;
     }
     .navbar.scrolled {
-      background: rgba(15,15,15,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 14px 0;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+      background: rgba(12,12,12,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 13px 0;
+      border-bottom-color: rgba(212,168,122,0.15);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(212,168,122,0.1);
     }
 
     /* Nav links */
@@ -948,10 +961,10 @@ function Navbar({ onBookCall }) {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
-          <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ color: '#d4a87a', fontSize: 25 }}>◆</span>
-            <span className="font-serif" style={{ fontSize: 35, fontWeight: 400, letterSpacing: '-0.01em' }}>
-              <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span>
+          <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 9 }}>
+            <span style={{ color: '#d4a87a', fontSize: 22, lineHeight: 1 }}>◆</span>
+            <span className="font-serif" style={{ fontSize: 32, fontWeight: 400, letterSpacing: '-0.01em', lineHeight: 1 }}>
+              <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span><span style={{ fontSize: 17, fontFamily: "'DM Sans', sans-serif", fontWeight: 500, letterSpacing: '0.01em', background: 'linear-gradient(135deg, #d4a87a, #e8c896)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginLeft: 1, verticalAlign: 'middle' }}>.ai</span>
             </span>
           </a>
 
@@ -2015,7 +2028,7 @@ function Footer({ onBookCall }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
               <span style={{ color: '#d4a87a', fontSize: 14 }}>◆</span>
               <span className="font-serif" style={{ fontSize: 20, fontWeight: 400 }}>
-                <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span>
+                <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span><span style={{ fontSize: 12, fontFamily: "'DM Sans', sans-serif", fontWeight: 500, background: 'linear-gradient(135deg, #d4a87a, #e8c896)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginLeft: 1 }}>.ai</span>
               </span>
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
