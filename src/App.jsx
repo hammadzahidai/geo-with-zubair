@@ -2485,7 +2485,6 @@ export default function App() {
       <Navbar onBookCall={scrollToBookCall} />
 
       <Hero onBookCall={scrollToBookCall} />
-      <BookACall />
       <TheOpportunity />
       <GEOInAction />
       <WhoWeServe />
@@ -2493,6 +2492,7 @@ export default function App() {
       <Services />
       <Process />
       <FAQ />
+      <BookACall />
       <Contact />
       <Footer onBookCall={scrollToBookCall} />
 
