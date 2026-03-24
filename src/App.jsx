@@ -90,15 +90,12 @@ const GlobalStyles = () => (
     /* Scroll-reveal animations */
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
-      will-change: auto;
     }
     .reveal-delay-1 { transition-delay: 0.06s; }
     .reveal-delay-2 { transition-delay: 0.12s; }
@@ -108,13 +105,13 @@ const GlobalStyles = () => (
 
     /* Hero word animation */
     @keyframes wordReveal {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     .word-reveal {
       display: inline-block;
       opacity: 0;
-      animation: wordReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: wordReveal 0.5s ease forwards;
     }
 
     /* Logo marquee */
@@ -170,16 +167,19 @@ const GlobalStyles = () => (
       gap: 24px;
     }
     .industry-card {
-      background: #fff;
-      border: 1px solid rgba(200,149,108,0.15);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(212,168,122,0.12);
       border-radius: 16px;
       padding: 32px 28px;
-      border-top: 3px solid #c8956c;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border-top: 2px solid rgba(212,168,122,0.35);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
     }
     .industry-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(200,149,108,0.12);
+      transform: translateY(-2px);
+      background: rgba(212,168,122,0.04);
+      border-color: rgba(212,168,122,0.3);
+      border-top-color: #d4a87a;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(212,168,122,0.12);
     }
     .service-card {
       background: rgba(255,255,255,0.03);
@@ -190,9 +190,9 @@ const GlobalStyles = () => (
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
     .service-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
       background: rgba(255,255,255,0.05);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
       border-top-color: #d4a87a;
     }
 
@@ -206,8 +206,8 @@ const GlobalStyles = () => (
     }
     .glass-card:hover {
       border-color: rgba(212,168,122,0.2);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
     }
 
     /* Why card */
@@ -220,9 +220,9 @@ const GlobalStyles = () => (
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
     .why-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
       background: rgba(255,255,255,0.05);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.22), 0 0 0 1px rgba(212,168,122,0.08);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
       border-top-color: rgba(212,168,122,0.5);
     }
 
@@ -281,9 +281,9 @@ const GlobalStyles = () => (
       transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .testimonial-card:hover {
-      background: rgba(255,255,255,0.055);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
       border-top-color: rgba(212,168,122,0.4);
     }
 
@@ -298,9 +298,9 @@ const GlobalStyles = () => (
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
     .metric-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.055);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.2), 0 0 24px rgba(212,168,122,0.06);
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
       border-bottom-color: rgba(212,168,122,0.45);
     }
     @media (max-width: 480px) {
@@ -535,9 +535,9 @@ const GlobalStyles = () => (
       pointer-events: none;
     }
     .stat-hero-card:hover {
-      border-color: rgba(212,168,122,0.35);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(212,168,122,0.12), 0 0 0 1px rgba(212,168,122,0.2);
+      border-color: rgba(212,168,122,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212,168,122,0.1);
     }
     .stat-num-gradient {
       background: linear-gradient(135deg, #f0dcc0 0%, #d4a87a 45%, #c8956c 100%);
@@ -770,11 +770,7 @@ const GlobalStyles = () => (
       margin: 16px 0 24px;
     }
 
-    /* Ambient section glow */
-    @keyframes ambientPulse {
-      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-      50%       { opacity: 1;   transform: translateX(-50%) scale(1.08); }
-    }
+    /* Ambient section glow — static, no animation (removed ambientPulse for scroll perf) */
     .ambient-glow {
       position: absolute;
       left: 50%;
@@ -786,14 +782,12 @@ const GlobalStyles = () => (
     .ambient-glow-top {
       top: -100px;
       width: 900px; height: 400px;
-      background: radial-gradient(ellipse, rgba(212,168,122,0.13) 0%, transparent 68%);
-      animation: ambientPulse 7s ease-in-out infinite;
+      background: radial-gradient(ellipse, rgba(212,168,122,0.10) 0%, transparent 68%);
     }
     .ambient-glow-bottom {
       bottom: -80px;
       width: 650px; height: 280px;
-      background: radial-gradient(ellipse, rgba(212,168,122,0.09) 0%, transparent 65%);
-      animation: ambientPulse 9s ease-in-out infinite reverse;
+      background: radial-gradient(ellipse, rgba(212,168,122,0.07) 0%, transparent 65%);
     }
 
     /* Subtle grid for non-hero sections */
@@ -808,27 +802,10 @@ const GlobalStyles = () => (
       z-index: 0;
     }
 
-    /* CTA button pulse rings */
-    @keyframes ripple {
-      0%   { transform: scale(1);   opacity: 0.35; }
-      100% { transform: scale(2.2); opacity: 0; }
-    }
+    /* CTA button wrapper — no pulse animation (removed for perf) */
     .btn-pulse-wrap {
       position: relative;
       display: inline-flex;
-    }
-    .btn-pulse-wrap::before,
-    .btn-pulse-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      background: rgba(212,168,122,0.25);
-      pointer-events: none;
-      animation: ripple 2.4s ease-out infinite;
-    }
-    .btn-pulse-wrap::after {
-      animation-delay: 1.2s;
     }
 
     /* Hero radial glow */
@@ -841,24 +818,7 @@ const GlobalStyles = () => (
       pointer-events: none;
     }
 
-    /* Hero floating orbs */
-    @keyframes orbDrift1 {
-      0%   { transform: translate(0, 0) scale(1); }
-      33%  { transform: translate(40px, -30px) scale(1.05); }
-      66%  { transform: translate(-20px, 20px) scale(0.97); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
-    @keyframes orbDrift2 {
-      0%   { transform: translate(0, 0) scale(1); }
-      40%  { transform: translate(-50px, 30px) scale(1.04); }
-      70%  { transform: translate(25px, -15px) scale(0.98); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
-    @keyframes orbDrift3 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(30px, 40px); }
-      100% { transform: translate(0, 0); }
-    }
+    /* Hero floating orbs — static blurs, no drift animation for scroll perf */
     .hero-orb {
       position: absolute;
       border-radius: 50%;
@@ -868,20 +828,17 @@ const GlobalStyles = () => (
     .hero-orb-1 {
       width: 420px; height: 420px;
       top: 10%; left: 8%;
-      background: radial-gradient(circle, rgba(212,168,122,0.1) 0%, transparent 70%);
-      animation: orbDrift1 28s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(212,168,122,0.09) 0%, transparent 70%);
     }
     .hero-orb-2 {
       width: 360px; height: 360px;
       top: 30%; right: 6%;
-      background: radial-gradient(circle, rgba(212,168,122,0.07) 0%, transparent 70%);
-      animation: orbDrift2 34s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(212,168,122,0.06) 0%, transparent 70%);
     }
     .hero-orb-3 {
       width: 300px; height: 300px;
       bottom: 15%; left: 35%;
-      background: radial-gradient(circle, rgba(240,220,190,0.04) 0%, transparent 70%);
-      animation: orbDrift3 22s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(240,220,190,0.03) 0%, transparent 70%);
     }
 
     /* Responsive adjustments */
@@ -1422,25 +1379,17 @@ function WhoWeServe() {
   ];
 
   return (
-    <section id="who-we-serve" style={{ background: '#faf9f7', padding: '96px 0' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+    <section id="who-we-serve" style={{ background: '#111111', padding: '96px 32px', position: 'relative', overflow: 'hidden' }}>
+      <div className="ambient-glow ambient-glow-top" />
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <div style={{
-            display: 'inline-block',
-            background: 'rgba(200,149,108,0.1)',
-            border: '1px solid rgba(200,149,108,0.3)',
-            borderRadius: '100px',
-            padding: '6px 20px',
-            marginBottom: '20px',
-          }}>
-            <span style={{ color: '#c8956c', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Who We Serve</span>
-          </div>
-          <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 'clamp(32px,4vw,48px)', color: '#1a1a1a', marginBottom: '16px', lineHeight: 1.2 }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div className="label-tag" style={{ marginBottom: 16 }}>Who We Serve</div>
+          <h2 className="headline-section h-dark" style={{ maxWidth: 640, margin: '0 auto 16px' }}>
             Built for Local Service Businesses<br />
-            <em style={{ color: '#c8956c' }}>That Can't Afford to Be Invisible</em>
+            <em style={{ fontStyle: 'italic', color: '#d4a87a', WebkitTextFillColor: '#d4a87a' }}>That Can't Afford to Be Invisible</em>
           </h2>
-          <p style={{ color: '#666', fontSize: '18px', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7 }}>
+          <p style={{ color: '#8a8580', fontSize: '18px', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif" }}>
             We specialize in the industries where AI search drives real revenue — and where being the first name mentioned changes everything.
           </p>
         </div>
@@ -1448,14 +1397,14 @@ function WhoWeServe() {
         {/* Industry Cards Grid */}
         <div className="who-we-serve-grid">
           {industries.map((ind, i) => (
-            <div key={i} className="industry-card">
-              <div style={{ fontSize: '36px', marginBottom: '16px', lineHeight: 1 }}>{ind.icon}</div>
-              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: '22px', color: '#1a1a1a', marginBottom: '10px', lineHeight: 1.3 }}>{ind.title}</h3>
-              <p style={{ color: '#555', fontSize: '15px', lineHeight: 1.65, marginBottom: '16px' }}>{ind.tagline}</p>
+            <div key={i} className="industry-card reveal" style={{ animationDelay: `${i * 0.06}s` }}>
+              <div style={{ fontSize: '32px', marginBottom: '16px', lineHeight: 1 }}>{ind.icon}</div>
+              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: '21px', color: '#f0ece4', marginBottom: '10px', lineHeight: 1.3 }}>{ind.title}</h3>
+              <p style={{ color: '#8a8580', fontSize: '15px', lineHeight: 1.65, marginBottom: '16px', fontFamily: "'DM Sans', sans-serif" }}>{ind.tagline}</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {ind.examples.map((ex, j) => (
-                  <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#888', fontSize: '13px', marginBottom: '6px' }}>
-                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#c8956c', flexShrink: 0 }} />
+                  <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#6a6560', fontSize: '13px', marginBottom: '6px', fontFamily: "'DM Sans', sans-serif" }}>
+                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#d4a87a', flexShrink: 0 }} />
                     {ex}
                   </li>
                 ))}
@@ -1465,23 +1414,9 @@ function WhoWeServe() {
         </div>
 
         {/* CTA nudge */}
-        <div style={{ textAlign: 'center', marginTop: '56px' }}>
-          <p style={{ color: '#888', fontSize: '15px', marginBottom: '20px' }}>Don't see your industry? If AI search drives clients to your competitors, we can help.</p>
-          <a href="#contact" style={{
-            display: 'inline-block',
-            background: 'transparent',
-            border: '1.5px solid #c8956c',
-            color: '#c8956c',
-            padding: '12px 32px',
-            borderRadius: '8px',
-            fontSize: '15px',
-            fontWeight: 600,
-            textDecoration: 'none',
-            transition: 'background 0.2s, color 0.2s',
-          }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#c8956c'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#c8956c'; }}
-          >
+        <div className="reveal" style={{ textAlign: 'center', marginTop: '56px' }}>
+          <p style={{ color: '#6a6560', fontSize: '15px', marginBottom: '20px', fontFamily: "'DM Sans', sans-serif" }}>Don't see your industry? If AI search drives clients to your competitors, we can help.</p>
+          <a href="#contact" className="btn-ghost" style={{ padding: '12px 32px', borderRadius: '10px', textDecoration: 'none', display: 'inline-block' }}>
             Check If We're a Fit →
           </a>
         </div>
