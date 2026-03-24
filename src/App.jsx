@@ -128,19 +128,19 @@ const GlobalStyles = () => (
 
     /* CTA button */
     .btn-copper {
-      background: linear-gradient(135deg, #d4a87a, #c08a58);
-      color: #1a1a1a;
+      background: linear-gradient(135deg, #f0c060 0%, #e09030 40%, #c87020 100%);
+      color: #1a0e00;
       font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 15px;
       border: none;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      box-shadow: 0 4px 24px rgba(212,168,122,0.35), 0 0 48px rgba(212,168,122,0.12);
+      box-shadow: 0 4px 20px rgba(224,144,48,0.45), 0 1px 0 rgba(255,220,120,0.3) inset;
     }
     .btn-copper:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(212,168,122,0.45), 0 0 60px rgba(212,168,122,0.18);
+      box-shadow: 0 8px 32px rgba(224,144,48,0.55), 0 1px 0 rgba(255,220,120,0.3) inset;
       filter: brightness(1.08);
     }
     .btn-ghost {
