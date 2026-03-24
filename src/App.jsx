@@ -1416,18 +1416,12 @@ function TheOpportunity() {
           {/* CTA */}
           <div style={{ textAlign: 'center', marginTop: 36, position: 'relative', zIndex: 1 }}>
             <button
+              className="btn-copper"
               onClick={() => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
-                background: 'linear-gradient(135deg, #d4a87a, #c8956c)',
-                color: '#0f0f0f',
-                border: 'none',
                 borderRadius: 10,
-                padding: '13px 36px',
-                fontSize: 15,
-                fontWeight: 700,
-                fontFamily: "'DM Sans', sans-serif",
-                cursor: 'pointer',
-                letterSpacing: '0.01em',
+                padding: '13px 32px',
+                whiteSpace: 'nowrap',
               }}
             >
               Claim Your Edge — Book a Free Audit →
