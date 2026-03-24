@@ -1424,7 +1424,7 @@ function TheOpportunity() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Claim Your Edge — Book a Free Audit →
+              Book a Free Audit →
             </button>
           </div>
         </div>
