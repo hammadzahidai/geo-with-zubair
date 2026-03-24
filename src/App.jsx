@@ -711,15 +711,31 @@ const GlobalStyles = () => (
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
 
-    /* Floating mobile CTA */
+    /* Floating mobile CTA — full-width bottom bar */
     .mobile-fab {
-      position: fixed;
-      bottom: 24px;
-      right: 20px;
-      z-index: 90;
       display: none;
     }
-    @media (max-width: 768px) { .mobile-fab { display: flex; } }
+    @media (max-width: 768px) {
+      .mobile-fab {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        padding: 12px 20px 28px;
+        background: linear-gradient(to top, rgba(10,10,10,0.98) 60%, transparent);
+      }
+      .mobile-fab button {
+        width: 100%;
+        justify-content: center;
+        border-radius: 14px !important;
+        padding: 15px 20px !important;
+        font-size: 15px !important;
+        white-space: nowrap;
+        box-shadow: 0 4px 32px rgba(212,168,122,0.4) !important;
+      }
+    }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 6px; }
@@ -895,6 +911,12 @@ const GlobalStyles = () => (
     }
 
     /* ── Mobile overrides ── */
+    @media (max-width: 768px) {
+      /* Add bottom padding so FAB doesn't cover page content */
+      body { padding-bottom: 90px; }
+      .hero-cta-row { flex-direction: column; align-items: stretch !important; }
+      .hero-cta-primary, .hero-cta-secondary { width: 100%; justify-content: center; }
+    }
     @media (max-width: 480px) {
       section { padding-left: 20px !important; padding-right: 20px !important; }
       .headline-section { font-size: 28px !important; }
@@ -1152,22 +1174,22 @@ function Hero({ onBookCall }) {
         </div>
 
         {/* CTA Row */}
-        <div className="reveal reveal-delay-2" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
+        <div className="reveal reveal-delay-2 hero-cta-row" style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
           <div className="btn-pulse-wrap">
             <button
-              className="btn-copper"
-              style={{ padding: '16px 36px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 8, position: 'relative', zIndex: 1 }}
+              className="btn-copper hero-cta-primary"
+              style={{ padding: '15px 32px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 8, position: 'relative', zIndex: 1, whiteSpace: 'nowrap' }}
               onClick={onBookCall}
             >
-              Claim Your AI Dominance <ArrowRight size={16} />
+              Get AI Visibility Now <ArrowRight size={16} />
             </button>
           </div>
           <button
-            className="btn-ghost"
-            style={{ padding: '16px 36px', borderRadius: 12 }}
+            className="btn-ghost hero-cta-secondary"
+            style={{ padding: '15px 28px', borderRadius: 12, whiteSpace: 'nowrap' }}
             onClick={scrollToGeo}
           >
-            See How GEO Works
+            See How It Works
           </button>
         </div>
 
