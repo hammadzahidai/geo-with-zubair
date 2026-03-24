@@ -766,15 +766,24 @@ const GlobalStyles = () => (
     }
     .cal-pulse { animation: calPulse 1.6s ease-in-out infinite; }
 
-    /* Hero grid overlay */
+    /* Hero grid overlay — animated drift */
+    @keyframes gridDrift {
+      0%   { background-position: 0 0, 0 0; }
+      100% { background-position: 60px 60px, 60px 60px; }
+    }
+    @keyframes gridShimmer {
+      0%, 100% { opacity: 0.65; }
+      50%       { opacity: 1; }
+    }
     .hero-grid {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(212,168,122,0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,168,122,0.055) 1px, transparent 1px);
+        linear-gradient(rgba(212,168,122,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,122,0.1) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
+      animation: gridDrift 14s linear infinite, gridShimmer 6s ease-in-out infinite;
     }
 
     /* Opportunity card */
