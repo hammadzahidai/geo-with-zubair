@@ -1137,10 +1137,10 @@ function Hero({ onBookCall }) {
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 52 }}>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: 17,
-            lineHeight: 1.55,
-            color: '#9a928a',
-            maxWidth: 580,
+            fontSize: 14,
+            lineHeight: 1.6,
+            color: '#7a7268',
+            maxWidth: 520,
             margin: '0 auto 18px',
             letterSpacing: '0.01em',
           }}>
@@ -1152,10 +1152,13 @@ function Hero({ onBookCall }) {
             fontSize: 18,
             fontWeight: 600,
             lineHeight: 1.45,
-            color: '#f0ece4',
             maxWidth: 500,
             margin: '0 auto 24px',
             letterSpacing: '-0.01em',
+            background: 'linear-gradient(90deg, #f0ece4 0%, #e8c896 50%, #f0ece4 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
           }}>
             We make AI recommend you. Every time.
           </p>
