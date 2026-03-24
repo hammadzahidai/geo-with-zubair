@@ -163,23 +163,41 @@ const GlobalStyles = () => (
     /* Service card */
     .who-we-serve-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
     }
-    .industry-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212,168,122,0.12);
+    @media (max-width: 1024px) {
+      .who-we-serve-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .who-we-serve-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 420px) {
+      .who-we-serve-grid { grid-template-columns: 1fr; }
+    }
+    .industry-card-v2 {
+      background: linear-gradient(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      padding: 32px 28px;
-      border-top: 2px solid rgba(212,168,122,0.35);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .industry-card:hover {
-      transform: translateY(-2px);
-      background: rgba(212,168,122,0.04);
-      border-color: rgba(212,168,122,0.3);
-      border-top-color: #d4a87a;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(212,168,122,0.12);
+    .industry-card-v2::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb, 212,168,122), 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .industry-card-v2:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(160deg, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.03) 100%);
+      border-color: rgba(var(--accent-rgb, 212,168,122), 0.35);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 32px rgba(var(--accent-rgb, 212,168,122), 0.08);
     }
     .service-card {
       background: rgba(255,255,255,0.03);
@@ -1601,76 +1619,102 @@ function GEOInAction() {
 function WhoWeServe() {
   const industries = [
     {
-      icon: '✨',
+      icon: <Sparkles size={22} />,
       title: 'Med Spas & Cosmetic Clinics',
-      tagline: 'When someone asks "best med spa near me" — you need to be the name that comes up.',
-      examples: ['Botox & filler clinics', 'Laser treatment centers', 'IV therapy lounges'],
+      tagline: 'Be the first name AI mentions when someone searches "best med spa near me."',
+      tags: ['Botox & Fillers', 'Laser Treatments', 'IV Therapy'],
+      accent: '#c87ac8', rgb: '200,122,200',
     },
     {
-      icon: '⚖️',
+      icon: <Shield size={22} />,
       title: 'Law Firms',
-      tagline: 'AI is the first place injured clients, immigrants, and entrepreneurs look for help.',
-      examples: ['Personal injury', 'Immigration law', 'Business & contract law'],
+      tagline: 'AI is where injured clients and entrepreneurs look first — own that answer.',
+      tags: ['Personal Injury', 'Immigration', 'Business Law'],
+      accent: '#7ab4d4', rgb: '122,180,212',
     },
     {
-      icon: '🦷',
-      title: 'Cosmetic & Multi-Location Dentists',
-      tagline: 'Patients search by procedure and neighborhood — be the answer they trust.',
-      examples: ['Invisalign & veneers', 'Implant specialists', 'Multi-location practices'],
+      icon: <Award size={22} />,
+      title: 'Cosmetic Dentists',
+      tagline: 'Patients search by procedure and zip code — be the trusted answer they find.',
+      tags: ['Invisalign', 'Implants', 'Multi-Location'],
+      accent: '#78c4a0', rgb: '120,196,160',
     },
     {
-      icon: '🏡',
-      title: 'Real Estate Teams & Brokerages',
-      tagline: 'Buyers and sellers ask AI for agent recommendations before they call anyone.',
-      examples: ['Buyer & seller agents', 'Luxury property teams', 'Regional brokerages'],
+      icon: <Users size={22} />,
+      title: 'Real Estate Teams',
+      tagline: 'Buyers ask AI for agent recs before they ever make a call. Show up first.',
+      tags: ['Buyer Agents', 'Luxury Listings', 'Brokerages'],
+      accent: '#d4a87a', rgb: '212,168,122',
     },
     {
-      icon: '🔨',
+      icon: <Zap size={22} />,
       title: 'Luxury Home Services',
-      tagline: 'High-ticket homeowners research contractors on ChatGPT before requesting a quote.',
-      examples: ['Custom remodeling', 'Solar installation', 'Outdoor living & landscaping'],
+      tagline: 'High-ticket clients research on ChatGPT before requesting a single quote.',
+      tags: ['Remodeling', 'Solar', 'Landscaping'],
+      accent: '#d4845a', rgb: '212,132,90',
     },
   ];
 
   return (
-    <section id="who-we-serve" style={{ background: '#111111', padding: '96px 32px', position: 'relative', overflow: 'hidden' }}>
+    <section id="who-we-serve" style={{ background: '#0d0d0d', padding: '96px 32px', position: 'relative', overflow: 'hidden' }}>
+      <div className="section-grid" />
       <div className="ambient-glow ambient-glow-top" />
-      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
         {/* Header */}
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <div className="label-tag" style={{ marginBottom: 16 }}>Who We Serve</div>
-          <h2 className="headline-section h-dark" style={{ maxWidth: 640, margin: '0 auto 16px' }}>
-            Built for Local Service Businesses<br />
-            <em style={{ fontStyle: 'italic', color: '#d4a87a', WebkitTextFillColor: '#d4a87a' }}>That Can't Afford to Be Invisible</em>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <div className="label-tag" style={{ marginBottom: 14 }}>Who We Serve</div>
+          <h2 className="headline-section h-dark" style={{ maxWidth: 600, margin: '0 auto 14px' }}>
+            Industries Where AI Search<br />
+            <em style={{ fontStyle: 'italic', color: '#d4a87a', WebkitTextFillColor: '#d4a87a' }}>Drives Real Revenue</em>
           </h2>
-          <p style={{ color: '#8a8580', fontSize: '18px', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif" }}>
-            We specialize in the industries where AI search drives real revenue — and where being the first name mentioned changes everything.
+          <p style={{ color: '#6a6560', fontSize: '16px', maxWidth: '500px', margin: '0 auto', lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif" }}>
+            We specialize where being the first AI-recommended business changes everything.
           </p>
         </div>
 
-        {/* Industry Cards Grid */}
-        <div className="who-we-serve-grid">
+        {/* Industry Cards — 5 column grid */}
+        <div className="who-we-serve-grid reveal">
           {industries.map((ind, i) => (
-            <div key={i} className="industry-card reveal" style={{ animationDelay: `${i * 0.06}s` }}>
-              <div style={{ fontSize: '32px', marginBottom: '16px', lineHeight: 1 }}>{ind.icon}</div>
-              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: '21px', color: '#f0ece4', marginBottom: '10px', lineHeight: 1.3 }}>{ind.title}</h3>
-              <p style={{ color: '#8a8580', fontSize: '15px', lineHeight: 1.65, marginBottom: '16px', fontFamily: "'DM Sans', sans-serif" }}>{ind.tagline}</p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {ind.examples.map((ex, j) => (
-                  <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#6a6560', fontSize: '13px', marginBottom: '6px', fontFamily: "'DM Sans', sans-serif" }}>
-                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#d4a87a', flexShrink: 0 }} />
-                    {ex}
-                  </li>
+            <div key={i} className="industry-card-v2" style={{ '--accent': ind.accent, '--accent-rgb': ind.rgb }}>
+              {/* Top accent bar */}
+              <div style={{ height: 3, background: `linear-gradient(90deg, ${ind.accent}, transparent)`, borderRadius: '2px 2px 0 0', margin: '-28px -28px 24px' }} />
+              {/* Icon */}
+              <div style={{
+                width: 48, height: 48, borderRadius: 12,
+                background: `rgba(${ind.rgb}, 0.12)`,
+                border: `1px solid rgba(${ind.rgb}, 0.25)`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: ind.accent, marginBottom: 18,
+              }}>
+                {ind.icon}
+              </div>
+              {/* Title */}
+              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: '19px', color: '#f0ece4', marginBottom: 10, lineHeight: 1.25 }}>{ind.title}</h3>
+              {/* Tagline */}
+              <p style={{ color: '#6a6560', fontSize: '13px', lineHeight: 1.65, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", flexGrow: 1 }}>{ind.tagline}</p>
+              {/* Tag pills */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {ind.tags.map((tag, j) => (
+                  <span key={j} style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 11, fontWeight: 600,
+                    padding: '3px 10px', borderRadius: 100,
+                    background: `rgba(${ind.rgb}, 0.1)`,
+                    border: `1px solid rgba(${ind.rgb}, 0.2)`,
+                    color: ind.accent,
+                    letterSpacing: '0.03em',
+                  }}>{tag}</span>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
 
         {/* CTA nudge */}
-        <div className="reveal" style={{ textAlign: 'center', marginTop: '56px' }}>
-          <p style={{ color: '#6a6560', fontSize: '15px', marginBottom: '20px', fontFamily: "'DM Sans', sans-serif" }}>Don't see your industry? If AI search drives clients to your competitors, we can help.</p>
-          <a href="#contact" className="btn-ghost" style={{ padding: '12px 32px', borderRadius: '10px', textDecoration: 'none', display: 'inline-block' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginTop: '48px' }}>
+          <p style={{ color: '#4a4540', fontSize: '14px', marginBottom: '18px', fontFamily: "'DM Sans', sans-serif" }}>Don't see your industry? If AI drives clients to your competitors, we can help.</p>
+          <a href="#contact" className="btn-ghost" style={{ padding: '11px 28px', borderRadius: '10px', textDecoration: 'none', display: 'inline-block' }}>
             Check If We're a Fit →
           </a>
         </div>
