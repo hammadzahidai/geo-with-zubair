@@ -911,11 +911,19 @@ const GlobalStyles = () => (
     }
 
     /* ── Mobile overrides ── */
+    /* Mobile-only hero CTA — hidden on desktop */
+    .hero-mobile-cta { display: none; }
+
     @media (max-width: 768px) {
       /* Add bottom padding so FAB doesn't cover page content */
       body { padding-bottom: 90px; }
-      .hero-cta-row { flex-direction: column; align-items: stretch !important; }
-      .hero-cta-primary, .hero-cta-secondary { width: 100%; justify-content: center; }
+      /* Show the inline CTA under the tagline */
+      .hero-mobile-cta { display: block; }
+      /* Hide primary button from the lower CTA row (avoid duplication) */
+      .hero-cta-primary { display: none !important; }
+      /* Ghost button stays, goes full width */
+      .hero-cta-secondary { width: 100%; justify-content: center; }
+      .hero-cta-row { justify-content: center !important; }
     }
     @media (max-width: 480px) {
       section { padding-left: 20px !important; padding-right: 20px !important; }
@@ -1146,11 +1154,22 @@ function Hero({ onBookCall }) {
             lineHeight: 1.45,
             color: '#f0ece4',
             maxWidth: 500,
-            margin: '0 auto',
+            margin: '0 auto 24px',
             letterSpacing: '-0.01em',
           }}>
             We make AI recommend you. Every time.
           </p>
+
+          {/* Mobile-only CTA — appears right under the tagline */}
+          <div className="hero-mobile-cta">
+            <button
+              className="btn-copper"
+              style={{ padding: '14px 28px', borderRadius: 12, display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, whiteSpace: 'nowrap' }}
+              onClick={onBookCall}
+            >
+              Get AI Visibility Now <ArrowRight size={15} />
+            </button>
+          </div>
         </div>
 
         {/* Stat Cards */}
