@@ -307,14 +307,14 @@ const GlobalStyles = () => (
 
     /* Stat cards row */
     .stat-cards-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
       margin-bottom: 52px;
+      flex-wrap: nowrap;
     }
-    @media (max-width: 560px) {
-      .stat-cards-row { grid-template-columns: 1fr; gap: 8px; }
-      .stat-hero-card { flex-direction: row !important; align-items: center !important; text-align: left !important; padding: 14px 16px !important; }
+    @media (max-width: 640px) {
+      .stat-cards-row { flex-direction: column; gap: 10px; }
     }
 
     /* Metric card */
@@ -551,51 +551,63 @@ const GlobalStyles = () => (
       fill: currentColor;
     }
 
-    /* Stat hero card — horizontal layout */
+    /* Stat hero card — vertical centered desktop, horizontal mobile */
     .stat-hero-card {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(212,168,122,0.14);
-      border-left: 3px solid var(--card-accent, #d4a87a);
+      border-top: 2px solid var(--card-accent, #d4a87a);
       border-radius: 12px;
-      padding: 18px 20px;
+      flex: 0 1 260px;
+      padding: 22px 24px;
       min-width: 0;
       display: flex;
-      align-items: center;
-      gap: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
       transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
     }
     .stat-hero-card:hover {
       background: rgba(255,255,255,0.06);
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
     }
     .stat-card-icon {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      background: rgba(255,255,255,0.06);
     }
-    .stat-card-text { flex: 1; min-width: 0; }
+    .stat-card-text { width: 100%; }
     .stat-card-num {
       font-family: 'Instrument Serif', serif;
-      font-size: 28px;
+      font-size: 36px;
       font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 2px;
+      line-height: 1;
+      margin-bottom: 4px;
     }
     .stat-card-label {
       font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 500;
       color: #a09890;
-      line-height: 1.3;
+      line-height: 1.4;
     }
     .stat-card-sub {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       color: #5a5550;
-      margin-top: 1px;
+      margin-top: 2px;
+    }
+    /* Mobile: horizontal layout */
+    @media (max-width: 640px) {
+      .stat-hero-card {
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 14px 16px !important;
+        flex: unset !important;
+        gap: 14px;
+      }
+      .stat-card-num { font-size: 26px !important; }
     }
 
     /* Copper icon container */
