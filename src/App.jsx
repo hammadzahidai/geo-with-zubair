@@ -1749,7 +1749,7 @@ function WhoWeServe() {
                 {ind.icon}
               </div>
               {/* Title */}
-              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: '19px', color: '#f0ece4', marginBottom: 10, lineHeight: 1.25 }}>{ind.title}</h3>
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: 10, lineHeight: 1.25, letterSpacing: '-0.01em' }}>{ind.title}</h3>
               {/* Tagline */}
               <p style={{ color: '#6a6560', fontSize: '13px', lineHeight: 1.65, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", flexGrow: 1 }}>{ind.tagline}</p>
               {/* Tag pills */}
