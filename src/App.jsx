@@ -930,10 +930,27 @@ const GlobalStyles = () => (
       z-index: 0;
     }
 
-    /* CTA button wrapper — no pulse animation (removed for perf) */
+    /* CTA button wrapper — ripple rings */
+    @keyframes btnRipple {
+      0%   { transform: scale(1);    opacity: 0.55; }
+      100% { transform: scale(1.75); opacity: 0; }
+    }
     .btn-pulse-wrap {
       position: relative;
       display: inline-flex;
+    }
+    .btn-pulse-wrap::before,
+    .btn-pulse-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      border: 2px solid rgba(224, 160, 48, 0.6);
+      animation: btnRipple 2.2s ease-out infinite;
+      pointer-events: none;
+    }
+    .btn-pulse-wrap::after {
+      animation-delay: 1.1s;
     }
 
     /* Hero radial glow */
