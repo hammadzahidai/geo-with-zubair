@@ -799,24 +799,34 @@ const GlobalStyles = () => (
       .mobile-fab { display: none !important; }
     }
 
-    /* ── Floating keyword words ── */
-    @keyframes floatA {
-      0%,100% { transform: translateY(0px)   translateX(0px); }
-      40%      { transform: translateY(-26px) translateX(10px); }
-      70%      { transform: translateY(-12px) translateX(-7px); }
+    /* ── Floating keyword words — come & go animations ── */
+    /* Rise up and fade */
+    @keyframes riseUp {
+      0%   { transform: translateY(50px) translateX(0px);   opacity: 0; }
+      18%  { opacity: 0.18; }
+      75%  { opacity: 0.14; }
+      100% { transform: translateY(-30px) translateX(6px);  opacity: 0; }
     }
-    @keyframes floatB {
-      0%,100% { transform: translateY(0px)   translateX(0px); }
-      30%      { transform: translateY(20px)  translateX(-12px); }
-      65%      { transform: translateY(-10px) translateX(9px); }
+    /* Drift right and fade */
+    @keyframes driftRight {
+      0%   { transform: translateX(-40px) translateY(0px);  opacity: 0; }
+      18%  { opacity: 0.16; }
+      75%  { opacity: 0.12; }
+      100% { transform: translateX(40px)  translateY(-8px); opacity: 0; }
     }
-    @keyframes floatC {
-      0%,100% { transform: translateY(0px)   translateX(0px)  rotate(0deg); }
-      50%      { transform: translateY(-18px) translateX(-9px) rotate(-2deg); }
+    /* Drift left and fade */
+    @keyframes driftLeft {
+      0%   { transform: translateX(40px)  translateY(5px);  opacity: 0; }
+      18%  { opacity: 0.16; }
+      75%  { opacity: 0.12; }
+      100% { transform: translateX(-40px) translateY(-6px); opacity: 0; }
     }
-    @keyframes wordPulse {
-      0%,100% { opacity: var(--w-op, 0.15); }
-      50%      { opacity: calc(var(--w-op, 0.15) + 0.07); }
+    /* Rise diagonally */
+    @keyframes riseDiag {
+      0%   { transform: translateY(40px)  translateX(-15px); opacity: 0; }
+      20%  { opacity: 0.15; }
+      78%  { opacity: 0.11; }
+      100% { transform: translateY(-25px) translateX(15px);  opacity: 0; }
     }
     .float-word {
       position: fixed;
@@ -828,10 +838,9 @@ const GlobalStyles = () => (
       letter-spacing: 0.07em;
       text-transform: uppercase;
       font-size: 11px;
-      filter: blur(var(--w-blur, 0.6px));
       z-index: 1;
       white-space: nowrap;
-      opacity: var(--w-op, 0.15);
+      opacity: 0;
     }
 
     /* Custom scrollbar */
@@ -2525,20 +2534,28 @@ function MobileFAB({ onBookCall }) {
    FLOATING KEYWORD WORDS
 ───────────────────────────────────────────── */
 const FLOAT_WORDS = [
-  { text: 'AI Search',    x: '6%',  y: '8%',  op: 0.18, blur: 0.5, anim: 'floatA', dur: '20s', delay: '0s',   pulse: '9s'  },
-  { text: 'ChatGPT',      x: '76%', y: '12%', op: 0.16, blur: 0.5, anim: 'floatB', dur: '25s', delay: '-8s',  pulse: '12s' },
-  { text: 'GEO',          x: '44%', y: '4%',  op: 0.22, blur: 0,   anim: 'floatC', dur: '18s', delay: '-3s',  pulse: '8s'  },
-  { text: 'Perplexity',   x: '84%', y: '33%', op: 0.15, blur: 0.8, anim: 'floatA', dur: '23s', delay: '-12s', pulse: '11s' },
-  { text: 'Claude',       x: '12%', y: '41%', op: 0.16, blur: 0.5, anim: 'floatB', dur: '19s', delay: '-6s',  pulse: '10s' },
-  { text: 'Gemini',       x: '60%', y: '26%', op: 0.15, blur: 0.8, anim: 'floatC', dur: '22s', delay: '-15s', pulse: '13s' },
-  { text: 'AI Overviews', x: '29%', y: '53%', op: 0.14, blur: 1,   anim: 'floatA', dur: '26s', delay: '-9s',  pulse: '14s' },
-  { text: 'citations',    x: '79%', y: '60%', op: 0.16, blur: 0.5, anim: 'floatB', dur: '21s', delay: '-4s',  pulse: '9s'  },
-  { text: 'Copilot',      x: '3%',  y: '68%', op: 0.15, blur: 0.8, anim: 'floatC', dur: '24s', delay: '-11s', pulse: '11s' },
-  { text: 'Generative',   x: '52%', y: '76%', op: 0.14, blur: 1,   anim: 'floatA', dur: '28s', delay: '-7s',  pulse: '15s' },
-  { text: 'authority',    x: '17%', y: '83%', op: 0.15, blur: 0.8, anim: 'floatB', dur: '20s', delay: '-2s',  pulse: '10s' },
-  { text: 'AI-first',     x: '72%', y: '86%', op: 0.16, blur: 0.5, anim: 'floatC', dur: '17s', delay: '-14s', pulse: '8s'  },
-  { text: 'visibility',   x: '35%', y: '16%', op: 0.15, blur: 0.8, anim: 'floatB', dur: '27s', delay: '-5s',  pulse: '12s' },
-  { text: 'LLM',          x: '90%', y: '72%', op: 0.17, blur: 0.5, anim: 'floatA', dur: '16s', delay: '-10s', pulse: '9s'  },
+  // Left edge — rising up
+  { text: 'Claude',       x: '2%',  y: '60%', size: 10, anim: 'riseUp',    dur: '9s',  delay: '0s'   },
+  { text: 'Copilot',      x: '4%',  y: '40%', size: 9,  anim: 'riseUp',    dur: '11s', delay: '-4s'  },
+  { text: 'AI Overviews', x: '1%',  y: '70%', size: 9,  anim: 'riseUp',    dur: '13s', delay: '-8s'  },
+
+  // Right edge — drifting left
+  { text: 'ChatGPT',      x: '88%', y: '20%', size: 11, anim: 'driftLeft', dur: '10s', delay: '-2s'  },
+  { text: 'Perplexity',   x: '85%', y: '55%', size: 9,  anim: 'driftLeft', dur: '12s', delay: '-6s'  },
+  { text: 'LLM',          x: '90%', y: '75%', size: 12, anim: 'driftLeft', dur: '8s',  delay: '-10s' },
+
+  // Top — drifting right
+  { text: 'GEO',          x: '15%', y: '8%',  size: 13, anim: 'driftRight', dur: '11s', delay: '-3s'  },
+  { text: 'AI Search',    x: '55%', y: '5%',  size: 9,  anim: 'driftRight', dur: '14s', delay: '-7s'  },
+
+  // Bottom — rising diagonally
+  { text: 'Generative',   x: '20%', y: '82%', size: 9,  anim: 'riseDiag',  dur: '10s', delay: '-5s'  },
+  { text: 'AI-first',     x: '60%', y: '85%', size: 10, anim: 'riseDiag',  dur: '12s', delay: '-1s'  },
+
+  // Mid edges — occasional drift
+  { text: 'Gemini',       x: '78%', y: '38%', size: 9,  anim: 'driftLeft', dur: '9s',  delay: '-9s'  },
+  { text: 'citations',    x: '3%',  y: '25%', size: 9,  anim: 'riseUp',    dur: '13s', delay: '-11s' },
+  { text: 'authority',    x: '86%', y: '88%', size: 9,  anim: 'riseDiag',  dur: '11s', delay: '-13s' },
 ];
 
 function FloatingWords() {
@@ -2551,9 +2568,8 @@ function FloatingWords() {
           style={{
             left: w.x,
             top: w.y,
-            '--w-op': w.op,
-            '--w-blur': `${w.blur}px`,
-            animation: `${w.anim} ${w.dur} ease-in-out ${w.delay} infinite, wordPulse ${w.pulse} ease-in-out ${w.delay} infinite`,
+            fontSize: w.size,
+            animation: `${w.anim} ${w.dur} ease-in-out ${w.delay} infinite`,
           }}
         >
           {w.text}
