@@ -551,51 +551,72 @@ const GlobalStyles = () => (
       fill: currentColor;
     }
 
-    /* Stat hero card — vertical centered desktop, horizontal mobile */
+    /* Stat hero card — 3D elevated, vertical desktop / horizontal mobile */
     .stat-hero-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(212,168,122,0.14);
-      border-top: 2px solid var(--card-accent, #d4a87a);
-      border-radius: 12px;
-      flex: 0 1 260px;
-      padding: 22px 24px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 1.5px solid var(--card-accent, #d4a87a);
+      border-radius: 16px;
+      flex: 0 1 255px;
+      padding: 22px 22px 20px;
       min-width: 0;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
-      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      gap: 12px;
+      position: relative;
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.04) inset,
+        0 1px 0 rgba(0,0,0,0.4),
+        0 4px 16px rgba(0,0,0,0.35),
+        0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .stat-hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb, 212,168,122), 0.08) 0%, transparent 65%);
+      pointer-events: none;
     }
     .stat-hero-card:hover {
-      background: rgba(255,255,255,0.06);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.05) inset,
+        0 1px 0 rgba(0,0,0,0.4),
+        0 12px 36px rgba(0,0,0,0.4),
+        0 4px 12px rgba(var(--accent-rgb, 212,168,122), 0.12);
+      background: linear-gradient(145deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
     }
     .stat-card-icon {
-      width: 38px; height: 38px;
-      border-radius: 10px;
+      width: 40px; height: 40px;
+      border-radius: 11px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.05) inset;
     }
     .stat-card-text { width: 100%; }
     .stat-card-num {
       font-family: 'Instrument Serif', serif;
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 400;
       line-height: 1;
       margin-bottom: 4px;
+      letter-spacing: -0.5px;
     }
     .stat-card-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 12.5px;
       font-weight: 500;
-      color: #a09890;
+      color: #9a9088;
       line-height: 1.4;
     }
     .stat-card-sub {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
-      color: #5a5550;
+      color: #524e4a;
       margin-top: 2px;
     }
     /* Mobile: horizontal layout */
@@ -1256,8 +1277,8 @@ function Hero({ onBookCall }) {
             { num: '$2.1T', label: 'AI-driven revenue by 2027', sub: 'across all industries', icon: <DollarSign size={18} />, accent: '#7ac4d4', rgb: '122,196,212' },
             { num: '3.5×', label: 'more visibility for GEO businesses', sub: 'vs. non-optimized competitors', icon: <BarChart2 size={18} />, accent: '#a47ad4', rgb: '164,122,212' },
           ].map((s) => (
-            <div key={s.num} className="stat-hero-card" style={{ '--card-accent': s.accent }}>
-              <div className="stat-card-icon" style={{ color: s.accent, background: `rgba(${s.rgb},0.12)` }}>
+            <div key={s.num} className="stat-hero-card" style={{ '--card-accent': s.accent, '--accent-rgb': s.rgb }}>
+              <div className="stat-card-icon" style={{ color: s.accent, background: `rgba(${s.rgb},0.15)` }}>
                 {s.icon}
               </div>
               <div className="stat-card-text">
