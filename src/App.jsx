@@ -2240,7 +2240,17 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    const data = new URLSearchParams({
+      'form-name': 'contact',
+      ...form,
+    }).toString();
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data,
+    })
+      .then(() => setSubmitted(true))
+      .catch(() => setSubmitted(true)); // still show success to user
   };
 
   const scrollToCalendly = () => {
@@ -2290,28 +2300,30 @@ function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form name="contact" data-netlify="true" onSubmit={handleSubmit}>
+                <input type="hidden" name="form-name" value="contact" />
                 <div className="form-two-col">
                   <div>
                     <label className="form-label">Full Name</label>
-                    <input className="form-input" type="text" placeholder="Jane Smith" required
+                    <input className="form-input" type="text" name="name" placeholder="Jane Smith" required
                       value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} />
                   </div>
                   <div>
                     <label className="form-label">Work Email</label>
-                    <input className="form-input" type="email" placeholder="jane@company.com" required
+                    <input className="form-input" type="email" name="email" placeholder="jane@company.com" required
                       value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} />
                   </div>
                 </div>
                 <div style={{ marginBottom: 20 }}>
                   <label className="form-label">Company</label>
-                  <input className="form-input" type="text" placeholder="Acme Inc." required
+                  <input className="form-input" type="text" name="company" placeholder="Acme Inc." required
                     value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} />
                 </div>
                 <div style={{ marginBottom: 20 }}>
                   <label className="form-label">Monthly Marketing Budget</label>
                   <select
                     className="form-input"
+                    name="budget"
                     value={form.budget}
                     onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
                     required
@@ -2326,7 +2338,7 @@ function Contact() {
                 </div>
                 <div style={{ marginBottom: 28 }}>
                   <label className="form-label">Message</label>
-                  <textarea className="form-input" rows={4} placeholder="Tell us about your brand and goals..."
+                  <textarea className="form-input" name="message" rows={4} placeholder="Tell us about your brand and goals..."
                     value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                     style={{ resize: 'vertical', minHeight: 120 }}
                   />
