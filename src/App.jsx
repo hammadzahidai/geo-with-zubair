@@ -764,36 +764,39 @@ const GlobalStyles = () => (
 
     /* Floating mobile CTA — bottom-right pill, slides up on scroll */
     .mobile-fab {
-      display: none;
+      position: fixed !important;
+      bottom: 28px !important;
+      right: 20px !important;
+      z-index: 99999 !important;
+      display: flex !important;
+      transform: translateY(100px) scale(0.8);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
     }
-    @media (max-width: 768px) {
-      .mobile-fab {
-        display: flex !important;
-        position: fixed;
-        bottom: 28px;
-        right: 20px;
-        z-index: 10000;
-        transform: translateY(80px) scale(0.85);
-        opacity: 0;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
-        pointer-events: none;
-      }
-      .mobile-fab.mobile-fab-visible {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .mobile-fab button {
-        display: flex !important;
-        align-items: center;
-        gap: 8px;
-        padding: 13px 22px !important;
-        border-radius: 100px !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        white-space: nowrap;
-        box-shadow: 0 6px 32px rgba(224,144,48,0.55), 0 2px 10px rgba(0,0,0,0.5) !important;
-      }
+    .mobile-fab.mobile-fab-visible {
+      transform: translateY(0) scale(1) !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .mobile-fab button {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 14px 24px !important;
+      border-radius: 100px !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      letter-spacing: 0.01em !important;
+      box-shadow:
+        0 8px 32px rgba(224,144,48,0.6),
+        0 2px 12px rgba(0,0,0,0.6),
+        0 1px 0 rgba(255,220,120,0.3) inset !important;
+    }
+    /* Hide FAB on desktop */
+    @media (min-width: 769px) {
+      .mobile-fab { display: none !important; }
     }
 
     /* Custom scrollbar */
