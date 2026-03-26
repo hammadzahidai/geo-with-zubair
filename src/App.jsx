@@ -729,38 +729,37 @@ const GlobalStyles = () => (
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
 
-    /* Floating mobile CTA — slides up on scroll */
+    /* Floating mobile CTA — bottom-right pill, slides up on scroll */
     .mobile-fab {
       display: none;
     }
     @media (max-width: 768px) {
       .mobile-fab {
-        display: flex;
+        display: flex !important;
         position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 999;
-        padding: 12px 20px 28px;
-        background: linear-gradient(to top, rgba(10,10,10,0.98) 60%, transparent);
-        transform: translateY(100%);
+        bottom: 28px;
+        right: 20px;
+        z-index: 10000;
+        transform: translateY(80px) scale(0.85);
         opacity: 0;
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
         pointer-events: none;
       }
       .mobile-fab.mobile-fab-visible {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
         pointer-events: auto;
       }
       .mobile-fab button {
-        width: 100%;
-        justify-content: center;
-        border-radius: 14px !important;
-        padding: 15px 20px !important;
-        font-size: 15px !important;
+        display: flex !important;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 22px !important;
+        border-radius: 100px !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
         white-space: nowrap;
-        box-shadow: 0 4px 32px rgba(212,168,122,0.4) !important;
+        box-shadow: 0 6px 32px rgba(224,144,48,0.55), 0 2px 10px rgba(0,0,0,0.5) !important;
       }
     }
 
@@ -811,6 +810,8 @@ const GlobalStyles = () => (
       background-size: 60px 60px;
       pointer-events: none;
       animation: gridDrift 14s linear infinite, gridShimmer 6s ease-in-out infinite;
+      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     }
 
     /* Opportunity card */
@@ -1319,11 +1320,11 @@ function TheOpportunity() {
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
           <div className="label-tag" style={{ marginBottom: 16 }}>The Opportunity</div>
-          <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
-            The Biggest Shift in Search History Is Happening Right Now
+          <h2 className="headline-section h-dark" style={{ maxWidth: 580, marginBottom: 12, margin: '0 auto 12px' }}>
+            AI Is Replacing Google.<br />Is Your Brand in the Answer?
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 560, margin: '0 auto' }}>
-            And 99% of businesses are completely unprepared.
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#7a7268', maxWidth: 480, margin: '0 auto' }}>
+            99% of businesses are invisible to AI. The ones who act now will own their market.
           </p>
         </div>
 
@@ -1331,22 +1332,21 @@ function TheOpportunity() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, marginBottom: 48 }}>
           {/* Reality Card */}
           <div className="reveal reveal-delay-1 opportunity-card" style={{ borderLeftColor: '#c45c45' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#c45c45', flexShrink: 0 }} />
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 600, color: '#f0ece4' }}>
-                What's Happening Right Now
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#c45c45', flexShrink: 0 }} />
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4' }}>
+                The Threat
               </h3>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
-                'AI chatbots like ChatGPT and Perplexity are replacing Google for millions of users every day',
-                "Customers ask ChatGPT 'What's the best [your service] near me?' — and your brand isn't in the answer",
-                'Traditional SEO alone cannot protect you — Google AI Overviews are cutting organic click-through rates',
-                'Businesses that invest in GEO now will own AI recommendations in their market for years to come',
+                'ChatGPT & Perplexity are replacing Google for millions daily',
+                "Your brand isn't in the AI answer — a competitor is",
+                'SEO alone can\'t save you from AI Overviews killing organic traffic',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#c45c45', flexShrink: 0, marginTop: 7 }} />
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#a09890', lineHeight: 1.6 }}>{item}</p>
+                  <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#c45c45', flexShrink: 0, marginTop: 8 }} />
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#a09890', lineHeight: 1.55 }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -1354,22 +1354,21 @@ function TheOpportunity() {
 
           {/* Opportunity Card */}
           <div className="reveal reveal-delay-2 opportunity-card" style={{ borderLeftColor: '#d4a87a' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#d4a87a', flexShrink: 0 }} />
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 600, color: '#f0ece4' }}>
-                What This Means For Your Business
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#d4a87a', flexShrink: 0 }} />
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4' }}>
+                The Opportunity
               </h3>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
-                'Brands with strong GEO scores get recommended by ChatGPT, Google AI, and Perplexity — for free, at scale',
-                'Generative Engine Optimization today is like SEO in 2005 — the early movers capture everything',
-                'A single AI citation in ChatGPT or Google AI Overviews builds more trust than an entire ad campaign',
-                'One AI recommendation to a high-intent searcher converts faster than any paid lead',
+                'GEO today = SEO in 2005 — early movers capture everything',
+                'One AI citation builds more trust than an entire ad campaign',
+                'AI-recommended brands convert faster than any paid lead',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#d4a87a', flexShrink: 0, marginTop: 7 }} />
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#a09890', lineHeight: 1.6 }}>{item}</p>
+                  <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#d4a87a', flexShrink: 0, marginTop: 8 }} />
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#a09890', lineHeight: 1.55 }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -1423,9 +1422,9 @@ function TheOpportunity() {
           {/* 3 cards in a row */}
           <div className="edge-callout-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, position: 'relative', zIndex: 1 }}>
             {[
-              { icon: <Zap size={18} />, title: 'First-Mover Lock-In', desc: "AI models build long-term trust with brands they've cited before. The earlier you optimize, the deeper your AI authority compounds." },
-              { icon: <Target size={18} />, title: 'Outrank Sleeping Competitors', desc: 'Most local businesses have zero GEO presence. Own the AI answer before your competitor even knows the question exists.' },
-              { icon: <TrendingUp size={18} />, title: 'AI as a 24/7 Sales Rep', desc: 'Every time ChatGPT recommends your law firm, spa, or clinic — it\'s a warm referral from a customer already looking to buy.' },
+              { icon: <Zap size={18} />, title: 'First-Mover Lock-In', desc: "Optimize early — AI authority compounds over time." },
+              { icon: <Target size={18} />, title: 'Zero Competition', desc: 'Most local businesses have no GEO presence. Own the answer now.' },
+              { icon: <TrendingUp size={18} />, title: 'AI as a Sales Rep', desc: "Every ChatGPT mention is a warm referral from a ready buyer." },
             ].map((pt) => (
               <div key={pt.title} style={{
                 background: 'rgba(255,255,255,0.03)',
@@ -2087,8 +2086,7 @@ function BookACall() {
   ];
 
   return (
-    <section ref={calRef} id="book-call" style={{ background: '#0f0f0f', padding: '80px 32px 72px', position: 'relative', overflow: 'hidden' }}>
-      <div className="section-grid" />
+    <section ref={calRef} id="book-call" style={{ background: 'transparent', padding: '80px 32px 72px', position: 'relative', overflow: 'hidden' }}>
       <div className="ambient-glow ambient-glow-top" />
       <div className="ambient-glow ambient-glow-bottom" />
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
@@ -2109,10 +2107,6 @@ function BookACall() {
 
           {/* Left — value proposition */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingTop: 8 }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#a09890', lineHeight: 1.6 }}>
-              In 30 minutes, we'll audit your AI search presence, identify your biggest opportunities,
-              and map your path to domination.
-            </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {valuePoints.map((point, i) => (
@@ -2395,19 +2389,15 @@ function MobileFAB({ onBookCall }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 480);
+    const onScroll = () => setVisible(window.scrollY > 200);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <div className={`mobile-fab ${visible ? 'mobile-fab-visible' : ''}`}>
-      <button
-        className="btn-copper"
-        style={{ padding: '14px 22px', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, boxShadow: '0 4px 24px rgba(212,168,122,0.3)' }}
-        onClick={onBookCall}
-      >
-        <Phone size={15} />
+      <button className="btn-copper" onClick={onBookCall}>
+        <Phone size={14} />
         Book a Call
       </button>
     </div>
@@ -2555,6 +2545,7 @@ export default function App() {
       <Navbar onBookCall={scrollToBookCall} />
 
       <Hero onBookCall={scrollToBookCall} />
+      <BookACall />
       <TheOpportunity />
       <GEOInAction />
       <WhoWeServe />
@@ -2562,7 +2553,6 @@ export default function App() {
       <Services />
       <Process />
       <FAQ />
-      <BookACall />
       <Contact />
       <Footer onBookCall={scrollToBookCall} />
 
