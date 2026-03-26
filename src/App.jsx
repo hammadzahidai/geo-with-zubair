@@ -850,20 +850,29 @@ const GlobalStyles = () => (
       mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     }
 
-    /* Opportunity card */
+    /* Opportunity card — 3D elevated */
     .opportunity-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
       padding: 36px;
       border-left: 4px solid transparent;
-      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.04) inset,
+        0 1px 0 rgba(0,0,0,0.5),
+        0 6px 20px rgba(0,0,0,0.35),
+        0 16px 48px rgba(0,0,0,0.2);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
     }
     .opportunity-card:hover {
-      background: rgba(255,255,255,0.05);
-      border-left-color: rgba(212,168,122,0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+      background: linear-gradient(160deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
+      transform: translateY(-5px);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.05) inset,
+        0 1px 0 rgba(0,0,0,0.5),
+        0 16px 48px rgba(0,0,0,0.45),
+        0 4px 16px rgba(0,0,0,0.3);
     }
 
     /* Star rating */
@@ -1516,12 +1525,18 @@ function GEOInAction() {
 
   const ChatWindow = ({ label, labelColor, messages }) => (
     <div style={{
-      background: '#0d0d0d',
-      border: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.25)' : 'rgba(212,168,122,0.25)'}`,
-      borderRadius: 16,
+      background: labelColor === 'bad'
+        ? 'linear-gradient(160deg, rgba(196,92,69,0.07) 0%, rgba(15,12,12,1) 40%)'
+        : 'linear-gradient(160deg, rgba(212,168,122,0.08) 0%, rgba(12,12,15,1) 40%)',
+      border: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.2)' : 'rgba(212,168,122,0.2)'}`,
+      borderRadius: 18,
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
+      boxShadow: labelColor === 'bad'
+        ? '0 2px 0 rgba(255,255,255,0.03) inset, 0 1px 0 rgba(0,0,0,0.6), 0 8px 32px rgba(0,0,0,0.5), 0 24px 64px rgba(0,0,0,0.3)'
+        : '0 2px 0 rgba(255,255,255,0.04) inset, 0 1px 0 rgba(0,0,0,0.6), 0 8px 32px rgba(0,0,0,0.5), 0 24px 64px rgba(212,168,122,0.06)',
+      transition: 'transform 0.28s ease, box-shadow 0.28s ease',
     }}>
       {/* Window chrome */}
       <div style={{
