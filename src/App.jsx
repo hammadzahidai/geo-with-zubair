@@ -1289,6 +1289,7 @@ function Hero({ onBookCall }) {
 
           {/* Mobile-only CTA — appears right under the tagline */}
           <div className="hero-mobile-cta">
+            <div className="btn-pulse-wrap">
             <button
               className="btn-copper"
               style={{ padding: '14px 28px', borderRadius: 12, display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, whiteSpace: 'nowrap' }}
@@ -1296,6 +1297,7 @@ function Hero({ onBookCall }) {
             >
               Get AI Visibility Now <ArrowRight size={15} />
             </button>
+            </div>
           </div>
         </div>
 
