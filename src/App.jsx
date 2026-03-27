@@ -692,7 +692,7 @@ const GlobalStyles = () => (
       display: grid;
       grid-template-columns: 1fr 1.4fr;
       gap: 40px;
-      align-items: start;
+      align-items: center;
     }
     @media (max-width: 860px) {
       .book-grid { grid-template-columns: 1fr; gap: 28px; }
@@ -2310,7 +2310,7 @@ function Contact() {
   };
 
   return (
-    <section id="contact" style={{ background: '#0f0f0f', padding: '80px 32px' }}>
+    <section id="contact" style={{ background: '#0f0f0f', padding: '48px 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{
           border: '1px solid rgba(255,255,255,0.07)',
@@ -2321,19 +2321,36 @@ function Contact() {
         }}>
 
           {/* Left */}
-          <div className="reveal" style={{ padding: '64px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div className="reveal" style={{ padding: '48px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0 }}>
+            <div className="label-tag" style={{ marginBottom: 12 }}>Get in Touch</div>
             <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16 }}>
-              Or Send Us a Message
+              Send Us a Message
             </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7, marginBottom: 48, maxWidth: 380 }}>
-              Not ready to book a call? Drop us a message and we'll get back to you within 24 hours with a personalized response.
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7, marginBottom: 32, maxWidth: 360 }}>
+              Not ready to book a call? Drop us a message and we'll get back to you within 24 hours.
             </p>
 
+            {/* Trust bullets */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 36 }}>
+              {[
+                'Free AI visibility audit included',
+                'No contracts, no commitment',
+                'Response within 24 hours',
+                'Personalized GEO strategy call',
+              ].map((item) => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(212,168,122,0.12)', border: '1px solid rgba(212,168,122,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Check size={12} style={{ color: '#d4a87a' }} />
+                  </div>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#c0b8b0' }}>{item}</span>
+                </div>
+              ))}
+            </div>
 
             <button
               onClick={scrollToCalendly}
               className="book-link-desktop"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', alignItems: 'center', gap: 6, marginTop: 36, padding: 0 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, padding: 0 }}
             >
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#d4a87a' }}>Book directly instead</span>
               <ArrowRight size={14} style={{ color: '#d4a87a' }} />
@@ -2341,7 +2358,7 @@ function Contact() {
           </div>
 
           {/* Right: Form */}
-          <div className="reveal reveal-delay-1" style={{ background: '#0a0a0a', padding: '64px 48px' }}>
+          <div className="reveal reveal-delay-1" style={{ background: '#0a0a0a', padding: '48px 48px' }}>
             {submitted ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 20, textAlign: 'center' }}>
                 <div className="icon-container" style={{ width: 64, height: 64, borderRadius: 16 }}>
