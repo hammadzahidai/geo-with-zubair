@@ -2279,7 +2279,7 @@ function BookACall() {
    SECTION 12: CONTACT FORM — DARK
 ───────────────────────────────────────────── */
 function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', company: '', budget: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', budget: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
@@ -2358,10 +2358,17 @@ function Contact() {
                       value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} />
                   </div>
                 </div>
-                <div style={{ marginBottom: 20 }}>
-                  <label className="form-label">Company</label>
-                  <input className="form-input" type="text" name="company" placeholder="Acme Inc." required
-                    value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} />
+                <div className="form-two-col">
+                  <div>
+                    <label className="form-label">Phone Number</label>
+                    <input className="form-input" type="tel" name="phone" placeholder="+1 (555) 000-0000"
+                      value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="form-label">Company</label>
+                    <input className="form-input" type="text" name="company" placeholder="Acme Inc." required
+                      value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} />
+                  </div>
                 </div>
                 <div style={{ marginBottom: 20 }}>
                   <label className="form-label">Monthly Marketing Budget</label>
@@ -2721,6 +2728,7 @@ export default function App() {
       <Navbar onBookCall={scrollToBookCall} />
 
       <Hero onBookCall={scrollToBookCall} />
+      <Contact />
       <BookACall />
       <TheOpportunity />
       <GEOInAction />
@@ -2729,7 +2737,6 @@ export default function App() {
       <Services />
       <Process />
       <FAQ />
-      <Contact />
       <Footer onBookCall={scrollToBookCall} />
 
       <MobileFAB onBookCall={scrollToBookCall} />
