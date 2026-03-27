@@ -374,6 +374,14 @@ const GlobalStyles = () => (
       align-items: start;
     }
 
+    /* Book link visibility toggle */
+    .book-link-desktop { display: flex; }
+    .book-link-mobile  { display: none; }
+    @media (max-width: 767px) {
+      .book-link-desktop { display: none; }
+      .book-link-mobile  { display: flex; justify-content: center; margin-top: 20px; }
+    }
+
     /* Contact form 2-col responsive */
     .form-two-col {
       display: grid;
@@ -2324,7 +2332,8 @@ function Contact() {
 
             <button
               onClick={scrollToCalendly}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, marginTop: 36, padding: 0 }}
+              className="book-link-desktop"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', alignItems: 'center', gap: 6, marginTop: 36, padding: 0 }}
             >
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#d4a87a' }}>Book directly instead</span>
               <ArrowRight size={14} style={{ color: '#d4a87a' }} />
@@ -2404,6 +2413,15 @@ function Contact() {
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#6b6560', textAlign: 'center', marginTop: 14 }}>
                   We respond within 24 hours · No spam, ever
                 </p>
+                <div className="book-link-mobile">
+                  <button
+                    onClick={scrollToCalendly}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, padding: 0 }}
+                  >
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#d4a87a' }}>Book directly instead</span>
+                    <ArrowRight size={14} style={{ color: '#d4a87a' }} />
+                  </button>
+                </div>
               </form>
             )}
           </div>
