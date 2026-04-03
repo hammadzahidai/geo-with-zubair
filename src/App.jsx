@@ -1313,7 +1313,7 @@ function Navbar({ onBookCall }) {
 ───────────────────────────────────────────── */
 function Hero({ onBookCall }) {
   const words1 = ['SEO', 'Is', 'for', 'Yesterday;'];
-  const words2 = ['GEO', 'Is', 'for'];
+  const words2 = ['AI', 'Search', 'Is', 'for'];
 
   const platforms = ['ChatGPT', 'Google AI', 'Perplexity', 'Claude', 'Gemini', 'Copilot'];
 
@@ -1361,7 +1361,7 @@ function Hero({ onBookCall }) {
                 </span>
               ))}
             </div>
-            {/* Line 2 — "GEO Is for What's Next." with copper italic "What's Next." */}
+            {/* Line 2 — "AI Search Is for What's Next." with copper italic "What's Next." */}
             <div>
               {words2.map((w, i) => (
                 <span key={w} className="word-reveal" style={{ animationDelay: `${0.78 + i * 0.12}s`, marginRight: '0.25em' }}>
