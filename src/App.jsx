@@ -815,6 +815,17 @@ const GlobalStyles = () => (
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
 
+    /* Blinking cursor */
+    .blink-cursor {
+      font-weight: 300;
+      color: #d4a87a;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     /* Bounce-down arrow animation */
     .bounce-down {
       display: inline-flex;
@@ -1375,7 +1386,7 @@ function Hero({ onBookCall }) {
             margin: '0 auto 18px',
             letterSpacing: '0.01em',
           }}>
-            People ask ChatGPT "best dentist near me" and book whoever AI recommends.
+            People ask ChatGPT "<span style={{ color: '#d4a87a' }}>best dentist near me</span><span className="blink-cursor">|</span>" and book whoever AI recommends.
             Not there? A competitor just got your client.
           </p>
           <p style={{
