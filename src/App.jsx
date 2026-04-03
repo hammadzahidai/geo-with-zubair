@@ -40,12 +40,57 @@ const GlobalStyles = () => (
     .font-serif { font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; }
     .font-sans  { font-family: 'DM Sans', system-ui, sans-serif; }
 
-    /* Logo gradient text */
+    /* Logo gradient text — warm copper metallic */
     .logo-gradient {
-      background: linear-gradient(135deg, #e8c896 0%, #d4a87a 30%, #c8956c 55%, #dbb892 80%, #f0dcc0 100%);
+      background: linear-gradient(
+        135deg,
+        #f0dcc0 0%,
+        #d4a87a 20%,
+        #c8956c 40%,
+        #e8c896 55%,
+        #c8956c 70%,
+        #d4a87a 85%,
+        #f0dcc0 100%
+      );
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: metallic-shift 4s ease-in-out infinite;
+      filter: brightness(1.1);
+    }
+    @keyframes metallic-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Subtle float for logo accent words */
+    .logo-float-gpt {
+      display: inline-block;
+      animation: logo-float 3s ease-in-out infinite;
+    }
+    .logo-float-boost {
+      display: inline-block;
+      animation: logo-float 3s ease-in-out infinite 1.5s;
+    }
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+
+    /* Logo text glow */
+    .logo-text {
+      position: relative;
+      display: inline-block;
+    }
+    .logo-text::after {
+      content: '';
+      position: absolute;
+      inset: -5px -10px;
+      background: radial-gradient(ellipse at center, rgba(200,149,108,0.12) 0%, transparent 70%);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: -1;
     }
 
     /* Headline styles */
@@ -468,7 +513,7 @@ const GlobalStyles = () => (
     }
     .nav-logo:hover {
       transform: translateY(-1px);
-      filter: drop-shadow(0 0 8px rgba(212,168,122,0.35));
+      filter: drop-shadow(0 0 12px rgba(232,200,150,0.4));
     }
 
     /* Video container */
@@ -769,6 +814,16 @@ const GlobalStyles = () => (
 
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
+
+    /* Bounce-down arrow animation */
+    .bounce-down {
+      display: inline-flex;
+      animation: bounceDown 1.5s ease-in-out infinite;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
 
     /* Floating mobile CTA — bottom-right pill, slides up on scroll */
     .mobile-fab {
@@ -1168,9 +1223,9 @@ function Navbar({ onBookCall }) {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 9 }}>
-            <span style={{ color: '#d4a87a', fontSize: 22, lineHeight: 1 }}>◆</span>
-            <span className="font-serif" style={{ fontSize: 32, fontWeight: 400, letterSpacing: '-0.01em', lineHeight: 1 }}>
-              <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span><span style={{ fontSize: 17, fontFamily: "'DM Sans', sans-serif", fontWeight: 500, letterSpacing: '0.01em', background: 'linear-gradient(135deg, #d4a87a, #e8c896)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginLeft: 1, verticalAlign: 'middle' }}>.ai</span>
+            <span style={{ color: '#d4a87a', fontSize: 18, lineHeight: 1, filter: 'drop-shadow(0 0 6px rgba(200,149,108,0.35))' }}>◆</span>
+            <span className="font-sans logo-text" style={{ fontSize: 21, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1 }}>
+              <span className="logo-gradient logo-float-gpt" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#f0ece4', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient logo-float-boost" style={{ fontWeight: 800 }}>Boost</span>
             </span>
           </a>
 
@@ -1638,7 +1693,7 @@ function GEOInAction() {
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
         }}>
-          {labelColor === 'bad' ? '✗ Without GEO' : '✓ With Geophinx'}
+          {labelColor === 'bad' ? '✗ Without GEO' : '✓ With GPTSearchBoost'}
         </span>
       </div>
 
@@ -1870,7 +1925,7 @@ function WhatIsGeo() {
     },
     {
       icon: <Shield size={20} />,
-      title: 'Geophinx = Your Advantage',
+      title: 'GPTSearchBoost = Your Advantage',
       body: 'We engineer every element of your digital presence so that AI engines cite, recommend, and trust your brand. Consistently. Reliably. First.',
     },
   ];
@@ -2323,9 +2378,33 @@ function Contact() {
           {/* Left */}
           <div className="reveal" style={{ padding: '48px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0 }}>
             <div className="label-tag" style={{ marginBottom: 12 }}>Get in Touch</div>
-            <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16 }}>
-              Send Us a Message
-            </h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
+              <h2 className="headline-section h-dark" style={{ maxWidth: 640, margin: 0 }}>
+                Send Us a Message
+              </h2>
+              <button
+                className="bounce-down"
+                onClick={() => {
+                  const forms = document.querySelectorAll('form[name="contact"]');
+                  const visible = Array.from(forms).find(f => !f.hidden);
+                  if (visible) {
+                    const rect = visible.getBoundingClientRect();
+                    window.scrollBy({ top: rect.top - 90, behavior: 'smooth' });
+                  }
+                }}
+                style={{
+                  width: 38, height: 38, borderRadius: 8, border: 'none', cursor: 'pointer',
+                  background: 'linear-gradient(135deg, #d4a87a, #c8956c)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                  boxShadow: '0 3px 12px rgba(200,149,108,0.35)',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 5px 18px rgba(200,149,108,0.5)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 3px 12px rgba(200,149,108,0.35)'; }}
+              >
+                <ChevronDown size={18} strokeWidth={2.5} style={{ color: '#0f0f0f' }} />
+              </button>
+            </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7, marginBottom: 32, maxWidth: 360 }}>
               Not ready to book a call? Drop us a message and we'll get back to you within 24 hours.
             </p>
@@ -2387,7 +2466,7 @@ function Contact() {
                 <div className="form-two-col">
                   <div>
                     <label className="form-label">Phone Number</label>
-                    <input className="form-input" type="tel" name="phone" placeholder="+1 (555) 000-0000"
+                    <input className="form-input" type="tel" name="phone" placeholder="+1 (555) 000-0000" required
                       value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} />
                   </div>
                   <div>
@@ -2464,10 +2543,10 @@ function Footer({ onBookCall }) {
 
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-              <span style={{ color: '#d4a87a', fontSize: 14 }}>◆</span>
-              <span className="font-serif" style={{ fontSize: 20, fontWeight: 400 }}>
-                <span className="logo-gradient">GEO</span><span style={{ color: '#f0ece4' }}>phinx</span><span style={{ fontSize: 12, fontFamily: "'DM Sans', sans-serif", fontWeight: 500, background: 'linear-gradient(135deg, #d4a87a, #e8c896)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginLeft: 1 }}>.ai</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 16 }}>
+              <span style={{ color: '#d4a87a', fontSize: 12, filter: 'drop-shadow(0 0 4px rgba(200,149,108,0.3))' }}>◆</span>
+              <span className="font-sans logo-text" style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.025em' }}>
+                <span className="logo-gradient" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#f0ece4', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient" style={{ fontWeight: 800 }}>Boost</span>
               </span>
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
@@ -2525,7 +2604,7 @@ function Footer({ onBookCall }) {
           gap: 16,
         }}>
           <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#6b6560' }}>
-            © 2026 Geophinx. All rights reserved.
+            © 2026 GPTSearchBoost.com. All rights reserved.
           </span>
           <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
             {['Privacy Policy', 'Terms of Service'].map((t) => (
