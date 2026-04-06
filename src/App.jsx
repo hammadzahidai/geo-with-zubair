@@ -815,6 +815,31 @@ const GlobalStyles = () => (
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
 
+    /* Soft left-to-right shimmer on "AI Search" hero text */
+    .hero-shine {
+      display: inline-block;
+      opacity: 0;
+      background: linear-gradient(
+        90deg,
+        #ffffff 25%,
+        #f0c96e 45%,
+        #e0a030 50%,
+        #f0c96e 55%,
+        #ffffff 75%
+      );
+      background-size: 300% 100%;
+      background-position: 100% 50%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: wordReveal 0.5s ease forwards, hero-shimmer-sweep 4s ease-in-out 2s infinite;
+    }
+    @keyframes hero-shimmer-sweep {
+      0% { background-position: 100% 50%; }
+      35% { background-position: 0% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     /* Blinking cursor */
     .blink-cursor {
       font-weight: 300;
@@ -1313,7 +1338,7 @@ function Navbar({ onBookCall }) {
 ───────────────────────────────────────────── */
 function Hero({ onBookCall }) {
   const words1 = ['SEO', 'Is', 'for', 'Yesterday;'];
-  const words2 = ['AI', 'Search', 'Is', 'for'];
+  const words2 = ['AI', 'Search', 'Is'];
 
   const platforms = ['ChatGPT', 'Google AI', 'Perplexity', 'Claude', 'Gemini', 'Copilot'];
 
@@ -1364,7 +1389,7 @@ function Hero({ onBookCall }) {
             {/* Line 2 — "AI Search Is for What's Next." with copper italic "What's Next." */}
             <div>
               {words2.map((w, i) => (
-                <span key={w} className="word-reveal" style={{ animationDelay: `${0.78 + i * 0.12}s`, marginRight: '0.25em' }}>
+                <span key={w} className={`word-reveal ${(w === 'AI' || w === 'Search') ? 'hero-shine' : ''}`} style={{ animationDelay: `${0.78 + i * 0.12}s`, marginRight: '0.25em' }}>
                   {w}
                 </span>
               ))}
