@@ -606,41 +606,57 @@ const GlobalStyles = () => (
 
     /* Stat hero card — 3D elevated, vertical desktop / horizontal mobile */
     .stat-hero-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-top: 1.5px solid var(--card-accent, #d4a87a);
-      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 40%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
       flex: 0 1 255px;
-      padding: 22px 22px 20px;
+      padding: 24px 24px 22px;
       min-width: 0;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 12px;
       position: relative;
+      transform: perspective(800px) rotateX(2deg);
+      transform-style: preserve-3d;
       box-shadow:
-        0 2px 0 rgba(255,255,255,0.04) inset,
-        0 1px 0 rgba(0,0,0,0.4),
-        0 4px 16px rgba(0,0,0,0.35),
-        0 8px 32px rgba(0,0,0,0.2);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        0 1px 0 rgba(255,255,255,0.08) inset,
+        -1px 0 0 rgba(255,255,255,0.04) inset,
+        0 -1px 0 rgba(0,0,0,0.3) inset,
+        0 4px 8px rgba(0,0,0,0.3),
+        0 12px 28px rgba(0,0,0,0.25),
+        0 20px 40px rgba(0,0,0,0.15),
+        0 2px 10px rgba(var(--accent-rgb, 212,168,122), 0.08);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
     }
     .stat-hero-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 16px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb, 212,168,122), 0.08) 0%, transparent 65%);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 40%),
+        radial-gradient(ellipse at 30% 0%, rgba(var(--accent-rgb, 212,168,122), 0.1) 0%, transparent 60%);
       pointer-events: none;
     }
+    .stat-hero-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 15%; right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb, 212,168,122), 0.5), transparent);
+      border-radius: 1px;
+    }
     .stat-hero-card:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: perspective(800px) rotateX(0deg) translateY(-6px) scale(1.02);
       box-shadow:
-        0 2px 0 rgba(255,255,255,0.05) inset,
-        0 1px 0 rgba(0,0,0,0.4),
-        0 12px 36px rgba(0,0,0,0.4),
-        0 4px 12px rgba(var(--accent-rgb, 212,168,122), 0.12);
-      background: linear-gradient(145deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
+        0 1px 0 rgba(255,255,255,0.1) inset,
+        -1px 0 0 rgba(255,255,255,0.06) inset,
+        0 -1px 0 rgba(0,0,0,0.2) inset,
+        0 8px 16px rgba(0,0,0,0.3),
+        0 20px 48px rgba(0,0,0,0.2),
+        0 6px 20px rgba(var(--accent-rgb, 212,168,122), 0.15);
+      background: linear-gradient(160deg, rgba(255,255,255,0.11) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.02) 100%);
     }
     .stat-card-icon {
       width: 40px; height: 40px;
@@ -901,31 +917,54 @@ const GlobalStyles = () => (
     /* ── Floating keyword words — come & go animations ── */
     /* Rise up and fade */
     @keyframes riseUp {
-      0%   { transform: translateY(50px) translateX(0px);   opacity: 0; }
-      18%  { opacity: 0.18; }
-      75%  { opacity: 0.14; }
-      100% { transform: translateY(-30px) translateX(6px);  opacity: 0; }
+      0%   { transform: translateY(60px) translateX(0px);    opacity: 0; }
+      15%  { opacity: 0.28; }
+      50%  { opacity: 0.22; transform: translateY(10px) translateX(12px); }
+      80%  { opacity: 0.18; }
+      100% { transform: translateY(-40px) translateX(-8px);  opacity: 0; }
     }
-    /* Drift right and fade */
+    /* Drift right with wobble */
     @keyframes driftRight {
-      0%   { transform: translateX(-40px) translateY(0px);  opacity: 0; }
-      18%  { opacity: 0.16; }
-      75%  { opacity: 0.12; }
-      100% { transform: translateX(40px)  translateY(-8px); opacity: 0; }
+      0%   { transform: translateX(-50px) translateY(0px);   opacity: 0; }
+      15%  { opacity: 0.25; }
+      40%  { transform: translateX(0px) translateY(-15px);   opacity: 0.22; }
+      70%  { transform: translateX(30px) translateY(8px);    opacity: 0.18; }
+      100% { transform: translateX(50px) translateY(-12px);  opacity: 0; }
     }
-    /* Drift left and fade */
+    /* Drift left with wobble */
     @keyframes driftLeft {
-      0%   { transform: translateX(40px)  translateY(5px);  opacity: 0; }
-      18%  { opacity: 0.16; }
-      75%  { opacity: 0.12; }
-      100% { transform: translateX(-40px) translateY(-6px); opacity: 0; }
+      0%   { transform: translateX(50px)  translateY(10px);  opacity: 0; }
+      15%  { opacity: 0.25; }
+      35%  { transform: translateX(10px) translateY(-12px);  opacity: 0.22; }
+      65%  { transform: translateX(-20px) translateY(15px);  opacity: 0.18; }
+      100% { transform: translateX(-50px) translateY(-10px); opacity: 0; }
     }
-    /* Rise diagonally */
+    /* Wander — organic random path */
+    @keyframes wander {
+      0%   { transform: translate(0px, 0px);      opacity: 0; }
+      12%  { opacity: 0.26; }
+      25%  { transform: translate(25px, -20px);    opacity: 0.24; }
+      50%  { transform: translate(-15px, -35px);   opacity: 0.2; }
+      75%  { transform: translate(20px, -50px);    opacity: 0.16; }
+      100% { transform: translate(-10px, -65px);   opacity: 0; }
+    }
+    /* Orbit — circular float */
+    @keyframes orbit {
+      0%   { transform: translate(0px, 0px);      opacity: 0; }
+      10%  { opacity: 0.25; }
+      25%  { transform: translate(30px, -15px);    opacity: 0.22; }
+      50%  { transform: translate(10px, -35px);    opacity: 0.2; }
+      75%  { transform: translate(-25px, -18px);   opacity: 0.18; }
+      90%  { opacity: 0.12; }
+      100% { transform: translate(0px, 0px);       opacity: 0; }
+    }
+    /* Rise diagonally with curve */
     @keyframes riseDiag {
-      0%   { transform: translateY(40px)  translateX(-15px); opacity: 0; }
-      20%  { opacity: 0.15; }
-      78%  { opacity: 0.11; }
-      100% { transform: translateY(-25px) translateX(15px);  opacity: 0; }
+      0%   { transform: translateY(50px)  translateX(-20px); opacity: 0; }
+      18%  { opacity: 0.26; }
+      45%  { transform: translateY(10px) translateX(10px);   opacity: 0.22; }
+      78%  { opacity: 0.15; }
+      100% { transform: translateY(-35px) translateX(20px);  opacity: 0; }
     }
     .float-word {
       position: fixed;
@@ -933,7 +972,6 @@ const GlobalStyles = () => (
       user-select: none;
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
-      color: #d4a87a;
       letter-spacing: 0.07em;
       text-transform: uppercase;
       font-size: 11px;
@@ -1258,8 +1296,7 @@ function Navbar({ onBookCall }) {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
-          <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 9 }}>
-            <span style={{ color: '#d4a87a', fontSize: 18, lineHeight: 1, filter: 'drop-shadow(0 0 6px rgba(200,149,108,0.35))' }}>◆</span>
+          <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
             <span className="font-sans logo-text" style={{ fontSize: 21, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1 }}>
               <span className="logo-gradient logo-float-gpt" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#f0ece4', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient logo-float-boost" style={{ fontWeight: 800 }}>Boost</span>
             </span>
@@ -2404,15 +2441,22 @@ function Contact() {
     <section id="contact" style={{ background: '#0f0f0f', padding: '48px 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{
-          border: '1px solid rgba(255,255,255,0.07)',
-          borderRadius: 20,
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: 22,
           overflow: 'hidden',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          background: 'linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.015) 100%)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.06) inset, 0 0 0 1px rgba(212,168,122,0.06)',
+          position: 'relative',
         }}>
 
+          {/* Top accent glow */}
+          <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,168,122,0.4), transparent)', zIndex: 1 }} />
+          <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: 40, background: 'radial-gradient(ellipse at center top, rgba(212,168,122,0.06) 0%, transparent 100%)', pointerEvents: 'none', zIndex: 0 }} />
+
           {/* Left */}
-          <div className="reveal" style={{ padding: '48px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0 }}>
+          <div className="reveal" style={{ padding: '48px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0, position: 'relative', zIndex: 1 }}>
             <div className="label-tag" style={{ marginBottom: 12 }}>Get in Touch</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
               <h2 className="headline-section h-dark" style={{ maxWidth: 640, margin: 0 }}>
@@ -2473,7 +2517,7 @@ function Contact() {
           </div>
 
           {/* Right: Form */}
-          <div className="reveal reveal-delay-1" style={{ background: '#0a0a0a', padding: '48px 48px' }}>
+          <div className="reveal reveal-delay-1" style={{ background: 'linear-gradient(180deg, #0d0d0d 0%, #0a0a0a 100%)', padding: '48px 48px', borderLeft: '1px solid rgba(255,255,255,0.05)' }}>
             {submitted ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 20, textAlign: 'center' }}>
                 <div className="icon-container" style={{ width: 64, height: 64, borderRadius: 16 }}>
@@ -2565,6 +2609,81 @@ function Contact() {
 }
 
 /* ─────────────────────────────────────────────
+   OPEN SOURCE BANNER — DARK
+───────────────────────────────────────────── */
+function OpenSourceBanner() {
+  const tools = [
+    { name: 'GEO Audit Suite', desc: 'Full-stack AI search visibility audit — crawlability, schema, citability, and more.' },
+    { name: 'AI Citation Scorer', desc: 'Score how likely AI engines are to cite your content in their answers.' },
+    { name: 'llms.txt Generator', desc: 'Create and validate llms.txt files — the emerging standard for AI crawlers.' },
+  ];
+
+  return (
+    <section className="reveal" style={{ background: '#0f0f0f', padding: '72px 32px', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+
+        {/* GitHub icon */}
+        <div style={{
+          width: 52, height: 52, borderRadius: 14, margin: '0 auto 20px',
+          background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a87a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4" />
+            <path d="M9 18c-4.51 2-5-2-7-2" />
+          </svg>
+        </div>
+
+        <div className="label-tag" style={{ marginBottom: 12 }}>Open Source</div>
+        <h2 className="headline-section h-dark" style={{ marginBottom: 14, fontSize: 32 }}>
+          Free GEO Tools for Everyone
+        </h2>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7, maxWidth: 520, margin: '0 auto 36px' }}>
+          We believe AI search optimization should be accessible. Our open-source toolkit helps you audit, optimize, and track your AI visibility — for free.
+        </p>
+
+        {/* Tool cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 36 }}>
+          {tools.map((t) => (
+            <div key={t.name} style={{
+              background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)',
+              borderRadius: 14, padding: '24px 20px', textAlign: 'left',
+              transition: 'border-color 0.25s ease, background 0.25s ease',
+            }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(212,168,122,0.25)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+            >
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, color: '#f0ece4', marginBottom: 8 }}>{t.name}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#6b6560', lineHeight: 1.6 }}>{t.desc}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <a
+          href="https://github.com/zubair-trabzada/geo-seo-claude"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-copper"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10,
+            padding: '14px 32px', borderRadius: 100, textDecoration: 'none',
+            fontSize: 14, fontWeight: 700, letterSpacing: '0.01em',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4" />
+            <path d="M9 18c-4.51 2-5-2-7-2" />
+          </svg>
+          View on GitHub  →
+        </a>
+
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
    SECTION 13: FOOTER — DARK
 ───────────────────────────────────────────── */
 function Footer({ onBookCall }) {
@@ -2579,24 +2698,14 @@ function Footer({ onBookCall }) {
 
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 16 }}>
-              <span style={{ color: '#d4a87a', fontSize: 12, filter: 'drop-shadow(0 0 4px rgba(200,149,108,0.3))' }}>◆</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
               <span className="font-sans logo-text" style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.025em' }}>
                 <span className="logo-gradient" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#f0ece4', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient" style={{ fontWeight: 800 }}>Boost</span>
               </span>
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
-              Generative Engine Optimization (GEO) for local service businesses — get recommended by ChatGPT, Google AI Overviews, and Perplexity.
+              We help businesses get found and recommended by AI search — ChatGPT, Google AI, Perplexity, and more. SEO, AEO, GEO — all in one place.
             </p>
-            <div style={{ display: 'flex', gap: 10 }}>
-              {[
-                { icon: <Linkedin size={15} />, label: 'LinkedIn' },
-                { icon: <Twitter size={15} />, label: 'Twitter' },
-                { icon: <Instagram size={15} />, label: 'Instagram' },
-              ].map((s) => (
-                <div key={s.label} className="social-icon" title={s.label}>{s.icon}</div>
-              ))}
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -2691,28 +2800,28 @@ function MobileFAB({ onBookCall }) {
    FLOATING KEYWORD WORDS
 ───────────────────────────────────────────── */
 const FLOAT_WORDS = [
-  // Left edge — rising up
-  { text: 'Claude',       x: '2%',  y: '60%', size: 10, anim: 'riseUp',    dur: '9s',  delay: '0s'   },
-  { text: 'Copilot',      x: '4%',  y: '40%', size: 9,  anim: 'riseUp',    dur: '11s', delay: '-4s'  },
-  { text: 'AI Overviews', x: '1%',  y: '70%', size: 9,  anim: 'riseUp',    dur: '13s', delay: '-8s'  },
+  // Scattered throughout — varied animations, positions, and colors
+  { text: 'Claude',       x: '8%',  y: '55%', size: 11, anim: 'wander',     dur: '11s', delay: '0s',   color: '#7eb8d4' },
+  { text: 'Copilot',      x: '5%',  y: '35%', size: 10, anim: 'riseUp',     dur: '12s', delay: '-4s',  color: '#a8b4c2' },
+  { text: 'AI Overviews', x: '12%', y: '72%', size: 10, anim: 'orbit',      dur: '14s', delay: '-8s',  color: '#d4a87a' },
 
-  // Right edge — drifting left
-  { text: 'ChatGPT',      x: '88%', y: '20%', size: 11, anim: 'driftLeft', dur: '10s', delay: '-2s'  },
-  { text: 'Perplexity',   x: '85%', y: '55%', size: 9,  anim: 'driftLeft', dur: '12s', delay: '-6s'  },
-  { text: 'LLM',          x: '90%', y: '75%', size: 12, anim: 'driftLeft', dur: '8s',  delay: '-10s' },
+  { text: 'ChatGPT',      x: '82%', y: '18%', size: 12, anim: 'wander',     dur: '10s', delay: '-2s',  color: '#74c8a3' },
+  { text: 'Perplexity',   x: '72%', y: '52%', size: 10, anim: 'orbit',      dur: '13s', delay: '-6s',  color: '#7eb8d4' },
+  { text: 'LLM',          x: '85%', y: '70%', size: 13, anim: 'driftLeft',  dur: '9s',  delay: '-10s', color: '#d4a87a' },
 
-  // Top — drifting right
-  { text: 'GEO',          x: '15%', y: '8%',  size: 13, anim: 'driftRight', dur: '11s', delay: '-3s'  },
-  { text: 'AI Search',    x: '55%', y: '5%',  size: 9,  anim: 'driftRight', dur: '14s', delay: '-7s'  },
+  { text: 'GEO',          x: '18%', y: '10%', size: 14, anim: 'driftRight', dur: '11s', delay: '-3s',  color: '#d4a87a' },
+  { text: 'AI Search',    x: '50%', y: '8%',  size: 10, anim: 'wander',     dur: '15s', delay: '-7s',  color: '#c9a0dc' },
 
-  // Bottom — rising diagonally
-  { text: 'Generative',   x: '20%', y: '82%', size: 9,  anim: 'riseDiag',  dur: '10s', delay: '-5s'  },
-  { text: 'AI-first',     x: '60%', y: '85%', size: 10, anim: 'riseDiag',  dur: '12s', delay: '-1s'  },
+  { text: 'Generative',   x: '25%', y: '80%', size: 10, anim: 'riseDiag',   dur: '11s', delay: '-5s',  color: '#a8b4c2' },
+  { text: 'AI-first',     x: '55%', y: '82%', size: 11, anim: 'orbit',      dur: '13s', delay: '-1s',  color: '#74c8a3' },
 
-  // Mid edges — occasional drift
-  { text: 'Gemini',       x: '78%', y: '38%', size: 9,  anim: 'driftLeft', dur: '9s',  delay: '-9s'  },
-  { text: 'citations',    x: '3%',  y: '25%', size: 9,  anim: 'riseUp',    dur: '13s', delay: '-11s' },
-  { text: 'authority',    x: '86%', y: '88%', size: 9,  anim: 'riseDiag',  dur: '11s', delay: '-13s' },
+  { text: 'Gemini',       x: '68%', y: '35%', size: 10, anim: 'wander',     dur: '10s', delay: '-9s',  color: '#d4a87a' },
+  { text: 'citations',    x: '6%',  y: '22%', size: 10, anim: 'riseUp',     dur: '14s', delay: '-11s', color: '#c9a0dc' },
+  { text: 'authority',    x: '78%', y: '85%', size: 10, anim: 'riseDiag',   dur: '12s', delay: '-13s', color: '#7eb8d4' },
+
+  // Extra mid-screen words for more coverage
+  { text: 'ChatGPT',      x: '35%', y: '45%', size: 9,  anim: 'orbit',      dur: '16s', delay: '-3s',  color: '#74c8a3' },
+  { text: 'Perplexity',   x: '42%', y: '65%', size: 9,  anim: 'wander',     dur: '14s', delay: '-7s',  color: '#a8b4c2' },
 ];
 
 function FloatingWords() {
@@ -2726,6 +2835,7 @@ function FloatingWords() {
             left: w.x,
             top: w.y,
             fontSize: w.size,
+            color: w.color || '#d4a87a',
             animation: `${w.anim} ${w.dur} ease-in-out ${w.delay} infinite`,
           }}
         >
@@ -2887,6 +2997,7 @@ export default function App() {
       <Services />
       <Process />
       <FAQ />
+      <OpenSourceBanner />
       <Footer onBookCall={scrollToBookCall} />
 
       <MobileFAB onBookCall={scrollToBookCall} />
