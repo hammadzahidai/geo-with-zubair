@@ -1,0 +1,51 @@
+# GPTSearchBoost
+
+> GEO agency that optimizes local service businesses to get recommended by ChatGPT, Google AI Overviews, Perplexity, Claude, and Gemini.
+
+## Services
+
+- [AI Search Audit & Visibility Analysis](https://gptsearchboost.com/#services): Deep-dive analysis of brand presence across ChatGPT, Gemini, Perplexity, Claude, and Google AI Overviews — maps every gap and opportunity.
+- [AI Content Optimization](https://gptsearchboost.com/#services): Rewrites and restructures content so ChatGPT, Perplexity, and Google AI recommend your business when customers search.
+- [Structured Data & Schema](https://gptsearchboost.com/#services): Advanced schema markup, entity optimization, and knowledge graph signals that help AI models cite your business with confidence.
+- [Authority Building & Digital PR](https://gptsearchboost.com/#services): Builds AI citations and brand mentions across authoritative sources that make ChatGPT and Google AI trust and recommend your business.
+- [Technical GEO](https://gptsearchboost.com/#services): Technical site optimization for AI crawler accessibility, indexability, and structured data that AI engines rely on.
+- [GEO Score Monitoring](https://gptsearchboost.com/#services): Tracks AI citation frequency, GEO score, and brand mention growth across ChatGPT, Perplexity, and Google AI with monthly dashboards.
+
+## Process
+
+- [5-Step GEO Process](https://gptsearchboost.com/#process): Our proven process — AI Search Audit, Content & Schema Optimization, Technical GEO Setup, AI Citation & Authority Building, and ongoing GEO Score Monitoring.
+
+## About
+
+- [What is GEO](https://gptsearchboost.com/#geo): Explains Generative Engine Optimization — how AI search differs from traditional SEO, why it matters, and how GPTSearchBoost gives businesses a competitive advantage.
+- [The Opportunity](https://gptsearchboost.com/#opportunity): 40% of searches are now AI-answered. $2.1T in AI-driven revenue by 2027. 3.5x more visibility for GEO-optimized businesses vs non-optimized competitors.
+
+## Contact
+
+- [Book a Call](https://gptsearchboost.com/#book-call): Schedule a free 30-minute AI search strategy session via Calendly. Includes AI visibility audit, competitor analysis, and custom GEO roadmap.
+- [Send a Message](https://gptsearchboost.com/#contact): Contact form for inquiries. Free AI visibility audit included, response within 24 hours, no contracts or commitment required.
+
+## FAQ
+
+- [Frequently Asked Questions](https://gptsearchboost.com/#faq): Covers SEO vs GEO differences, timeline for results (60-90 days for initial improvements), AI platform optimization, pricing, and working with small and local businesses.
+
+## Open Source
+
+- [Free GEO Tools on GitHub](https://github.com/zubair-trabzada/geo-seo-claude): Open-source GEO toolkit including GEO Audit Suite, AI Citation Scorer, and llms.txt Generator — free tools for AI search optimization.
+
+## Key Facts
+
+- GPTSearchBoost.com is a Generative Engine Optimization (GEO) agency
+- Specializes in local service businesses — law firms, med spas, dentists, real estate teams, luxury home services
+- Optimizes for ChatGPT, Google AI Overviews, Perplexity, Claude, Gemini, and Copilot
+- Covers SEO, AEO (Answer Engine Optimization), and GEO under one roof
+- Free 30-minute strategy sessions with no obligation
+- Clear pricing proposals delivered within 48 hours
+- Measurable AI search visibility improvements within 60-90 days
+- Open-source GEO tools available on GitHub
+
+## Contact
+
+- Website: https://gptsearchboost.com
+- Booking: https://gptsearchboost.com/#book-call
+- Contact Form: https://gptsearchboost.com/#contact

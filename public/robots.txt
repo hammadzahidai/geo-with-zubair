@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# AI crawler guidance
+# See https://gptsearchboost.com/llms.txt for structured site information
+
+Sitemap: https://gptsearchboost.com/sitemap.xml
