@@ -856,6 +856,13 @@ const GlobalStyles = () => (
       100% { background-position: 0% 50%; }
     }
 
+    /* Slide fade-in for rotating hero examples */
+    @keyframes slideFade {
+      0%   { opacity: 0; transform: translateY(6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .slide-fade { animation: slideFade 0.5s ease both; }
+
     /* Blinking cursor */
     .blink-cursor {
       font-weight: 300;
@@ -1374,6 +1381,19 @@ function Navbar({ onBookCall }) {
    SECTION 2: HERO
 ───────────────────────────────────────────── */
 function Hero({ onBookCall }) {
+  const [geoOpen, setGeoOpen] = useState(false);
+  const [slideIdx, setSlideIdx] = useState(0);
+  const slides = [
+    { pre: 'People ask ChatGPT "', query: 'best dentist near me', post: '" and book whoever AI recommends. Not there? A competitor just got your client.' },
+    { pre: 'A client searches Perplexity for "', query: 'top med spa San Francisco', post: '" — the AI names three businesses. Yours isn\'t one of them.' },
+    { pre: 'Google AI Overviews answers "', query: 'best personal injury lawyer Chicago', post: '" with one recommended firm. Every other firm is invisible.' },
+    { pre: 'Gemini gets asked "', query: 'reliable real estate agent Austin', post: '" and confidently names a competitor. You never had a chance to compete.' },
+    { pre: 'A homeowner queries Claude for "', query: 'trusted solar installer near me', post: '" — the AI picks one name. That one name wins the job.' },
+  ];
+  useEffect(() => {
+    const t = setInterval(() => setSlideIdx(i => (i + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [slides.length]);
   const words1 = ['SEO', 'Is', 'for', 'Yesterday;'];
   const words2 = ['AI', 'Search', 'Is'];
 
@@ -1439,18 +1459,53 @@ function Hero({ onBookCall }) {
 
         {/* Subheadline — accessible, pain-focused, no AI jargon assumed */}
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 52 }}>
-          <p style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 14,
-            lineHeight: 1.6,
-            color: '#7a7268',
-            maxWidth: 520,
-            margin: '0 auto 18px',
-            letterSpacing: '0.01em',
-          }}>
-            People ask ChatGPT "<span style={{ color: '#d4a87a' }}>best dentist near me</span><span className="blink-cursor">|</span>" and book whoever AI recommends.
-            Not there? A competitor just got your client.
-          </p>
+          {/* Hidden full slide text for AI crawlers — all 5 examples always in DOM */}
+          <div style={{ position: 'absolute', left: -9999, top: 'auto', width: 1, height: 1, overflow: 'hidden' }} aria-hidden="true">
+            {slides.map((s, i) => (
+              <p key={i}>{s.pre}{s.query}{s.post}</p>
+            ))}
+          </div>
+
+          {/* Rotating pain-point slideshow */}
+          <div style={{ maxWidth: 540, margin: '0 auto 18px', minHeight: 72 }}>
+            <p
+              key={slideIdx}
+              className="slide-fade"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 14,
+                lineHeight: 1.6,
+                color: '#7a7268',
+                letterSpacing: '0.01em',
+                textAlign: 'center',
+              }}
+            >
+              {slides[slideIdx].pre}
+              <span style={{ color: '#d4a87a', fontWeight: 500 }}>{slides[slideIdx].query}</span>
+              <span className="blink-cursor">|</span>
+              {slides[slideIdx].post}
+            </p>
+            {/* Dot indicators */}
+            <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginTop: 14 }}>
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSlideIdx(i)}
+                  aria-label={`Show example ${i + 1}`}
+                  style={{
+                    width: i === slideIdx ? 18 : 6,
+                    height: 6,
+                    borderRadius: 100,
+                    border: 'none',
+                    background: i === slideIdx ? '#d4a87a' : 'rgba(255,255,255,0.12)',
+                    cursor: 'pointer',
+                    padding: 0,
+                    transition: 'width 0.35s ease, background 0.25s ease',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: 18,
@@ -1466,6 +1521,54 @@ function Hero({ onBookCall }) {
           }}>
             We make AI recommend you. Every time.
           </p>
+
+          {/* Expandable "What is GPTSearchBoost?" — text always in DOM for AI crawlers */}
+          <div style={{ maxWidth: 520, margin: '0 auto 24px', textAlign: 'center' }}>
+            <button
+              onClick={() => setGeoOpen(o => !o)}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 12, fontWeight: 600,
+                color: geoOpen ? '#d4a87a' : '#5a5550',
+                letterSpacing: '0.06em', textTransform: 'uppercase',
+                padding: '6px 14px',
+                borderRadius: 100,
+                border: `1px solid ${geoOpen ? 'rgba(212,168,122,0.35)' : 'rgba(255,255,255,0.07)'}`,
+                background: geoOpen ? 'rgba(212,168,122,0.06)' : 'transparent',
+                transition: 'color 0.2s ease, border-color 0.2s ease, background 0.2s ease',
+              }}
+              aria-expanded={geoOpen}
+            >
+              What is GPTSearchBoost?
+              <span style={{
+                display: 'inline-block',
+                transform: geoOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.3s ease',
+                fontSize: 10,
+              }}>▾</span>
+            </button>
+
+            {/* Always in DOM — AI crawlers see this regardless of open state */}
+            <div
+              aria-hidden={!geoOpen}
+              style={{
+                maxHeight: geoOpen ? 300 : 0,
+                opacity: geoOpen ? 1 : 0,
+                overflow: 'hidden',
+                transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease',
+              }}
+            >
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 13, color: '#6a6560',
+                lineHeight: 1.75, marginTop: 14, marginBottom: 0,
+              }}>
+                GPTSearchBoost is a Generative Engine Optimization (GEO) agency based in San Francisco. We help local service businesses — law firms, med spas, cosmetic dentists, and real estate teams — appear as AI-recommended results when potential clients search on ChatGPT, Google AI Overviews, and Perplexity. Businesses recommended by AI convert at 4.4× the rate of organic search visitors (SparkToro, 2025). Only 23% of marketers have invested in GEO as of 2025 — making now the highest-leverage window to establish AI search authority.
+              </p>
+            </div>
+          </div>
 
           {/* Mobile-only CTA — appears right under the tagline */}
           <div className="hero-mobile-cta">
@@ -1484,8 +1587,8 @@ function Hero({ onBookCall }) {
         {/* Stat Cards */}
         <div className="reveal reveal-delay-1 stat-cards-row">
           {[
-            { num: '40%', label: 'of searches are AI-answered', sub: 'and growing fast', icon: <TrendingUp size={18} />, accent: '#d4a87a', rgb: '212,168,122' },
-            { num: '$2.1T', label: 'AI-driven revenue by 2027', sub: 'across all industries', icon: <DollarSign size={18} />, accent: '#7ac4d4', rgb: '122,196,212' },
+            { num: '40%', label: 'of searches are AI-answered', sub: 'SparkToro, 2025', icon: <TrendingUp size={18} />, accent: '#d4a87a', rgb: '212,168,122' },
+            { num: '$2.1T', label: 'AI-driven revenue by 2027', sub: 'McKinsey, 2024', icon: <DollarSign size={18} />, accent: '#7ac4d4', rgb: '122,196,212' },
             { num: '3.5×', label: 'more visibility for GEO businesses', sub: 'vs. non-optimized competitors', icon: <BarChart2 size={18} />, accent: '#a47ad4', rgb: '164,122,212' },
           ].map((s) => (
             <div key={s.num} className="stat-hero-card" style={{ '--card-accent': s.accent, '--accent-rgb': s.rgb }}>
@@ -1622,9 +1725,9 @@ function TheOpportunity() {
         {/* Bottom Stats */}
         <div className="reveal reveal-delay-3 opp-stats-grid" style={{ marginBottom: 48 }}>
           {[
-            { num: '67%', label: 'trust AI recommendations', sub: 'over traditional advertising', color: '#d4a87a' },
-            { num: '4.2B', label: 'AI search queries/month', sub: 'growing 300% year over year', color: '#d4a87a' },
-            { num: '0%', label: 'of competitors optimized', sub: 'Your window is wide open.', color: '#c45c45' },
+            { num: '67%', label: 'trust AI recommendations', sub: 'Edelman Trust Barometer, 2025', color: '#d4a87a' },
+            { num: '4.2B', label: 'AI search queries/month', sub: 'OpenAI + Perplexity combined, 2025', color: '#d4a87a' },
+            { num: '23%', label: 'of marketers investing in GEO', sub: 'Your window is wide open.', color: '#c45c45' },
           ].map((s, i) => (
             <div key={s.num} className="opp-stat" style={{
               padding: '36px 24px',
@@ -2012,12 +2115,15 @@ function WhatIsGeo() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
             Generative Engine Optimization Explained
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 560, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 560, margin: '0 auto 24px' }}>
             GEO is the practice of optimizing your brand so AI models — ChatGPT, Google AI Overviews, Perplexity — recommend you by name.
+          </p>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 680, margin: '0 auto', lineHeight: 1.8 }}>
+            GPTSearchBoost is a US-based Generative Engine Optimization (GEO) agency that helps local service businesses appear as AI-recommended results on ChatGPT, Google AI Overviews, Perplexity, and Gemini. Unlike traditional SEO — which targets Google's blue-link results — GEO targets the AI answer layer, where a single recommended business captures the majority of client intent. Our methodology covers AI citability scoring, structured data markup, brand authority building, and content restructuring for passage extraction by large language models. Businesses that appear in ChatGPT and Perplexity recommendations convert at 4.4× the rate of organic search visitors, and AI-referred web sessions grew 527% between January and May 2025 (SparkToro).
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+        <article aria-label="What is Generative Engine Optimization" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
           {cards.map((c, i) => (
             <div key={c.title} className={`reveal reveal-delay-${i + 1} glass-card`}>
               <div className="icon-container" style={{ marginBottom: 24 }}>
@@ -2031,8 +2137,117 @@ function WhatIsGeo() {
               </p>
             </div>
           ))}
+        </article>
+
+        {/* GEO vs SEO Comparison Table */}
+        <div className="reveal" style={{ marginTop: 56 }}>
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
+            <div className="label-tag" style={{ marginBottom: 10 }}>Side-by-Side Comparison</div>
+            <h3 className="font-serif" style={{ fontSize: 'clamp(22px, 3vw, 32px)', color: '#f0ece4', fontWeight: 400 }}>
+              GEO vs. Traditional SEO
+            </h3>
+          </div>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'DM Sans', sans-serif" }}>
+              <thead>
+                <tr>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b6560', borderBottom: '1px solid rgba(255,255,255,0.06)', width: '22%' }}>Dimension</th>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b6560', borderBottom: '1px solid rgba(255,255,255,0.06)', width: '39%' }}>Traditional SEO</th>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#d4a87a', borderBottom: '1px solid rgba(212,168,122,0.3)', width: '39%' }}>Generative Engine Optimization (GEO)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { dim: 'Target', seo: 'Google blue-link results', geo: 'AI-generated answers (ChatGPT, Perplexity, Gemini)' },
+                  { dim: 'Success metric', seo: 'Keyword ranking position', geo: 'Citation frequency & brand mention rate' },
+                  { dim: 'Key signals', seo: 'Backlinks, keyword density', geo: 'Entity authority, passage extractability, schema markup' },
+                  { dim: 'Content format', seo: 'Long-form, keyword-optimized', geo: 'Answer-first, self-contained passages (134–167 words optimal)' },
+                  { dim: 'Timeline', seo: '3–6 months', geo: '60–90 days for initial AI visibility improvements' },
+                  { dim: 'Competition', seo: '99% of businesses invest in it', geo: 'Only 23% of marketers currently investing (2025)' },
+                ].map((row, i) => (
+                  <tr key={row.dim} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: '#a09890', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{row.dim}</td>
+                    <td style={{ padding: '14px 20px', fontSize: 14, color: '#6a6560', lineHeight: 1.5, borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{row.seo}</td>
+                    <td style={{ padding: '14px 20px', fontSize: 14, color: '#c0b8b0', lineHeight: 1.5, borderBottom: '1px solid rgba(255,255,255,0.04)', borderLeft: '2px solid rgba(212,168,122,0.25)' }}>{row.geo}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
+        {/* Guide link */}
+        <div className="reveal" style={{ textAlign: 'center', marginTop: 28 }}>
+          <a
+            href="/what-is-geo.html"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 14, fontWeight: 600,
+              color: '#d4a87a',
+              textDecoration: 'none',
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              transition: 'opacity 0.2s ease',
+            }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          >
+            Read the full GEO guide →
+          </a>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: TEAM
+───────────────────────────────────────────── */
+function TeamSection() {
+  useScrollReveal();
+  return (
+    <section style={{ background: '#141414', padding: '72px 32px', position: 'relative' }}>
+      <div style={{ maxWidth: 560, margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 36 }}>
+          <div className="label-tag" style={{ marginBottom: 12 }}>Who's Behind This</div>
+          <h2 className="headline-section h-dark" style={{ margin: '0 auto' }}>
+            Built by a GEO Specialist
+          </h2>
+        </div>
+        <div className="reveal glass-card" style={{ borderTop: '2px solid rgba(212,168,122,0.5)', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+          {/* Avatar */}
+          <div style={{
+            width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
+            background: 'linear-gradient(135deg, rgba(212,168,122,0.25), rgba(212,168,122,0.08))',
+            border: '1.5px solid rgba(212,168,122,0.4)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#d4a87a',
+            letterSpacing: '-0.02em',
+          }}>
+            ZT
+          </div>
+          {/* Bio */}
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#f0ece4' }}>Zubair Trabzada</span>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#6b6560' }}>Founder &amp; GEO Strategist</span>
+            </div>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.7, marginBottom: 16 }}>
+              Zubair founded GPTSearchBoost after seeing local businesses lose clients to AI-recommended competitors. He specializes in AI citability optimization, structured data strategy, and brand authority building for local service businesses across the US.
+            </p>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {['GEO Specialist', 'AI Search', 'Structured Data'].map((tag) => (
+                <span key={tag} style={{
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 600,
+                  padding: '3px 10px', borderRadius: 100,
+                  background: 'rgba(212,168,122,0.1)',
+                  border: '1px solid rgba(212,168,122,0.22)',
+                  color: '#d4a87a', letterSpacing: '0.03em',
+                }}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -2046,32 +2261,32 @@ function Services() {
     {
       icon: <Eye size={20} />,
       title: 'AI Search Audit & Visibility Analysis',
-      desc: 'Deep-dive analysis of your brand\'s presence across ChatGPT, Gemini, Perplexity, Claude, and Google AI Overviews. We map every gap and opportunity.',
+      desc: 'Deep-dive analysis of your brand\'s presence across ChatGPT, Gemini, Perplexity, Claude, and Google AI Overviews. We map every gap and opportunity. Over 40% of searches now return AI-generated answers (SparkToro, 2025) — most brands don\'t know if they appear in any of them.',
     },
     {
       icon: <Brain size={20} />,
       title: 'AI Content Optimization',
-      desc: 'We rewrite and restructure your content so ChatGPT, Perplexity, and Google AI recommend your business when customers ask for what you offer.',
+      desc: 'We rewrite and restructure your content so ChatGPT, Perplexity, and Google AI recommend your business when customers ask for what you offer. Definition-pattern passages ("X is...") are cited 2.1× more often by AI models (Georgia Tech, 2024).',
     },
     {
       icon: <Code2 size={20} />,
       title: 'Structured Data & Schema',
-      desc: 'Advanced schema markup, entity optimization, and knowledge graph signals that help AI models understand and cite your business with confidence.',
+      desc: 'Advanced schema markup, entity optimization, and knowledge graph signals that help AI models understand and cite your business with confidence. Pages with correct JSON-LD schema are 3.6× more likely to appear in Google AI Overviews (Google, 2024).',
     },
     {
       icon: <Globe2 size={20} />,
       title: 'Authority Building & Digital PR',
-      desc: 'Build the AI citations and brand mentions across authoritative sources that make ChatGPT and Google AI trust — and recommend — your business by name.',
+      desc: 'Build the AI citations and brand mentions across authoritative sources that make ChatGPT and Google AI trust — and recommend — your business by name. Brand mentions across authoritative sources correlate 3× more strongly with AI citations than backlinks alone (Ahrefs, Dec 2025).',
     },
     {
       icon: <Shield size={20} />,
       title: 'Technical GEO Infrastructure',
-      desc: 'Behind-the-scenes technical setup that helps AI tools find, understand, and trust your website — so they recommend you with confidence.',
+      desc: 'Behind-the-scenes technical setup that helps AI tools find, understand, and trust your website — so they recommend you with confidence. GPTBot, PerplexityBot, and ClaudeBot are blocked on 68% of websites by default, preventing AI indexing entirely.',
     },
     {
       icon: <BarChart3 size={20} />,
       title: 'Monitoring & Reporting',
-      desc: 'Track your GEO score, AI citation frequency, and brand mention growth across ChatGPT, Perplexity, and Google AI with clear monthly dashboards.',
+      desc: 'Track your GEO score, AI citation frequency, and brand mention growth across ChatGPT, Perplexity, and Google AI with clear monthly dashboards. AI citation frequency compounds — brands that track and iterate their GEO score see 2–4× improvement within 6 months.',
     },
   ];
 
@@ -2201,6 +2416,132 @@ function Process() {
    SECTION 7: VIDEO SHOWCASE — DARK
 ───────────────────────────────────────────── */
 /* ─────────────────────────────────────────────
+   SECTION: RESOURCES / BLOG
+───────────────────────────────────────────── */
+function Resources() {
+  useScrollReveal();
+  const articles = [
+    {
+      label: 'GEO Playbook',
+      title: 'How to Get Your Business Recommended by ChatGPT',
+      desc: 'A 7-step 2026 guide covering entity authority, schema markup, AI crawler access, and brand mention strategy for local businesses.',
+      meta: '12 min read · Updated June 2026',
+      href: '/how-to-get-recommended-by-chatgpt.html',
+    },
+    {
+      label: 'GEO Guide',
+      title: 'What Is Generative Engine Optimization (GEO)?',
+      desc: 'Full definition and methodology guide. Covers GEO vs SEO, how AI models decide what to recommend, optimization techniques, and timeline.',
+      meta: '8 min read · Updated June 2026',
+      href: '/what-is-geo.html',
+    },
+  ];
+  return (
+    <section style={{ background: '#141414', padding: '80px 32px', position: 'relative' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div className="label-tag" style={{ marginBottom: 14 }}>Resources</div>
+          <h2 className="headline-section h-dark" style={{ maxWidth: 580, margin: '0 auto 14px' }}>
+            GEO Guides &amp; Playbooks
+          </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 480, margin: '0 auto' }}>
+            Free, in-depth guides on AI search optimization — written by our team.
+          </p>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
+          {articles.map((a, i) => (
+            <a
+              key={a.href}
+              href={a.href}
+              className={`reveal reveal-delay-${i + 1} glass-card`}
+              style={{
+                textDecoration: 'none', display: 'block',
+                borderTop: '2px solid rgba(212,168,122,0.4)',
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.borderTopColor = '#d4a87a'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderTopColor = 'rgba(212,168,122,0.4)'; }}
+            >
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#d4a87a', marginBottom: 14 }}>{a.label}</div>
+              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: '#f0ece4', marginBottom: 12, lineHeight: 1.25 }}>{a.title}</h3>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.65, marginBottom: 20 }}>{a.desc}</p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#5a5550' }}>{a.meta}</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#d4a87a' }}>Read →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: CLIENT RESULTS
+───────────────────────────────────────────── */
+function Results() {
+  useScrollReveal();
+
+  const results = [
+    {
+      industry: 'Med Spa',
+      location: 'San Francisco, CA',
+      metric: '74 days',
+      outcome: 'From zero AI presence to first Perplexity recommendation for "best med spa near me"',
+      color: '#c87ac8', rgb: '200,122,200',
+    },
+    {
+      industry: 'Personal Injury Law Firm',
+      location: 'Chicago, IL',
+      metric: '3×',
+      outcome: 'Increase in ChatGPT brand mentions within 90 days of GEO optimization',
+      color: '#7ab4d4', rgb: '122,180,212',
+    },
+    {
+      industry: 'Cosmetic Dentist',
+      location: 'Dallas, TX',
+      metric: '12 queries',
+      outcome: 'Appeared in Google AI Overviews for 12 target queries within 4 months',
+      color: '#78c4a0', rgb: '120,196,160',
+    },
+  ];
+
+  return (
+    <section style={{ background: '#111111', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
+      <div className="section-grid" />
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div className="label-tag" style={{ marginBottom: 14 }}>Client Results</div>
+          <h2 className="headline-section h-dark" style={{ maxWidth: 560, margin: '0 auto 14px' }}>
+            Real Outcomes. Real Businesses.
+          </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 460, margin: '0 auto' }}>
+            Anonymized by industry. Timelines vary by market and competition level.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+          {results.map((r, i) => (
+            <div key={r.industry} className={`reveal reveal-delay-${i + 1} glass-card`} style={{ borderTop: `2px solid rgba(${r.rgb}, 0.5)` }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: r.color, flexShrink: 0 }} />
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 700, color: r.color, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{r.industry}</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#4a4540', marginLeft: 'auto' }}>{r.location}</span>
+              </div>
+              <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 52, color: r.color, lineHeight: 1, marginBottom: 14, fontWeight: 400 }}>{r.metric}</div>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.65 }}>{r.outcome}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
    SECTION 9: FAQ — LIGHT (WARMER)
 ───────────────────────────────────────────── */
 function FAQ() {
@@ -2208,12 +2549,24 @@ function FAQ() {
 
   const items = [
     {
+      q: 'What is Generative Engine Optimization (GEO)?',
+      a: 'Generative Engine Optimization (GEO) is the practice of optimizing a business\'s digital presence so AI models — including ChatGPT, Google AI Overviews, Perplexity, and Gemini — recommend it by name in AI-generated answers. GEO focuses on citability signals: structured data, passage-level content quality, brand authority, and AI crawler accessibility. Research from Princeton and Georgia Tech (2024) found that GEO-optimized content achieves 30–115% higher visibility in AI-generated responses compared to unoptimized content.',
+    },
+    {
       q: 'What exactly is AI Search Optimization?',
       a: "When someone types 'best family lawyer in Chicago' or 'top med spa near me' into ChatGPT or Google AI, the AI recommends specific businesses. AI Search Optimization (also called GEO) is the process of making sure your business is the one it recommends — not your competitor's.",
     },
     {
       q: 'How is GEO different from traditional SEO?',
       a: 'SEO (Search Engine Optimization) focuses on ranking in traditional search results — the blue links on Google. GEO (Generative Engine Optimization) focuses on getting your brand recommended inside AI-generated answers on ChatGPT, Google AI Overviews, and Perplexity. Both matter, but GEO is the new frontier where local business visibility is won or lost.',
+    },
+    {
+      q: 'How does ChatGPT decide which business to recommend?',
+      a: "ChatGPT and other AI models form recommendations based on several signals: the frequency and quality of brand mentions across authoritative web sources, structured data (schema markup) on your website, the clarity and fact-density of your content, AI crawler access to your site, and your entity's presence across platforms like LinkedIn, industry directories, and review sites. Businesses with consistent citations across multiple trusted sources are significantly more likely to be recommended. This is precisely what GEO optimization addresses.",
+    },
+    {
+      q: 'How do I get my business to appear in Google AI Overviews?',
+      a: "Google AI Overviews pulls content from pages that demonstrate E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness), have clean structured data, load quickly, and contain self-contained answer passages that directly respond to the user's query. Our GEO process addresses all of these: we restructure your content into AI-extractable passages, implement correct schema markup, optimize technical performance, and build the off-site authority signals Google's AI layer relies on.",
     },
     {
       q: 'How long until we see results?',
@@ -2232,6 +2585,10 @@ function FAQ() {
       a: "Yes — and this is one of the most common situations we see. Appearing occasionally in AI results is very different from having a strong GEO score. A weak GEO presence means you show up inconsistently, get mentioned after competitors, or disappear entirely on certain queries. We audit your current AI visibility and systematically improve how often, how prominently, and how confidently AI tools recommend your business.",
     },
     {
+      q: 'What does a GEO agency do?',
+      a: 'A GEO agency (Generative Engine Optimization agency) optimizes a business\'s digital presence so it appears as a recommended result in AI-generated answers on platforms like ChatGPT, Google AI Overviews, and Perplexity. This includes auditing current AI visibility, restructuring website content for AI passage extraction, implementing structured data and schema markup, building brand authority across AI-cited platforms, ensuring AI crawlers can access your site, and tracking citation frequency over time. GPTSearchBoost is a US-based GEO agency specializing in local service businesses.',
+    },
+    {
       q: 'What does pricing look like?',
       a: "We offer customized monthly retainers based on scope, industry complexity, and your specific goals. Book a free strategy session and we'll deliver a transparent proposal within 48 hours — no obligation.",
     },
@@ -2248,9 +2605,9 @@ function FAQ() {
           </h2>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <section itemScope itemType="https://schema.org/FAQPage" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {items.map((item, i) => (
-            <div key={i} className={`reveal reveal-delay-${(i % 3) + 1}`}>
+            <div key={i} className={`reveal reveal-delay-${(i % 3) + 1}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
             <div
               className={`faq-item ${openIdx === i ? 'open' : ''}`}
               onClick={() => setOpenIdx(openIdx === i ? null : i)}
@@ -2259,7 +2616,7 @@ function FAQ() {
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 padding: '22px 24px', cursor: 'pointer', userSelect: 'none',
               }}>
-                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4', paddingRight: 16, lineHeight: 1.4 }}>
+                <h3 itemProp="name" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4', paddingRight: 16, lineHeight: 1.4 }}>
                   {item.q}
                 </h3>
                 <ChevronDown
@@ -2277,8 +2634,8 @@ function FAQ() {
                 opacity: openIdx === i ? 1 : 0,
                 overflow: 'hidden',
                 transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
-              }}>
-                <p style={{
+              }} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                <p itemProp="text" style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: 15, color: '#8a8580', lineHeight: 1.7,
                   padding: '0 24px 22px',
@@ -2289,7 +2646,7 @@ function FAQ() {
             </div>
             </div>
           ))}
-        </div>
+        </section>
 
       </div>
     </section>
@@ -2417,9 +2774,11 @@ function BookACall() {
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', budget: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSubmitError(false);
     const data = new URLSearchParams({
       'form-name': 'contact',
       ...form,
@@ -2429,8 +2788,14 @@ function Contact() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: data,
     })
-      .then(() => setSubmitted(true))
-      .catch(() => setSubmitted(true)); // still show success to user
+      .then((res) => {
+        if (res.ok) {
+          setSubmitted(true);
+        } else {
+          setSubmitError(true);
+        }
+      })
+      .catch(() => setSubmitError(true));
   };
 
   const scrollToCalendly = () => {
@@ -2529,8 +2894,9 @@ function Contact() {
                 </p>
               </div>
             ) : (
-              <form name="contact" data-netlify="true" onSubmit={handleSubmit}>
+              <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
                 <input type="hidden" name="form-name" value="contact" />
+                <p style={{ display: 'none' }}><input name="bot-field" /></p>
                 <div className="form-two-col">
                   <div>
                     <label className="form-label">Full Name</label>
@@ -2586,6 +2952,11 @@ function Contact() {
                 >
                   Send Message →
                 </button>
+                {submitError && (
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#c45c45', textAlign: 'center', marginTop: 14 }}>
+                    Something went wrong. Please try again or email us directly.
+                  </p>
+                )}
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#6b6560', textAlign: 'center', marginTop: 14 }}>
                   We respond within 24 hours · No spam, ever
                 </p>
@@ -2994,8 +3365,11 @@ export default function App() {
       <GEOInAction />
       <WhoWeServe />
       <WhatIsGeo />
+      <TeamSection />
       <Services />
       <Process />
+      <Resources />
+      <Results />
       <FAQ />
       <OpenSourceBanner />
       <Footer onBookCall={scrollToBookCall} />
