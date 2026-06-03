@@ -1293,6 +1293,7 @@ function Navbar({ onBookCall }) {
 
   const links = [
     { label: 'Services', href: '#services' },
+    { label: 'Pricing', href: '#pricing' },
     { label: 'Process', href: '#process' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
@@ -2193,6 +2194,184 @@ function WhatIsGeo() {
           >
             Read the full GEO guide →
           </a>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: PRICING
+───────────────────────────────────────────── */
+function Pricing() {
+  useScrollReveal();
+  const tiers = [
+    {
+      name: 'Free AI Visibility Audit',
+      price: '$0',
+      period: 'no card required',
+      tagline: 'See where you stand with AI search — in 60 seconds.',
+      features: [
+        'Full website crawl',
+        'Overall GEO score & letter grade',
+        '6-category citability breakdown',
+        'AI-crawler access check (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)',
+        'Top 3 critical fixes to ship today',
+      ],
+      cta: 'Start Free Audit',
+      popular: false,
+    },
+    {
+      name: 'Full GEO Audit',
+      price: '$49',
+      period: 'one-time',
+      tagline: 'Complete AI visibility audit + 90-day roadmap.',
+      features: [
+        'Everything in Free, plus:',
+        'AI-judged content quality & E-E-A-T scoring',
+        'Per-platform visibility dashboard (ChatGPT, Perplexity, Google AI, Gemini, Copilot)',
+        'Full AI-crawler audit',
+        'Keywords to win + competitor analysis',
+        'Prioritized fixes ranked by impact',
+        'Copy-paste JSON-LD + FAQ schema',
+        'Executive summary & 90-day roadmap',
+        'Client-ready downloadable PDF',
+      ],
+      cta: 'Get Full Audit',
+      popular: true,
+    },
+    {
+      name: 'Done-For-You GEO',
+      price: '$2,500+',
+      period: 'setup · $500/mo',
+      tagline: 'We build, ship, and manage your AI search visibility end-to-end.',
+      features: [
+        'Complete website rebuild optimized for GEO',
+        'All schema, llms.txt, and technical fixes implemented',
+        'Content rewritten for AI citation',
+        'Ongoing GEO maintenance & monitoring',
+        'Continuous AI citation tracking',
+        'Priority support',
+      ],
+      cta: 'Book Consultation',
+      popular: false,
+      footnote: 'Starting price shown — final quote set after free consultation.',
+    },
+  ];
+
+  const scrollToBook = () => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
+
+  return (
+    <section id="pricing" style={{ background: '#0f0f0f', padding: '88px 32px', position: 'relative', overflow: 'hidden' }}>
+      <div className="section-grid" />
+      <div className="ambient-glow ambient-glow-top" />
+      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div className="label-tag" style={{ marginBottom: 14 }}>Pricing</div>
+          <h2 className="headline-section h-dark" style={{ maxWidth: 620, margin: '0 auto 14px' }}>
+            Transparent Pricing for Every Stage
+          </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 480, margin: '0 auto' }}>
+            Start free. Upgrade when you're ready to dominate AI search.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, alignItems: 'stretch' }}>
+          {tiers.map((t, i) => (
+            <div
+              key={t.name}
+              className={`reveal reveal-delay-${i + 1} glass-card`}
+              style={{
+                display: 'flex', flexDirection: 'column',
+                position: 'relative',
+                padding: '36px 28px 32px',
+                borderTop: t.popular ? '2px solid #d4a87a' : '2px solid rgba(255,255,255,0.06)',
+                background: t.popular ? 'linear-gradient(180deg, rgba(212,168,122,0.06) 0%, rgba(255,255,255,0.03) 100%)' : 'rgba(255,255,255,0.03)',
+                boxShadow: t.popular ? '0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,168,122,0.18)' : 'none',
+                transform: 'translateZ(0)',
+              }}
+            >
+              {/* Popular badge */}
+              {t.popular && (
+                <div style={{
+                  position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
+                  background: 'linear-gradient(135deg, #f0c060, #c87020)',
+                  color: '#1a0e00',
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700,
+                  letterSpacing: '0.12em', textTransform: 'uppercase',
+                  padding: '5px 12px', borderRadius: 100,
+                  boxShadow: '0 4px 14px rgba(224,144,48,0.4)',
+                  whiteSpace: 'nowrap',
+                }}>
+                  ★ Most Popular
+                </div>
+              )}
+
+              {/* Tier name */}
+              <div style={{
+                fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700,
+                letterSpacing: '0.06em', textTransform: 'uppercase',
+                color: t.popular ? '#d4a87a' : '#a09890',
+                marginBottom: 12,
+              }}>{t.name}</div>
+
+              {/* Price */}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 6 }}>
+                <span style={{
+                  fontFamily: "'Instrument Serif', serif", fontSize: 44, lineHeight: 1,
+                  fontWeight: 400, color: '#f0ece4',
+                }}>{t.price}</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#6b6560' }}>{t.period}</span>
+              </div>
+
+              {/* Tagline */}
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580',
+                lineHeight: 1.55, marginBottom: 24,
+              }}>{t.tagline}</p>
+
+              {/* Feature list */}
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', flexGrow: 1 }}>
+                {t.features.map((f, j) => (
+                  <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10, fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#c0b8b0', lineHeight: 1.55 }}>
+                    <Check size={14} style={{ color: '#d4a87a', flexShrink: 0, marginTop: 4 }} />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <button
+                onClick={scrollToBook}
+                className={t.popular ? 'btn-copper' : 'btn-ghost'}
+                style={{
+                  width: '100%',
+                  padding: '13px 18px',
+                  borderRadius: 10,
+                  fontSize: 14,
+                  fontWeight: t.popular ? 700 : 500,
+                }}
+              >
+                {t.cta} →
+              </button>
+
+              {/* Footnote */}
+              {t.footnote && (
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: '#5a5550', textAlign: 'center', marginTop: 12, lineHeight: 1.5, fontStyle: 'italic' }}>
+                  {t.footnote}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Trust line */}
+        <div className="reveal" style={{ textAlign: 'center', marginTop: 36 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#5a5550' }}>
+            No contracts · No commitment · Proposal delivered within 48 hours
+          </p>
         </div>
 
       </div>
@@ -3365,8 +3544,9 @@ export default function App() {
       <GEOInAction />
       <WhoWeServe />
       <WhatIsGeo />
-      <TeamSection />
       <Services />
+      <Pricing />
+      <TeamSection />
       <Process />
       <Resources />
       <Results />

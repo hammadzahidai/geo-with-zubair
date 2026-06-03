@@ -33,8 +33,37 @@
           "employee": { "@id": "#zubair" },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "GEO Services",
+            "name": "GEO Services & Pricing",
             "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "Free AI Visibility Audit",
+                "price": "0",
+                "priceCurrency": "USD",
+                "description": "Free 60-second audit: full website crawl, overall GEO score & letter grade, 6-category citability breakdown, AI-crawler access check, top 3 critical fixes.",
+                "itemOffered": { "@type": "Service", "name": "AI Visibility Audit", "serviceType": "GEO Audit" }
+              },
+              {
+                "@type": "Offer",
+                "name": "Full GEO Audit",
+                "price": "49",
+                "priceCurrency": "USD",
+                "description": "One-time $49 audit: AI-judged content quality scoring, per-platform visibility dashboard (ChatGPT, Perplexity, Google AI, Gemini, Copilot), keywords to win, competitor analysis, copy-paste JSON-LD + FAQ schema, 90-day roadmap, client-ready PDF.",
+                "itemOffered": { "@type": "Service", "name": "Complete GEO Audit with 90-Day Roadmap", "serviceType": "GEO Audit" }
+              },
+              {
+                "@type": "Offer",
+                "name": "Done-For-You GEO",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "price": "2500",
+                  "priceCurrency": "USD",
+                  "minPrice": "2500",
+                  "valueAddedTaxIncluded": false
+                },
+                "description": "Done-For-You GEO starts at $2,500 setup plus $500/month: complete website rebuild for GEO, all schema/llms.txt/technical fixes implemented, content rewritten for AI citation, ongoing maintenance, continuous AI citation tracking, priority support. Final quote set after free consultation.",
+                "itemOffered": { "@type": "Service", "name": "Full-Service GEO Implementation & Management", "serviceType": "GEO Management" }
+              },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Search Audit & Visibility Analysis", "description": "Deep-dive analysis of brand presence across ChatGPT, Gemini, Perplexity, Claude, and Google AI Overviews. Maps gaps and opportunities.", "serviceType": "AI Visibility Audit", "areaServed": "United States" } },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Content Optimization", "description": "Restructure website content into answer-first passages that AI models cite. Definition-pattern passages are cited 2.1× more often (Georgia Tech, 2024).", "serviceType": "Content Optimization", "areaServed": "United States" } },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Structured Data & Schema Markup", "description": "JSON-LD schema implementation including LocalBusiness, FAQPage, Person, and Article schemas. Pages with correct schema are 3.6× more likely to appear in Google AI Overviews.", "serviceType": "Technical SEO", "areaServed": "United States" } },
