@@ -2243,7 +2243,7 @@ function Pricing() {
     },
     {
       name: 'Done-For-You GEO',
-      price: '$2,500+',
+      price: '$2,000+',
       period: 'setup · $500/mo',
       tagline: 'We build, ship, and manage your AI search visibility end-to-end.',
       features: [
@@ -3110,7 +3110,7 @@ function Contact() {
                     required
                   >
                     <option value="" disabled>Select your budget range</option>
-                    <option value="2.5-5k">$2.5K – $5K</option>
+                    <option value="2-5k">$2K – $5K</option>
                     <option value="5-10k">$5K – $10K</option>
                     <option value="10-25k">$10K – $25K</option>
                     <option value="25-50k">$25K – $50K</option>
