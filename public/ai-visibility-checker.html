@@ -187,7 +187,9 @@
           See if ChatGPT, Google AI Overviews, Perplexity, and Gemini recommend your business. Submit your site and we'll analyze your AI visibility across 6 categories — GEO score (0–100), citability breakdown, AI-crawler access, and the top 3 critical fixes — then email you the results within 24 hours. Free, no credit card required.
         </p>
 
-        <form class="checker-form" action="/#book-call" method="get">
+        <form class="checker-form" name="ai-visibility-check" method="post" action="/ai-visibility-checker-thanks.html" data-netlify="true" data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="ai-visibility-check" />
+          <input type="hidden" name="bot-field" style="display:none" />
           <label for="domain">Your website</label>
           <input type="url" id="domain" name="domain" placeholder="https://yourbusiness.com" required />
 
