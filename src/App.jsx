@@ -1456,6 +1456,19 @@ function Hero({ onBookCall }) {
               </span>
             </div>
           </h1>
+          {/* SEO H2 — targets buyer-language keywords: "ai visibility for businesses", "google ai overviews", "ranked on chatgpt" */}
+          <h2 style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 'clamp(15px, 2vw, 18px)',
+            fontWeight: 500,
+            color: '#a09890',
+            maxWidth: 720,
+            margin: '20px auto 0',
+            lineHeight: 1.55,
+            letterSpacing: '0.005em',
+          }}>
+            AI Visibility for Businesses — Get Recommended by ChatGPT, Google AI Overviews &amp; Perplexity
+          </h2>
         </div>
 
         {/* Subheadline — accessible, pain-focused, no AI jargon assumed */}
@@ -2439,7 +2452,7 @@ function Services() {
   const services = [
     {
       icon: <Eye size={20} />,
-      title: 'AI Search Audit & Visibility Analysis',
+      title: 'AI Visibility Audit',
       desc: 'Deep-dive analysis of your brand\'s presence across ChatGPT, Gemini, Perplexity, Claude, and Google AI Overviews. We map every gap and opportunity. Over 40% of searches now return AI-generated answers (SparkToro, 2025) — most brands don\'t know if they appear in any of them.',
     },
     {
@@ -2464,7 +2477,7 @@ function Services() {
     },
     {
       icon: <BarChart3 size={20} />,
-      title: 'Monitoring & Reporting',
+      title: 'AI Visibility Tracking',
       desc: 'Track your GEO score, AI citation frequency, and brand mention growth across ChatGPT, Perplexity, and Google AI with clear monthly dashboards. AI citation frequency compounds — brands that track and iterate their GEO score see 2–4× improvement within 6 months.',
     },
   ];

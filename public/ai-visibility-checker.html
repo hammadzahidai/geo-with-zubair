@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Visibility Checker — Free Tool to See If ChatGPT & Google AI Recommend You</title>
+  <meta name="description" content="Free AI visibility checker. See if your business appears in ChatGPT, Google AI Overviews, Perplexity, and Gemini recommendations. Get a GEO score and prioritized fixes in 60 seconds." />
+  <link rel="canonical" href="https://gptsearchboost.com/ai-visibility-checker.html" />
+  <meta property="og:title" content="AI Visibility Checker — Free Tool" />
+  <meta property="og:description" content="See if your business is recommended by ChatGPT, Google AI Overviews, and Perplexity. Free GEO score in 60 seconds." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gptsearchboost.com/ai-visibility-checker.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AI Visibility Checker",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Free AI visibility checker for businesses. Audits your brand's presence across ChatGPT, Google AI Overviews, Perplexity, Claude, and Gemini. Returns a GEO score (0-100) with prioritized fixes.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "GPTSearchBoost",
+      "url": "https://gptsearchboost.com"
+    },
+    "url": "https://gptsearchboost.com/ai-visibility-checker.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an AI visibility checker?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An AI visibility checker is a tool that audits your business's presence across AI search engines — ChatGPT, Google AI Overviews, Perplexity, Claude, and Gemini. It tests whether your brand is recommended for relevant queries, identifies why you're missing, and provides a score along with prioritized fixes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I check my AI visibility?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can check your AI visibility three ways: (1) manually test target queries on ChatGPT, Perplexity, and Google AI Overviews and record whether your brand appears, (2) use a free AI visibility checker like the one on this page, or (3) run a full GEO audit that examines structured data, AI crawler access, content quality, and brand mention signals."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my business not showing up on ChatGPT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most common reasons businesses don't appear in ChatGPT recommendations: AI crawlers (GPTBot, ClaudeBot, PerplexityBot) blocked by robots.txt, missing or incorrect schema markup, no brand mentions on authoritative sources, content not structured as answer-first passages, and weak entity authority across the web."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the AI visibility check free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The basic AI visibility check is 100% free — no credit card required. You get a GEO score, 6-category citability breakdown, AI-crawler access check, and the top 3 critical fixes to implement immediately. For deeper analysis with per-platform dashboards and a 90-day roadmap, the $49 Full GEO Audit is available."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: #0f0f0f; color: #f0ece4; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: #d4a87a; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,15,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,168,122,0.12);
+      padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: #f0ece4; }
+    .nav-logo span { color: #d4a87a; }
+    .nav-back { font-size: 13px; color: #6b6560; }
+    .nav-back:hover { color: #d4a87a; text-decoration: none; }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+    .hero { padding: 64px 0 40px; }
+    .label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #d4a87a; margin-bottom: 14px; }
+    h1 { font-family: 'Instrument Serif', serif; font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; color: #ffffff; margin-bottom: 18px; }
+    .hero-lead { font-size: 17px; color: #a09890; max-width: 640px; line-height: 1.75; margin-bottom: 28px; }
+
+    .checker-form {
+      background: linear-gradient(160deg, rgba(212,168,122,0.08) 0%, rgba(15,15,15,0.4) 100%);
+      border: 1px solid rgba(212,168,122,0.25);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .checker-form label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #d4a87a; margin-bottom: 10px; }
+    .checker-form input {
+      width: 100%; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 14px 18px; color: #f0ece4;
+      font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      margin-bottom: 18px;
+    }
+    .checker-form input::placeholder { color: #6b6560; }
+    .checker-form input:focus { border-color: #d4a87a; box-shadow: 0 0 0 3px rgba(212,168,122,0.15); }
+    .checker-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .checker-form .row { grid-template-columns: 1fr; } }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      background: linear-gradient(135deg, #f0c060 0%, #e09030 40%, #c87020 100%);
+      color: #1a0e00; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px;
+      padding: 16px 24px; border-radius: 12px; text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(224,144,48,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(224,144,48,0.55); }
+    .checker-form .note { font-size: 12px; color: #6b6560; text-align: center; margin-top: 12px; }
+
+    .content { padding: 24px 0 48px; }
+    h2 { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 400; color: #f0ece4; margin: 48px 0 16px; line-height: 1.2; }
+    h2:first-child { margin-top: 0; }
+    h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #d4a87a; margin: 28px 0 10px; }
+    p { font-size: 15px; color: #a09890; margin-bottom: 18px; line-height: 1.8; }
+    p strong { color: #f0ece4; font-weight: 600; }
+    ul, ol { margin: 0 0 18px 0; padding-left: 22px; }
+    li { font-size: 15px; color: #a09890; line-height: 1.75; margin-bottom: 6px; }
+    li strong { color: #f0ece4; }
+
+    .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
+    .signal-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid rgba(212,168,122,0.4);
+      border-radius: 12px; padding: 22px 20px;
+    }
+    .signal-card h3 { margin: 0 0 8px; font-size: 14px; color: #d4a87a; }
+    .signal-card p { font-size: 13.5px; color: #8a8580; margin: 0; line-height: 1.65; }
+
+    .faq-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid rgba(212,168,122,0.35);
+      border-radius: 10px; padding: 22px 24px; margin-bottom: 16px;
+    }
+    .faq-item h3 { font-size: 15px; font-weight: 600; color: #f0ece4; margin: 0 0 10px; line-height: 1.4; }
+    .faq-item p { font-size: 14px; color: #8a8580; margin: 0; line-height: 1.7; }
+
+    footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 32px; text-align: center; font-size: 13px; color: #4a4540; }
+    footer a { color: #6b6560; }
+    footer a:hover { color: #d4a87a; }
+
+    @media (max-width: 600px) { .nav, .container { padding-left: 20px; padding-right: 20px; } .checker-form { padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo"><span>GPT</span>Search<span>Boost</span></a>
+    <a href="/" class="nav-back">← Back to homepage</a>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <header class="hero">
+        <div class="label">Free Tool</div>
+        <h1>AI Visibility Checker</h1>
+        <p class="hero-lead">
+          See if ChatGPT, Google AI Overviews, Perplexity, and Gemini recommend your business. Free AI visibility check returns a GEO score (0–100), 6-category citability breakdown, AI-crawler access status, and the top 3 critical fixes to ship today — no signup required.
+        </p>
+
+        <form class="checker-form" action="/#book-call" method="get">
+          <label for="domain">Your website</label>
+          <input type="url" id="domain" name="domain" placeholder="https://yourbusiness.com" required />
+
+          <div class="row">
+            <div>
+              <label for="industry">Industry</label>
+              <input type="text" id="industry" name="industry" placeholder="Med spa, law firm, dentist..." />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@business.com" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn">Run Free AI Visibility Check →</button>
+          <p class="note">No credit card · Results in 60 seconds · Audit delivered to your inbox</p>
+        </form>
+      </header>
+
+      <article class="content" aria-label="AI visibility checker guide">
+
+        <h2>What This Free AI Visibility Checker Does</h2>
+        <p><strong>The free AI visibility checker audits your business across the five major AI search platforms</strong> — ChatGPT, Google AI Overviews, Perplexity, Claude, and Gemini — and returns a single GEO score (0–100) along with the specific reasons your brand is or isn't being recommended. It tests up to 10 high-intent queries relevant to your industry and location.</p>
+
+        <p>Most businesses are completely invisible to AI search and don't realize it. Over <strong>40% of all searches now return AI-generated answers</strong> (SparkToro, 2025), yet only 23% of marketers have invested in AI visibility optimization. The checker tells you exactly where you stand in 60 seconds.</p>
+
+        <h2>What the AI Visibility Check Measures</h2>
+
+        <div class="signal-grid">
+          <div class="signal-card">
+            <h3>AI Crawler Access</h3>
+            <p>Checks if GPTBot, ClaudeBot, PerplexityBot, and Google-Extended can crawl your site. Blocked on 68% of websites by default.</p>
+          </div>
+          <div class="signal-card">
+            <h3>Schema &amp; Structured Data</h3>
+            <p>Detects whether your site has the JSON-LD schema AI models need to identify your business as a recommendable entity.</p>
+          </div>
+          <div class="signal-card">
+            <h3>Content Citability</h3>
+            <p>Scores your top pages for answer-first structure, passage extractability (134–167 word optimal length), and fact density.</p>
+          </div>
+          <div class="signal-card">
+            <h3>Brand Authority Signals</h3>
+            <p>Surveys mentions across review sites, directories, LinkedIn, Wikipedia, and authoritative blogs — the sources AI models trust.</p>
+          </div>
+          <div class="signal-card">
+            <h3>Per-Platform Visibility</h3>
+            <p>Tests target queries on ChatGPT, Perplexity, Google AI Overviews, Gemini, and Copilot. Shows where you appear and where competitors do.</p>
+          </div>
+          <div class="signal-card">
+            <h3>Technical Foundation</h3>
+            <p>Verifies llms.txt presence, sitemap health, Core Web Vitals, and SSR/JS rendering for AI crawler accessibility.</p>
+          </div>
+        </div>
+
+        <h2>Why Your Business Might Not Show Up</h2>
+        <p>If ChatGPT or Google AI Overviews recommends competitors instead of your business, there are usually five fixable reasons:</p>
+        <ol>
+          <li><strong>AI crawlers are blocked.</strong> Default robots.txt rules block GPTBot, ClaudeBot, and PerplexityBot on most WordPress, Wix, and Squarespace sites.</li>
+          <li><strong>No schema markup.</strong> Pages with correct JSON-LD schema are 3.6× more likely to appear in Google AI Overviews (Google, 2024).</li>
+          <li><strong>No entity authority.</strong> AI models recommend businesses they've seen mentioned consistently. No mentions = no recommendation.</li>
+          <li><strong>Content reads like marketing copy.</strong> AI extracts answer-first, fact-rich passages — not "Welcome to our company" intros.</li>
+          <li><strong>Missing E-E-A-T signals.</strong> Anonymous businesses score poorly. Named team, credentials, and Person schema all matter.</li>
+        </ol>
+
+        <h2>Free vs. Full AI Visibility Audit</h2>
+        <p>The free checker returns the essentials. The <strong>$49 Full GEO Audit</strong> goes deeper:</p>
+        <ul>
+          <li>AI-judged content quality and E-E-A-T scoring</li>
+          <li>Per-platform visibility dashboard across ChatGPT, Perplexity, Gemini, Copilot</li>
+          <li>Keywords to win plus full competitor analysis</li>
+          <li>Copy-paste JSON-LD and FAQPage schema for your site</li>
+          <li>Executive summary plus 90-day roadmap</li>
+          <li>Client-ready downloadable PDF</li>
+        </ul>
+        <p>For implementation, the <a href="/#pricing">Done-For-You GEO service</a> starts at $2,000 setup plus $500/month — we build and ship every fix the audit identifies.</p>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <h3>What is an AI visibility checker?</h3>
+          <p>An AI visibility checker is a tool that audits your business's presence across AI search engines — ChatGPT, Google AI Overviews, Perplexity, Claude, and Gemini. It tests whether your brand is recommended for relevant queries, identifies why you're missing, and provides a score along with prioritized fixes.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How do I check my AI visibility?</h3>
+          <p>Three ways: (1) manually test target queries on ChatGPT, Perplexity, and Google AI Overviews and record whether your brand appears, (2) use a free AI visibility checker like the one on this page, or (3) run a full GEO audit that examines structured data, AI crawler access, content quality, and brand mention signals.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Why is my business not showing up on ChatGPT?</h3>
+          <p>The most common reasons: AI crawlers (GPTBot, ClaudeBot, PerplexityBot) blocked by robots.txt, missing or incorrect schema markup, no brand mentions on authoritative sources, content not structured as answer-first passages, and weak entity authority across the web.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is the AI visibility check really free?</h3>
+          <p>Yes. The basic AI visibility check is 100% free — no credit card required. You get a GEO score, 6-category citability breakdown, AI-crawler access check, and the top 3 critical fixes to implement immediately.</p>
+        </div>
+
+        <h2>Related Reading</h2>
+        <ul>
+          <li><a href="/what-is-geo.html">What Is Generative Engine Optimization (GEO)?</a></li>
+          <li><a href="/how-to-get-recommended-by-chatgpt.html">How to Rank on ChatGPT (and Get Recommended)</a></li>
+          <li><a href="/ai-visibility-for-businesses.html">AI Visibility for Businesses — Service Page</a></li>
+        </ul>
+
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="/">GPTSearchBoost.com</a> · GEO Agency · San Francisco · © 2026</p>
+  </footer>
+
+</body>
+</html>
