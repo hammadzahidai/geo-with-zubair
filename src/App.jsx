@@ -16,48 +16,52 @@ const GlobalStyles = () => (
 
     html { scroll-behavior: smooth; }
 
+    /* Subtle noise texture overlay */
+    html::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="200" height="200" filter="url(%23noise)" opacity="0.06"/%3E%3C/svg%3E');
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: multiply;
+    }
+
     body {
       font-family: 'DM Sans', system-ui, sans-serif;
-      background: #0f0f0f;
-      color: #f0ece4;
+      background: #ffffff;
+      color: #1e293b;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
-    }
-
-    /* Grain overlay */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.025;
+      position: relative;
+      z-index: 0;
     }
 
     /* Typography */
     .font-serif { font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; }
     .font-sans  { font-family: 'DM Sans', system-ui, sans-serif; }
 
-    /* Logo gradient text — warm copper metallic */
+    /* Logo gradient text — blue */
     .logo-gradient {
       background: linear-gradient(
         135deg,
-        #f0dcc0 0%,
-        #d4a87a 20%,
-        #c8956c 40%,
-        #e8c896 55%,
-        #c8956c 70%,
-        #d4a87a 85%,
-        #f0dcc0 100%
+        #3b82f6 0%,
+        #1e40af 30%,
+        #1d4ed8 50%,
+        #1e40af 70%,
+        #3b82f6 100%
       );
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: metallic-shift 4s ease-in-out infinite;
-      filter: brightness(1.1);
     }
     @keyframes metallic-shift {
       0%, 100% { background-position: 0% 50%; }
@@ -87,7 +91,7 @@ const GlobalStyles = () => (
       content: '';
       position: absolute;
       inset: -5px -10px;
-      background: radial-gradient(ellipse at center, rgba(200,149,108,0.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(30,58,138,0.08) 0%, transparent 70%);
       border-radius: 10px;
       pointer-events: none;
       z-index: -1;
@@ -105,17 +109,10 @@ const GlobalStyles = () => (
       font-weight: 400;
       line-height: 1.1;
       letter-spacing: -0.01em;
-      background: linear-gradient(to bottom, #1a1a1a 15%, #9a7050 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #0f172a;
     }
-    /* headline-section variant for dark backgrounds */
     .h-dark {
-      background: linear-gradient(to bottom, #ffffff 15%, #d4a87a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #0f172a;
     }
     .label-tag {
       font-family: 'DM Sans', sans-serif;
@@ -123,14 +120,14 @@ const GlobalStyles = () => (
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #d4a87a;
+      color: #1e40af;
     }
 
-    /* Copper accent */
-    .text-copper { color: #d4a87a; }
-    .text-copper-dark { color: #b8854e; }
-    .bg-copper-gradient { background: linear-gradient(135deg, #d4a87a, #c08a58); }
-    .border-copper { border-color: #d4a87a; }
+    /* Blue accent */
+    .text-copper { color: #1e40af; }
+    .text-copper-dark { color: #1d4ed8; }
+    .bg-copper-gradient { background: linear-gradient(135deg, #1e40af, #1d4ed8); }
+    .border-copper { border-color: #1e40af; }
 
     /* Scroll-reveal animations */
     .reveal {
@@ -173,25 +170,25 @@ const GlobalStyles = () => (
 
     /* CTA button */
     .btn-copper {
-      background: linear-gradient(135deg, #f0c060 0%, #e09030 40%, #c87020 100%);
-      color: #1a0e00;
+      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #1d4ed8 100%);
+      color: #ffffff;
       font-family: 'DM Sans', sans-serif;
       font-weight: 700;
       font-size: 15px;
       border: none;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      box-shadow: 0 4px 20px rgba(224,144,48,0.45), 0 1px 0 rgba(255,220,120,0.3) inset;
+      box-shadow: 0 4px 20px rgba(30,58,138,0.35), 0 1px 0 rgba(255,255,255,0.15) inset;
     }
     .btn-copper:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(224,144,48,0.55), 0 1px 0 rgba(255,220,120,0.3) inset;
+      box-shadow: 0 8px 32px rgba(30,58,138,0.45), 0 1px 0 rgba(255,255,255,0.15) inset;
       filter: brightness(1.08);
     }
     .btn-ghost {
       background: transparent;
-      color: #f0ece4;
-      border: 1px solid rgba(240,236,228,0.2);
+      color: #1e293b;
+      border: 1px solid rgba(15,23,42,0.18);
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
       font-size: 15px;
@@ -199,9 +196,9 @@ const GlobalStyles = () => (
       transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
     }
     .btn-ghost:hover {
-      border-color: #d4a87a;
-      color: #d4a87a;
-      background: rgba(212,168,122,0.06);
+      border-color: #1e40af;
+      color: #1e40af;
+      background: rgba(30,58,138,0.05);
       transform: translateY(-1px);
     }
 
@@ -221,107 +218,101 @@ const GlobalStyles = () => (
       .who-we-serve-grid { grid-template-columns: 1fr; }
     }
     .industry-card-v2 {
-      background: linear-gradient(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.02) 100%);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       padding: 28px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.05);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
       position: relative;
       overflow: hidden;
     }
-    .industry-card-v2::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb, 212,168,122), 0.06) 0%, transparent 65%);
-      pointer-events: none;
-    }
     .industry-card-v2:hover {
       transform: translateY(-3px);
-      background: linear-gradient(160deg, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.03) 100%);
-      border-color: rgba(var(--accent-rgb, 212,168,122), 0.35);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 32px rgba(var(--accent-rgb, 212,168,122), 0.08);
+      border-color: rgba(30,58,138,0.25);
+      box-shadow: 0 8px 28px rgba(15,23,42,0.1);
     }
     .service-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       padding: 36px;
       border-top: 2px solid transparent;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .service-card:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
-      border-top-color: #d4a87a;
+      box-shadow: 0 8px 28px rgba(15,23,42,0.1);
+      border-top-color: #1e40af;
     }
 
-    /* Dark glass card */
+    /* Clean white card */
     .glass-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       padding: 36px;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
       transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .glass-card:hover {
-      border-color: rgba(212,168,122,0.2);
+      border-color: rgba(30,58,138,0.25);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 24px rgba(15,23,42,0.1);
     }
 
     /* Why card */
     .why-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       padding: 36px;
       border-top: 2px solid transparent;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .why-card:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
-      border-top-color: rgba(212,168,122,0.5);
+      box-shadow: 0 8px 28px rgba(15,23,42,0.1);
+      border-top-color: rgba(30,58,138,0.5);
     }
 
     /* FAQ item */
     .faq-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 12px;
       border-left: 3px solid transparent;
       overflow: hidden;
-      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .faq-item:hover {
-      background: rgba(255,255,255,0.05);
-      border-left-color: rgba(212,168,122,0.3);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border-left-color: rgba(30,58,138,0.3);
+      box-shadow: 0 4px 16px rgba(15,23,42,0.08);
     }
-    .faq-item.open { border-left-color: #d4a87a; }
+    .faq-item.open { border-left-color: #1e40af; }
 
     /* Form inputs */
     .form-input {
       width: 100%;
-      background: #1a1a1a;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #f8fafc;
+      border: 1px solid rgba(15,23,42,0.12);
       border-radius: 10px;
       padding: 14px 16px;
-      color: #f0ece4;
+      color: #1e293b;
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .form-input::placeholder { color: #6b6560; }
+    .form-input::placeholder { color: #64748b; }
     .form-input:focus {
-      border-color: #d4a87a;
-      box-shadow: 0 0 0 3px rgba(212,168,122,0.15);
+      border-color: #1e40af;
+      box-shadow: 0 0 0 3px rgba(30,58,138,0.12);
     }
     .form-label {
       display: block;
@@ -330,24 +321,24 @@ const GlobalStyles = () => (
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #8a8580;
+      color: #64748b;
       margin-bottom: 8px;
     }
 
     /* Testimonial card */
     .testimonial-card {
-      background: rgba(255,255,255,0.03);
+      background: #ffffff;
       border-radius: 16px;
       padding: 32px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(15,23,42,0.08);
       border-top: 2px solid transparent;
-      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .testimonial-card:hover {
-      background: rgba(255,255,255,0.05);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-      border-top-color: rgba(212,168,122,0.4);
+      box-shadow: 0 8px 28px rgba(15,23,42,0.1);
+      border-top-color: rgba(30,58,138,0.4);
     }
 
     /* Stat cards row */
@@ -364,19 +355,19 @@ const GlobalStyles = () => (
 
     /* Metric card */
     .metric-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       padding: 40px 36px;
       text-align: center;
       border-bottom: 2px solid transparent;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .metric-card:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-      border-bottom-color: rgba(212,168,122,0.45);
+      box-shadow: 0 8px 28px rgba(15,23,42,0.1);
+      border-bottom-color: rgba(30,58,138,0.45);
     }
     @media (max-width: 480px) {
       .metric-card { padding: 24px 12px; }
@@ -395,7 +386,7 @@ const GlobalStyles = () => (
       right: -1px;
       width: 2px;
       height: 40px;
-      background: linear-gradient(to bottom, #d4a87a, transparent);
+      background: linear-gradient(to bottom, #1e40af, transparent);
       opacity: 0.3;
     }
 
@@ -454,28 +445,42 @@ const GlobalStyles = () => (
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 18px 0;
-      background: rgba(15,15,15,0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(212,168,122,0.08);
-      transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 14px 20px;
+      background: transparent;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
     }
-    .navbar::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 10%; right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212,168,122,0.35) 30%, rgba(232,200,150,0.5) 50%, rgba(212,168,122,0.35) 70%, transparent);
-      pointer-events: none;
+    .navbar > div:first-child {
+      width: 100%;
+      max-width: 1200px;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.2px solid rgba(15,23,42,0.12);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      box-shadow:
+        0 0 20px rgba(37,99,235,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 8px 24px rgba(15,23,42,0.08);
     }
     .navbar.scrolled {
-      background: rgba(12,12,12,0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 13px 0;
-      border-bottom-color: rgba(212,168,122,0.15);
-      box-shadow: 0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(212,168,122,0.1);
+      padding: 10px 20px;
+    }
+    .navbar.scrolled > div:first-child {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-color: rgba(15,23,42,0.15);
+      box-shadow:
+        0 0 24px rgba(37,99,235,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.85),
+        0 12px 32px rgba(15,23,42,0.12);
     }
 
     /* Nav links */
@@ -484,7 +489,7 @@ const GlobalStyles = () => (
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.03em;
-      color: #a09890;
+      color: #64748b;
       text-decoration: none;
       position: relative;
       padding-bottom: 3px;
@@ -497,12 +502,12 @@ const GlobalStyles = () => (
       left: 0;
       width: 0;
       height: 1.5px;
-      background: linear-gradient(90deg, #c8956c, #e8c896);
+      background: linear-gradient(90deg, #1e40af, #3b82f6);
       border-radius: 2px;
       transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .nav-link:hover {
-      color: #d4a87a;
+      color: #1e40af;
       transform: translateY(-1px);
     }
     .nav-link:hover::after { width: 100%; }
@@ -519,18 +524,18 @@ const GlobalStyles = () => (
     /* Video container */
     .video-container {
       position: relative;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #f8fafc;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
       transition: border-color 0.4s ease;
     }
     .video-container:hover {
-      border-color: rgba(212,168,122,0.3);
+      border-color: rgba(30,58,138,0.3);
     }
 
-    /* Play button — elegant hover with halo ring */
+    /* Play button */
     .play-btn {
       position: absolute;
       top: 50%;
@@ -539,14 +544,14 @@ const GlobalStyles = () => (
       width: 68px;
       height: 68px;
       border-radius: 50%;
-      border: 1.5px solid rgba(212,168,122,0.6);
+      border: 1.5px solid rgba(30,58,138,0.6);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(15,15,15,0.55);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      color: #d4a87a;
+      color: #1e40af;
       transition:
         background  0.4s cubic-bezier(0.16, 1, 0.3, 1),
         border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -582,14 +587,14 @@ const GlobalStyles = () => (
     }
 
     .video-container:hover .play-btn {
-      background: #d4a87a;
-      border-color: #d4a87a;
-      color: #1a1a1a;
+      background: #1e40af;
+      border-color: #1e40af;
+      color: #ffffff;
       transform: translate(-50%, -50%) scale(1.1);
-      box-shadow: 0 0 0 0px rgba(212,168,122,0.35), 0 8px 32px rgba(212,168,122,0.3);
+      box-shadow: 0 0 0 0px rgba(30,58,138,0.35), 0 8px 32px rgba(30,58,138,0.3);
     }
     .video-container:hover .play-btn::before {
-      border-color: rgba(212,168,122,0.25);
+      border-color: rgba(30,58,138,0.25);
       inset: -14px;
       opacity: 1;
     }
@@ -606,8 +611,8 @@ const GlobalStyles = () => (
 
     /* Stat hero card — 3D elevated, vertical desktop / horizontal mobile */
     .stat-hero-card {
-      background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 40%, rgba(255,255,255,0.01) 100%);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 18px;
       flex: 0 1 255px;
       padding: 24px 24px 22px;
@@ -620,13 +625,9 @@ const GlobalStyles = () => (
       transform: perspective(800px) rotateX(2deg);
       transform-style: preserve-3d;
       box-shadow:
-        0 1px 0 rgba(255,255,255,0.08) inset,
-        -1px 0 0 rgba(255,255,255,0.04) inset,
-        0 -1px 0 rgba(0,0,0,0.3) inset,
-        0 4px 8px rgba(0,0,0,0.3),
-        0 12px 28px rgba(0,0,0,0.25),
-        0 20px 40px rgba(0,0,0,0.15),
-        0 2px 10px rgba(var(--accent-rgb, 212,168,122), 0.08);
+        0 1px 3px rgba(15,23,42,0.07),
+        0 4px 12px rgba(15,23,42,0.07),
+        0 2px 10px rgba(30,58,138,0.06);
       transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
     }
     .stat-hero-card::before {
@@ -634,9 +635,7 @@ const GlobalStyles = () => (
       position: absolute;
       inset: 0;
       border-radius: 18px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 40%),
-        radial-gradient(ellipse at 30% 0%, rgba(var(--accent-rgb, 212,168,122), 0.1) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, transparent 60%);
       pointer-events: none;
     }
     .stat-hero-card::after {
@@ -644,48 +643,45 @@ const GlobalStyles = () => (
       position: absolute;
       top: 0; left: 15%; right: 15%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb, 212,168,122), 0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(30,58,138,0.2), transparent);
       border-radius: 1px;
     }
     .stat-hero-card:hover {
       transform: perspective(800px) rotateX(0deg) translateY(-6px) scale(1.02);
       box-shadow:
-        0 1px 0 rgba(255,255,255,0.1) inset,
-        -1px 0 0 rgba(255,255,255,0.06) inset,
-        0 -1px 0 rgba(0,0,0,0.2) inset,
-        0 8px 16px rgba(0,0,0,0.3),
-        0 20px 48px rgba(0,0,0,0.2),
-        0 6px 20px rgba(var(--accent-rgb, 212,168,122), 0.15);
-      background: linear-gradient(160deg, rgba(255,255,255,0.11) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.02) 100%);
+        0 8px 24px rgba(15,23,42,0.1),
+        0 6px 20px rgba(30,58,138,0.08);
+      background: #ffffff;
     }
     .stat-card-icon {
       width: 40px; height: 40px;
       border-radius: 11px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.05) inset;
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: 0 1px 3px rgba(15,23,42,0.06);
     }
     .stat-card-text { width: 100%; }
     .stat-card-num {
       font-family: 'Instrument Serif', serif;
       font-size: 38px;
-      font-weight: 400;
+      font-weight: 700;
       line-height: 1;
       margin-bottom: 4px;
       letter-spacing: -0.5px;
+      color: #0f172a !important;
     }
     .stat-card-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 12.5px;
       font-weight: 500;
-      color: #9a9088;
+      color: #475569;
       line-height: 1.4;
     }
     .stat-card-sub {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
-      color: #524e4a;
+      color: #64748b;
       margin-top: 2px;
     }
     /* Mobile: horizontal layout */
@@ -697,15 +693,15 @@ const GlobalStyles = () => (
         flex: unset !important;
         gap: 14px;
       }
-      .stat-card-num { font-size: 26px !important; }
+      .stat-card-num { font-size: 26px !important; font-weight: 700 !important; }
     }
 
-    /* Copper icon container */
+    /* Blue icon container */
     .icon-container {
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(212,168,122,0.12);
+      background: rgba(30,58,138,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -716,13 +712,14 @@ const GlobalStyles = () => (
     .mobile-menu {
       position: fixed;
       inset: 0;
-      background: #0f0f0f;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
       z-index: 99;
       display: flex;
       flex-direction: column;
-      padding: 100px 32px 48px;
+      padding: 100px 24px 48px;
       transform: translateX(100%);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(10px);
     }
     .mobile-menu.open { transform: translateX(0); }
 
@@ -730,14 +727,14 @@ const GlobalStyles = () => (
     .calendly-wrapper {
       background: #ffffff;
       border-radius: 16px;
-      border-top: 3px solid #d4a87a;
-      box-shadow: 0 4px 30px rgba(100,80,60,0.08);
+      border-top: 3px solid #1e40af;
+      box-shadow: 0 4px 24px rgba(15,23,42,0.08);
       overflow: hidden;
     }
     .calendly-wrapper-dark {
       background: #ffffff;
       border-radius: 16px;
-      box-shadow: 0 0 0 1px rgba(212,168,122,0.25), 0 8px 48px rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 1px rgba(30,58,138,0.15), 0 8px 32px rgba(15,23,42,0.12);
       overflow: hidden;
       position: relative;
     }
@@ -746,7 +743,7 @@ const GlobalStyles = () => (
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, #d4a87a 30%, #e8c896 50%, #d4a87a 70%, transparent);
+      background: linear-gradient(90deg, transparent, #1e40af 30%, #3b82f6 50%, #1e40af 70%, transparent);
       z-index: 2;
     }
     .book-grid {
@@ -778,17 +775,17 @@ const GlobalStyles = () => (
       gap: 14px;
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
-      color: #c0b8b0;
+      color: #64748b;
       line-height: 1.55;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #f8fafc;
+      border: 1px solid rgba(15,23,42,0.07);
       border-radius: 10px;
       transition: border-color 0.2s ease, background 0.2s ease;
     }
     .value-point:hover {
-      border-color: rgba(212,168,122,0.2);
-      background: rgba(212,168,122,0.04);
+      border-color: rgba(30,58,138,0.2);
+      background: rgba(30,58,138,0.03);
     }
     .value-point svg { flex-shrink: 0; margin-top: 2px; }
     .mini-stat-row {
@@ -800,29 +797,29 @@ const GlobalStyles = () => (
       flex: 1;
       min-width: 90px;
       padding: 18px 12px;
-      background: rgba(212,168,122,0.06);
-      border: 1px solid rgba(212,168,122,0.15);
+      background: rgba(30,58,138,0.05);
+      border: 1px solid rgba(30,58,138,0.12);
       border-radius: 12px;
       text-align: center;
       transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
       cursor: default;
     }
     .mini-stat:hover {
-      background: rgba(212,168,122,0.1);
-      border-color: rgba(212,168,122,0.3);
+      background: rgba(30,58,138,0.09);
+      border-color: rgba(30,58,138,0.25);
       transform: translateY(-2px);
     }
     .mini-stat .num {
       font-family: 'Instrument Serif', serif;
       font-size: 22px;
-      color: #d4a87a;
+      color: #1e40af;
       display: block;
       line-height: 1.2;
     }
     .mini-stat .lbl {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
-      color: #8a8580;
+      color: #64748b;
       letter-spacing: 0.03em;
       margin-top: 4px;
       display: block;
@@ -831,24 +828,12 @@ const GlobalStyles = () => (
     /* Section readability removed — filter: brightness on sections forces
        GPU compositing layers per section and causes scroll jank */
 
-    /* Soft left-to-right shimmer on "AI Search" hero text */
+    /* Hero accent words */
     .hero-shine {
       display: inline-block;
       opacity: 0;
-      background: linear-gradient(
-        90deg,
-        #ffffff 25%,
-        #f0c96e 45%,
-        #e0a030 50%,
-        #f0c96e 55%,
-        #ffffff 75%
-      );
-      background-size: 300% 100%;
-      background-position: 100% 50%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: wordReveal 0.5s ease forwards, hero-shimmer-sweep 4s ease-in-out 2s infinite;
+      color: #1e40af;
+      animation: wordReveal 0.5s ease forwards;
     }
     @keyframes hero-shimmer-sweep {
       0% { background-position: 100% 50%; }
@@ -866,7 +851,7 @@ const GlobalStyles = () => (
     /* Blinking cursor */
     .blink-cursor {
       font-weight: 300;
-      color: #d4a87a;
+      color: #1e40af;
       animation: blink 1s step-end infinite;
     }
     @keyframes blink {
@@ -913,7 +898,7 @@ const GlobalStyles = () => (
       letter-spacing: 0.01em !important;
       box-shadow:
         0 8px 32px rgba(224,144,48,0.6),
-        0 2px 12px rgba(0,0,0,0.6),
+        0 2px 12px rgba(30,58,138,0.3),
         0 1px 0 rgba(255,220,120,0.3) inset !important;
     }
     /* Hide FAB on desktop */
@@ -989,9 +974,9 @@ const GlobalStyles = () => (
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0f0f0f; }
-    ::-webkit-scrollbar-thumb { background: #3a3530; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #d4a87a; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #1e40af; }
 
     /* Section spacing */
     section { position: relative; }
@@ -1038,50 +1023,41 @@ const GlobalStyles = () => (
       mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     }
 
-    /* Opportunity card — 3D elevated */
+    /* Opportunity card */
     .opportunity-card {
-      background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 18px;
       padding: 36px;
       border-left: 4px solid transparent;
       position: relative;
-      box-shadow:
-        0 2px 0 rgba(255,255,255,0.04) inset,
-        0 1px 0 rgba(0,0,0,0.5),
-        0 6px 20px rgba(0,0,0,0.35),
-        0 16px 48px rgba(0,0,0,0.2);
-      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
     }
     .opportunity-card:hover {
-      background: linear-gradient(160deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
       transform: translateY(-5px);
-      box-shadow:
-        0 2px 0 rgba(255,255,255,0.05) inset,
-        0 1px 0 rgba(0,0,0,0.5),
-        0 16px 48px rgba(0,0,0,0.45),
-        0 4px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 28px rgba(15,23,42,0.1);
     }
 
     /* Star rating */
-    .star { color: #d4a87a; }
+    .star { color: #f59e0b; }
 
     /* Footer social */
     .social-icon {
       width: 38px; height: 38px;
       border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(15,23,42,0.1);
       display: flex; align-items: center; justify-content: center;
-      color: #8a8580;
+      color: #64748b;
       cursor: pointer;
       transition: border-color 0.2s ease, color 0.2s ease;
     }
-    .social-icon:hover { border-color: #d4a87a; color: #d4a87a; }
+    .social-icon:hover { border-color: #1e40af; color: #1e40af; }
 
     /* Copper divider */
     .copper-divider {
       width: 60px; height: 3px;
-      background: linear-gradient(90deg, #d4a87a, #c08a58);
+      background: linear-gradient(90deg, #1e40af, #1d4ed8);
       border-radius: 2px;
       margin: 16px 0 24px;
     }
@@ -1098,12 +1074,12 @@ const GlobalStyles = () => (
     .ambient-glow-top {
       top: -100px;
       width: 900px; height: 400px;
-      background: radial-gradient(ellipse, rgba(212,168,122,0.10) 0%, transparent 68%);
+      background: radial-gradient(ellipse, rgba(30,58,138,0.07) 0%, transparent 68%);
     }
     .ambient-glow-bottom {
       bottom: -80px;
       width: 650px; height: 280px;
-      background: radial-gradient(ellipse, rgba(212,168,122,0.07) 0%, transparent 65%);
+      background: radial-gradient(ellipse, rgba(30,58,138,0.05) 0%, transparent 65%);
     }
 
     /* Subtle grid for non-hero sections */
@@ -1161,17 +1137,17 @@ const GlobalStyles = () => (
     .hero-orb-1 {
       width: 420px; height: 420px;
       top: 10%; left: 8%;
-      background: radial-gradient(circle, rgba(212,168,122,0.09) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(30,58,138,0.06) 0%, transparent 70%);
     }
     .hero-orb-2 {
       width: 360px; height: 360px;
       top: 30%; right: 6%;
-      background: radial-gradient(circle, rgba(212,168,122,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
     }
     .hero-orb-3 {
       width: 300px; height: 300px;
       bottom: 15%; left: 35%;
-      background: radial-gradient(circle, rgba(240,220,190,0.03) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(30,58,138,0.04) 0%, transparent 70%);
     }
 
     /* Responsive adjustments */
@@ -1201,14 +1177,14 @@ const GlobalStyles = () => (
     .opp-stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
       border-radius: 16px;
       overflow: hidden;
     }
     @media (max-width: 600px) {
       .opp-stats-grid { grid-template-columns: 1fr; }
-      .opp-stats-grid .opp-stat { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .opp-stats-grid .opp-stat { border-right: none !important; border-bottom: 1px solid rgba(15,23,42,0.07); }
       .opp-stats-grid .opp-stat:last-child { border-bottom: none; }
     }
 
@@ -1302,11 +1278,11 @@ function Navbar({ onBookCall }) {
   return (
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           {/* Logo */}
           <a href="#hero" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
             <span className="font-sans logo-text" style={{ fontSize: 21, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1 }}>
-              <span className="logo-gradient logo-float-gpt" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#f0ece4', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient logo-float-boost" style={{ fontWeight: 800 }}>Boost</span>
+              <span className="logo-gradient logo-float-gpt" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#1e293b', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient logo-float-boost" style={{ fontWeight: 800 }}>Boost</span>
             </span>
           </a>
 
@@ -1328,9 +1304,26 @@ function Navbar({ onBookCall }) {
             </button>
             {/* Hamburger */}
             <button
-              className="md:hidden"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#f0ece4', padding: 4 }}
+              className="md:hidden flex items-center justify-center"
+              style={{
+                background: menuOpen ? 'rgba(37,99,235,0.1)' : 'rgba(15,23,42,0.05)',
+                border: '1.2px solid rgba(15,23,42,0.12)',
+                borderRadius: 10,
+                cursor: 'pointer',
+                color: menuOpen ? '#2563eb' : '#1e293b',
+                padding: '8px 8px',
+                transition: 'all 0.3s ease',
+                boxShadow: menuOpen ? '0 0 12px rgba(37,99,235,0.2)' : 'none'
+              }}
               onClick={() => setMenuOpen(!menuOpen)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(37,99,235,0.08)';
+                e.currentTarget.style.borderColor = 'rgba(37,99,235,0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = menuOpen ? 'rgba(37,99,235,0.1)' : 'rgba(15,23,42,0.05)';
+                e.currentTarget.style.borderColor = 'rgba(15,23,42,0.12)';
+              }}
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -1340,7 +1333,7 @@ function Navbar({ onBookCall }) {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {links.map((l, i) => (
             <a
               key={l.label}
@@ -1348,17 +1341,24 @@ function Navbar({ onBookCall }) {
               onClick={() => setMenuOpen(false)}
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: 28,
-                fontWeight: 500,
-                color: '#f0ece4',
+                fontSize: 16,
+                fontWeight: 600,
+                color: '#1e293b',
                 textDecoration: 'none',
-                padding: '12px 0',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
-                transition: 'color 0.2s ease',
+                padding: '14px 16px',
+                borderRadius: 10,
+                background: 'transparent',
+                transition: 'all 0.25s ease',
                 animationDelay: `${i * 0.07}s`,
               }}
-              onMouseEnter={e => e.target.style.color = '#d4a87a'}
-              onMouseLeave={e => e.target.style.color = '#f0ece4'}
+              onMouseEnter={e => {
+                e.target.style.background = 'rgba(37,99,235,0.08)';
+                e.target.style.color = '#2563eb';
+              }}
+              onMouseLeave={e => {
+                e.target.style.background = 'transparent';
+                e.target.style.color = '#1e293b';
+              }}
             >
               {l.label}
             </a>
@@ -1367,7 +1367,30 @@ function Navbar({ onBookCall }) {
         <div style={{ marginTop: 'auto' }}>
           <button
             className="btn-copper"
-            style={{ width: '100%', padding: '16px', borderRadius: 12, marginTop: 32, fontSize: 16 }}
+            style={{
+              width: '100%',
+              padding: '14px 20px',
+              borderRadius: 12,
+              marginTop: 32,
+              fontSize: 15,
+              fontWeight: 600,
+              background: '#2563eb',
+              color: '#ffffff',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+            }}
+            onMouseEnter={e => {
+              e.target.style.background = '#1d4ed8';
+              e.target.style.boxShadow = '0 6px 16px rgba(37,99,235,0.3)';
+              e.target.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={e => {
+              e.target.style.background = '#2563eb';
+              e.target.style.boxShadow = '0 4px 12px rgba(37,99,235,0.2)';
+              e.target.style.transform = 'translateY(0)';
+            }}
             onClick={() => { setMenuOpen(false); onBookCall(); }}
           >
             Book a Call →
@@ -1408,7 +1431,7 @@ function Hero({ onBookCall }) {
     <section
       id="hero"
       style={{
-        background: '#0f0f0f',
+        background: '#ffffff',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -1435,7 +1458,7 @@ function Hero({ onBookCall }) {
 
         {/* Hero Headline */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <h1 className="headline-hero" style={{ color: '#ffffff' }}>
+          <h1 className="headline-hero" style={{ color: '#0f172a' }}>
             {/* Line 1 */}
             <div style={{ marginBottom: 6 }}>
               {words1.map((w, i) => (
@@ -1456,70 +1479,10 @@ function Hero({ onBookCall }) {
               </span>
             </div>
           </h1>
-          {/* SEO H2 — targets buyer-language keywords: "ai visibility for businesses", "google ai overviews", "ranked on chatgpt" */}
-          <h2 style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 'clamp(15px, 2vw, 18px)',
-            fontWeight: 500,
-            color: '#a09890',
-            maxWidth: 720,
-            margin: '20px auto 0',
-            lineHeight: 1.55,
-            letterSpacing: '0.005em',
-          }}>
-            AI Visibility for Businesses — Get Recommended by ChatGPT, Google AI Overviews &amp; Perplexity
-          </h2>
         </div>
 
-        {/* Subheadline — accessible, pain-focused, no AI jargon assumed */}
+        {/* Subheadline — "We make AI recommend you" */}
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 52 }}>
-          {/* Hidden full slide text for AI crawlers — all 5 examples always in DOM */}
-          <div style={{ position: 'absolute', left: -9999, top: 'auto', width: 1, height: 1, overflow: 'hidden' }} aria-hidden="true">
-            {slides.map((s, i) => (
-              <p key={i}>{s.pre}{s.query}{s.post}</p>
-            ))}
-          </div>
-
-          {/* Rotating pain-point slideshow */}
-          <div style={{ maxWidth: 540, margin: '0 auto 18px', minHeight: 72 }}>
-            <p
-              key={slideIdx}
-              className="slide-fade"
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 14,
-                lineHeight: 1.6,
-                color: '#7a7268',
-                letterSpacing: '0.01em',
-                textAlign: 'center',
-              }}
-            >
-              {slides[slideIdx].pre}
-              <span style={{ color: '#d4a87a', fontWeight: 500 }}>{slides[slideIdx].query}</span>
-              <span className="blink-cursor">|</span>
-              {slides[slideIdx].post}
-            </p>
-            {/* Dot indicators */}
-            <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginTop: 14 }}>
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSlideIdx(i)}
-                  aria-label={`Show example ${i + 1}`}
-                  style={{
-                    width: i === slideIdx ? 18 : 6,
-                    height: 6,
-                    borderRadius: 100,
-                    border: 'none',
-                    background: i === slideIdx ? '#d4a87a' : 'rgba(255,255,255,0.12)',
-                    cursor: 'pointer',
-                    padding: 0,
-                    transition: 'width 0.35s ease, background 0.25s ease',
-                  }}
-                />
-              ))}
-            </div>
-          </div>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: 18,
@@ -1528,61 +1491,10 @@ function Hero({ onBookCall }) {
             maxWidth: 500,
             margin: '0 auto 24px',
             letterSpacing: '-0.01em',
-            background: 'linear-gradient(90deg, #f0ece4 0%, #e8c896 50%, #f0ece4 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            color: '#334155',
           }}>
             We make AI recommend you. Every time.
           </p>
-
-          {/* Expandable "What is GPTSearchBoost?" — text always in DOM for AI crawlers */}
-          <div style={{ maxWidth: 520, margin: '0 auto 24px', textAlign: 'center' }}>
-            <button
-              onClick={() => setGeoOpen(o => !o)}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 12, fontWeight: 600,
-                color: geoOpen ? '#d4a87a' : '#5a5550',
-                letterSpacing: '0.06em', textTransform: 'uppercase',
-                padding: '6px 14px',
-                borderRadius: 100,
-                border: `1px solid ${geoOpen ? 'rgba(212,168,122,0.35)' : 'rgba(255,255,255,0.07)'}`,
-                background: geoOpen ? 'rgba(212,168,122,0.06)' : 'transparent',
-                transition: 'color 0.2s ease, border-color 0.2s ease, background 0.2s ease',
-              }}
-              aria-expanded={geoOpen}
-            >
-              What is GPTSearchBoost?
-              <span style={{
-                display: 'inline-block',
-                transform: geoOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.3s ease',
-                fontSize: 10,
-              }}>▾</span>
-            </button>
-
-            {/* Always in DOM — AI crawlers see this regardless of open state */}
-            <div
-              aria-hidden={!geoOpen}
-              style={{
-                maxHeight: geoOpen ? 300 : 0,
-                opacity: geoOpen ? 1 : 0,
-                overflow: 'hidden',
-                transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease',
-              }}
-            >
-              <p style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 13, color: '#6a6560',
-                lineHeight: 1.75, marginTop: 14, marginBottom: 0,
-              }}>
-                GPTSearchBoost is a Generative Engine Optimization (GEO) agency based in San Francisco. We help local service businesses — law firms, med spas, cosmetic dentists, and real estate teams — appear as AI-recommended results when potential clients search on ChatGPT, Google AI Overviews, and Perplexity. Businesses recommended by AI convert at 4.4× the rate of organic search visitors (SparkToro, 2025). Only 23% of marketers have invested in GEO as of 2025 — making now the highest-leverage window to establish AI search authority.
-              </p>
-            </div>
-          </div>
 
           {/* Mobile-only CTA — appears right under the tagline */}
           <div className="hero-mobile-cta">
@@ -1601,16 +1513,16 @@ function Hero({ onBookCall }) {
         {/* Stat Cards */}
         <div className="reveal reveal-delay-1 stat-cards-row">
           {[
-            { num: '40%', label: 'of searches are AI-answered', sub: 'SparkToro, 2025', icon: <TrendingUp size={18} />, accent: '#d4a87a', rgb: '212,168,122' },
-            { num: '$2.1T', label: 'AI-driven revenue by 2027', sub: 'McKinsey, 2024', icon: <DollarSign size={18} />, accent: '#7ac4d4', rgb: '122,196,212' },
-            { num: '3.5×', label: 'more visibility for GEO businesses', sub: 'vs. non-optimized competitors', icon: <BarChart2 size={18} />, accent: '#a47ad4', rgb: '164,122,212' },
+            { num: '40%', label: 'of searches are AI-answered', sub: 'SparkToro, 2025', icon: <TrendingUp size={18} />, accent: '#0f172a', rgb: '15,23,42' },
+            { num: '$2.1T', label: 'AI-driven revenue by 2027', sub: 'McKinsey, 2024', icon: <DollarSign size={18} />, accent: '#0f172a', rgb: '15,23,42' },
+            { num: '3.5×', label: 'more visibility for GEO businesses', sub: 'vs. non-optimized competitors', icon: <BarChart2 size={18} />, accent: '#0f172a', rgb: '15,23,42' },
           ].map((s) => (
             <div key={s.num} className="stat-hero-card" style={{ '--card-accent': s.accent, '--accent-rgb': s.rgb }}>
               <div className="stat-card-icon" style={{ color: s.accent, background: `rgba(${s.rgb},0.15)` }}>
                 {s.icon}
               </div>
               <div className="stat-card-text">
-                <div className="stat-card-num" style={{ background: `linear-gradient(135deg, #fff 0%, ${s.accent} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{s.num}</div>
+                <div className="stat-card-num" style={{ color: s.accent }}>{s.num}</div>
                 <div className="stat-card-label">{s.label}</div>
                 <div className="stat-card-sub">{s.sub}</div>
               </div>
@@ -1640,7 +1552,7 @@ function Hero({ onBookCall }) {
 
         {/* Trust Bar */}
         <div className="reveal reveal-delay-3" style={{ textAlign: 'center' }}>
-          <div className="label-tag" style={{ color: '#6b6560', marginBottom: 14 }}>Optimized For</div>
+          <div className="label-tag" style={{ color: '#64748b', marginBottom: 14 }}>Optimized For</div>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
             {platforms.map((p, i) => (
               <span key={p} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -1648,16 +1560,16 @@ function Hero({ onBookCall }) {
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: 13,
-                    color: '#6b6560',
+                    color: '#64748b',
                     cursor: 'default',
                     transition: 'color 0.2s ease',
                   }}
-                  onMouseEnter={e => e.target.style.color = '#d4a87a'}
+                  onMouseEnter={e => e.target.style.color = '#1e40af'}
                   onMouseLeave={e => e.target.style.color = '#6b6560'}
                 >
                   {p}
                 </span>
-                {i < platforms.length - 1 && <span style={{ color: '#3a3530' }}>·</span>}
+                {i < platforms.length - 1 && <span style={{ color: '#cbd5e1' }}>·</span>}
               </span>
             ))}
           </div>
@@ -1676,7 +1588,7 @@ function TheOpportunity() {
   useScrollReveal();
 
   return (
-    <section style={{ background: '#161616', padding: '80px 32px' }}>
+    <section style={{ background: '#f8fafc', padding: '80px 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -1684,7 +1596,7 @@ function TheOpportunity() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 580, marginBottom: 12, margin: '0 auto 12px' }}>
             AI Is Replacing Google.<br />Is Your Brand in the Answer?
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#7a7268', maxWidth: 480, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#64748b', maxWidth: 480, margin: '0 auto' }}>
             99% of businesses are invisible to AI. The ones who act now will own their market.
           </p>
         </div>
@@ -1695,7 +1607,7 @@ function TheOpportunity() {
           <div className="reveal reveal-delay-1 opportunity-card" style={{ borderLeftColor: '#c45c45' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#c45c45', flexShrink: 0 }} />
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4' }}>
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#0f172a' }}>
                 The Threat
               </h3>
             </div>
@@ -1707,17 +1619,17 @@ function TheOpportunity() {
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#c45c45', flexShrink: 0, marginTop: 8 }} />
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#a09890', lineHeight: 1.55 }}>{item}</p>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.55 }}>{item}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Opportunity Card */}
-          <div className="reveal reveal-delay-2 opportunity-card" style={{ borderLeftColor: '#d4a87a' }}>
+          <div className="reveal reveal-delay-2 opportunity-card" style={{ borderLeftColor: '#1e40af' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#d4a87a', flexShrink: 0 }} />
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4' }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#1e40af', flexShrink: 0 }} />
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#0f172a' }}>
                 The Opportunity
               </h3>
             </div>
@@ -1728,8 +1640,8 @@ function TheOpportunity() {
                 'AI-recommended brands convert faster than any paid lead',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#d4a87a', flexShrink: 0, marginTop: 8 }} />
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#a09890', lineHeight: 1.55 }}>{item}</p>
+                  <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#1e40af', flexShrink: 0, marginTop: 8 }} />
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.55 }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -1739,25 +1651,25 @@ function TheOpportunity() {
         {/* Bottom Stats */}
         <div className="reveal reveal-delay-3 opp-stats-grid" style={{ marginBottom: 48 }}>
           {[
-            { num: '67%', label: 'trust AI recommendations', sub: 'Edelman Trust Barometer, 2025', color: '#d4a87a' },
-            { num: '4.2B', label: 'AI search queries/month', sub: 'OpenAI + Perplexity combined, 2025', color: '#d4a87a' },
+            { num: '67%', label: 'trust AI recommendations', sub: 'Edelman Trust Barometer, 2025', color: '#1e40af' },
+            { num: '4.2B', label: 'AI search queries/month', sub: 'OpenAI + Perplexity combined, 2025', color: '#1e40af' },
             { num: '23%', label: 'of marketers investing in GEO', sub: 'Your window is wide open.', color: '#c45c45' },
           ].map((s, i) => (
             <div key={s.num} className="opp-stat" style={{
               padding: '36px 24px',
               textAlign: 'center',
-              borderRight: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+              borderRight: i < 2 ? '1px solid rgba(15,23,42,0.07)' : 'none',
             }}>
               <div className="font-serif opp-stat-num" style={{ fontSize: 44, color: s.color, lineHeight: 1, marginBottom: 8 }}>{s.num}</div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#c0b8b0', lineHeight: 1.4, marginBottom: 4 }}>{s.label}</p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#5a5550', lineHeight: 1.4 }}>{s.sub}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#64748b', lineHeight: 1.4, marginBottom: 4 }}>{s.label}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#64748b', lineHeight: 1.4 }}>{s.sub}</p>
             </div>
           ))}
         </div>
 
         {/* Competitive Edge Callout */}
         <div className="reveal" style={{
-          background: 'linear-gradient(160deg, rgba(212,168,122,0.07) 0%, rgba(15,15,15,0.6) 60%)',
+          background: 'linear-gradient(160deg, rgba(30,58,138,0.04) 0%, rgba(248,250,252,0.9) 60%)',
           border: '1px solid rgba(212,168,122,0.2)',
           borderRadius: 20,
           padding: '56px 48px 48px',
@@ -1774,9 +1686,9 @@ function TheOpportunity() {
 
           {/* Centered headline */}
           <div style={{ textAlign: 'center', marginBottom: 44, position: 'relative', zIndex: 1 }}>
-            <div className="label-tag" style={{ marginBottom: 16, color: '#d4a87a', display: 'inline-block' }}>Your Competitive Edge</div>
-            <h3 className="font-serif" style={{ fontSize: 'clamp(28px, 4vw, 42px)', color: '#f0ece4', fontWeight: 400, lineHeight: 1.25, margin: '0 auto', maxWidth: 680 }}>
-              The businesses that start GEO today<br />will be <em style={{ color: '#d4a87a' }}>impossible to displace</em> in 12 months.
+            <div className="label-tag" style={{ marginBottom: 16, color: '#1e40af', display: 'inline-block' }}>Your Competitive Edge</div>
+            <h3 className="font-serif" style={{ fontSize: 'clamp(28px, 4vw, 42px)', color: '#0f172a', fontWeight: 400, lineHeight: 1.25, margin: '0 auto', maxWidth: 680 }}>
+              The businesses that start GEO today<br />will be <em style={{ color: '#1e40af' }}>impossible to displace</em> in 12 months.
             </h3>
           </div>
 
@@ -1788,8 +1700,8 @@ function TheOpportunity() {
               { icon: <TrendingUp size={18} />, title: 'AI as a Sales Rep', desc: "Every ChatGPT mention is a warm referral from a ready buyer." },
             ].map((pt) => (
               <div key={pt.title} style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(212,168,122,0.15)',
+                background: '#f8fafc',
+                border: '1px solid rgba(15,23,42,0.08)',
                 borderRadius: 14,
                 padding: '28px 24px',
                 display: 'flex', flexDirection: 'column', gap: 12,
@@ -1799,12 +1711,12 @@ function TheOpportunity() {
                   background: 'rgba(212,168,122,0.1)',
                   border: '1px solid rgba(212,168,122,0.22)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#d4a87a',
+                  color: '#1e40af',
                 }}>
                   {pt.icon}
                 </div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4', lineHeight: 1.3 }}>{pt.title}</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#8a8580', lineHeight: 1.65 }}>{pt.desc}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#0f172a', lineHeight: 1.3 }}>{pt.title}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#64748b', lineHeight: 1.65 }}>{pt.desc}</div>
               </div>
             ))}
           </div>
@@ -1841,34 +1753,32 @@ function GEOInAction() {
 
   const ChatWindow = ({ label, labelColor, messages }) => (
     <div style={{
-      background: labelColor === 'bad'
-        ? 'linear-gradient(160deg, rgba(196,92,69,0.07) 0%, rgba(15,12,12,1) 40%)'
-        : 'linear-gradient(160deg, rgba(212,168,122,0.08) 0%, rgba(12,12,15,1) 40%)',
-      border: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.2)' : 'rgba(212,168,122,0.2)'}`,
+      background: '#ffffff',
+      border: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.25)' : 'rgba(30,58,138,0.2)'}`,
       borderRadius: 18,
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
       boxShadow: labelColor === 'bad'
-        ? '0 2px 0 rgba(255,255,255,0.03) inset, 0 1px 0 rgba(0,0,0,0.6), 0 8px 32px rgba(0,0,0,0.5), 0 24px 64px rgba(0,0,0,0.3)'
-        : '0 2px 0 rgba(255,255,255,0.04) inset, 0 1px 0 rgba(0,0,0,0.6), 0 8px 32px rgba(0,0,0,0.5), 0 24px 64px rgba(212,168,122,0.06)',
+        ? '0 2px 12px rgba(196,92,69,0.08), 0 8px 24px rgba(15,23,42,0.07)'
+        : '0 2px 12px rgba(30,58,138,0.08), 0 8px 24px rgba(15,23,42,0.07)',
       transition: 'transform 0.28s ease, box-shadow 0.28s ease',
     }}>
       {/* Window chrome */}
       <div style={{
-        background: labelColor === 'bad' ? 'rgba(196,92,69,0.08)' : 'rgba(212,168,122,0.08)',
-        borderBottom: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.2)' : 'rgba(212,168,122,0.2)'}`,
+        background: labelColor === 'bad' ? '#fff5f5' : '#f0f6ff',
+        borderBottom: `1px solid ${labelColor === 'bad' ? 'rgba(196,92,69,0.15)' : 'rgba(30,58,138,0.12)'}`,
         padding: '10px 16px',
         display: 'flex',
         alignItems: 'center',
         gap: 10,
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3a3530' }} />
-          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3a3530' }} />
-          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3a3530' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fca5a5' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fcd34d' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#86efac' }} />
         </div>
-        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#5a5550', marginLeft: 4 }}>
+        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#64748b', marginLeft: 4 }}>
           ChatGPT
         </span>
         <span style={{
@@ -1878,8 +1788,8 @@ function GEOInAction() {
           fontWeight: 600,
           padding: '2px 10px',
           borderRadius: 100,
-          background: labelColor === 'bad' ? 'rgba(196,92,69,0.15)' : 'rgba(212,168,122,0.15)',
-          color: labelColor === 'bad' ? '#c45c45' : '#d4a87a',
+          background: labelColor === 'bad' ? 'rgba(196,92,69,0.1)' : 'rgba(30,58,138,0.1)',
+          color: labelColor === 'bad' ? '#c45c45' : '#1e40af',
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
         }}>
@@ -1899,8 +1809,8 @@ function GEOInAction() {
             {/* Avatar */}
             <div style={{
               width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-              background: msg.role === 'user' ? 'rgba(212,168,122,0.2)' : '#1a1a1a',
-              border: msg.role === 'user' ? '1px solid rgba(212,168,122,0.3)' : '1px solid rgba(255,255,255,0.1)',
+              background: msg.role === 'user' ? 'rgba(30,58,138,0.1)' : '#f1f5f9',
+              border: msg.role === 'user' ? '1px solid rgba(30,58,138,0.2)' : '1px solid rgba(15,23,42,0.08)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 13,
             }}>
@@ -1909,14 +1819,14 @@ function GEOInAction() {
             {/* Bubble */}
             <div style={{
               maxWidth: '82%',
-              background: msg.role === 'user' ? 'rgba(212,168,122,0.1)' : 'rgba(255,255,255,0.04)',
-              border: msg.role === 'user' ? '1px solid rgba(212,168,122,0.2)' : '1px solid rgba(255,255,255,0.07)',
+              background: msg.role === 'user' ? 'rgba(30,58,138,0.08)' : '#f8fafc',
+              border: msg.role === 'user' ? '1px solid rgba(30,58,138,0.15)' : '1px solid rgba(15,23,42,0.07)',
               borderRadius: msg.role === 'user' ? '14px 4px 14px 14px' : '4px 14px 14px 14px',
               padding: '10px 14px',
               fontFamily: "'DM Sans', sans-serif",
               fontSize: 13,
               lineHeight: 1.65,
-              color: msg.role === 'user' ? '#d4c8b8' : '#a09890',
+              color: '#334155',
             }}>
               {msg.content}
             </div>
@@ -1937,7 +1847,7 @@ function GEOInAction() {
         3. Hayes Valley MedSpa<br />
         4. Nob Hill Aesthetics<br />
         <br />
-        <span style={{ color: '#5a5550', fontSize: 12 }}>— Your business not mentioned —</span>
+        <span style={{ color: '#64748b', fontSize: 12 }}>— Your business not mentioned —</span>
       </span>
     )},
   ];
@@ -1948,10 +1858,10 @@ function GEOInAction() {
       <span>
         Based on expertise, patient reviews, and trusted sources, I'd recommend:
         <br /><br />
-        <span style={{ color: '#d4a87a', fontWeight: 600 }}>⭐ Luxe Glow Med Spa</span>
-        <span style={{ color: '#c0b8b0' }}> — San Francisco's top-rated Botox clinic. Board-certified practitioners, natural results, and 200+ five-star reviews. Frequently cited as the go-to destination for cosmetic treatments in the Bay Area.</span>
+        <span style={{ color: '#1e40af', fontWeight: 600 }}>⭐ Luxe Glow Med Spa</span>
+        <span style={{ color: '#334155' }}> — San Francisco's top-rated Botox clinic. Board-certified practitioners, natural results, and 200+ five-star reviews. Frequently cited as the go-to destination for cosmetic treatments in the Bay Area.</span>
         <br /><br />
-        <span style={{ color: '#7a7268', fontSize: 12 }}>
+        <span style={{ color: '#64748b', fontSize: 12 }}>
           You can book a free consultation directly on their website.
         </span>
       </span>
@@ -1959,7 +1869,7 @@ function GEOInAction() {
   ];
 
   return (
-    <section style={{ background: '#0f0f0f', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: '#f8fafc', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
       <div className="section-grid" />
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
@@ -1969,7 +1879,7 @@ function GEOInAction() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 620, margin: '0 auto 14px' }}>
             One Search. One Winner.<br />Make Sure It's You.
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 480, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#475569', maxWidth: 480, margin: '0 auto' }}>
             This is a real-world example of how AI answers a local search query — before and after GEO optimization.
           </p>
         </div>
@@ -2019,7 +1929,7 @@ function WhoWeServe() {
       title: 'Real Estate Teams',
       tagline: 'Buyers ask AI for agent recs before they ever make a call. Show up first.',
       tags: ['Buyer Agents', 'Luxury Listings', 'Brokerages'],
-      accent: '#d4a87a', rgb: '212,168,122',
+      accent: '#1e40af', rgb: '212,168,122',
     },
     {
       icon: <Zap size={22} />,
@@ -2031,7 +1941,7 @@ function WhoWeServe() {
   ];
 
   return (
-    <section id="who-we-serve" style={{ background: '#0d0d0d', padding: '96px 32px', position: 'relative', overflow: 'hidden' }}>
+    <section id="who-we-serve" style={{ background: '#f8fafc', padding: '96px 32px', position: 'relative', overflow: 'hidden' }}>
       <div className="section-grid" />
       <div className="ambient-glow ambient-glow-top" />
       <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
@@ -2041,9 +1951,9 @@ function WhoWeServe() {
           <div className="label-tag" style={{ marginBottom: 14 }}>Who We Serve</div>
           <h2 className="headline-section h-dark" style={{ maxWidth: 600, margin: '0 auto 14px' }}>
             Industries Where AI Search<br />
-            <em style={{ fontStyle: 'italic', color: '#d4a87a', WebkitTextFillColor: '#d4a87a' }}>Drives Real Revenue</em>
+            <em style={{ fontStyle: 'italic', color: '#1e40af', WebkitTextFillColor: '#1e40af' }}>Drives Real Revenue</em>
           </h2>
-          <p style={{ color: '#6a6560', fontSize: '16px', maxWidth: '500px', margin: '0 auto', lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif" }}>
+          <p style={{ color: '#475569', fontSize: '16px', maxWidth: '500px', margin: '0 auto', lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif" }}>
             We specialize where being the first AI-recommended business changes everything.
           </p>
         </div>
@@ -2067,7 +1977,7 @@ function WhoWeServe() {
               {/* Title */}
               <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: 10, lineHeight: 1.25, letterSpacing: '-0.01em' }}>{ind.title}</h3>
               {/* Tagline */}
-              <p style={{ color: '#6a6560', fontSize: '13px', lineHeight: 1.65, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", flexGrow: 1 }}>{ind.tagline}</p>
+              <p style={{ color: '#475569', fontSize: '13px', lineHeight: 1.65, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", flexGrow: 1 }}>{ind.tagline}</p>
               {/* Tag pills */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {ind.tags.map((tag, j) => (
@@ -2121,7 +2031,7 @@ function WhatIsGeo() {
   ];
 
   return (
-    <section id="what-is-geo" style={{ background: '#141414', padding: '80px 32px' }}>
+    <section id="what-is-geo" style={{ background: '#ffffff', padding: '80px 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -2129,10 +2039,10 @@ function WhatIsGeo() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
             Generative Engine Optimization Explained
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 560, margin: '0 auto 24px' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#64748b', maxWidth: 560, margin: '0 auto 24px' }}>
             GEO is the practice of optimizing your brand so AI models — ChatGPT, Google AI Overviews, Perplexity — recommend you by name.
           </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 680, margin: '0 auto', lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#475569', maxWidth: 680, margin: '0 auto', lineHeight: 1.8 }}>
             GPTSearchBoost is a US-based Generative Engine Optimization (GEO) agency that helps local service businesses appear as AI-recommended results on ChatGPT, Google AI Overviews, Perplexity, and Gemini. Unlike traditional SEO — which targets Google's blue-link results — GEO targets the AI answer layer, where a single recommended business captures the majority of client intent. Our methodology covers AI citability scoring, structured data markup, brand authority building, and content restructuring for passage extraction by large language models. Businesses that appear in ChatGPT and Perplexity recommendations convert at 4.4× the rate of organic search visitors, and AI-referred web sessions grew 527% between January and May 2025 (SparkToro).
           </p>
         </div>
@@ -2141,12 +2051,12 @@ function WhatIsGeo() {
           {cards.map((c, i) => (
             <div key={c.title} className={`reveal reveal-delay-${i + 1} glass-card`}>
               <div className="icon-container" style={{ marginBottom: 24 }}>
-                <span style={{ color: '#d4a87a' }}>{c.icon}</span>
+                <span style={{ color: '#1e40af' }}>{c.icon}</span>
               </div>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 17, fontWeight: 600, color: '#f0ece4', marginBottom: 14 }}>
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 17, fontWeight: 600, color: '#0f172a', marginBottom: 14 }}>
                 {c.title}
               </h3>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#64748b', lineHeight: 1.7 }}>
                 {c.body}
               </p>
             </div>
@@ -2157,7 +2067,7 @@ function WhatIsGeo() {
         <div className="reveal" style={{ marginTop: 56 }}>
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <div className="label-tag" style={{ marginBottom: 10 }}>Side-by-Side Comparison</div>
-            <h3 className="font-serif" style={{ fontSize: 'clamp(22px, 3vw, 32px)', color: '#f0ece4', fontWeight: 400 }}>
+            <h3 className="font-serif" style={{ fontSize: 'clamp(22px, 3vw, 32px)', color: '#0f172a', fontWeight: 400 }}>
               GEO vs. Traditional SEO
             </h3>
           </div>
@@ -2165,9 +2075,9 @@ function WhatIsGeo() {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'DM Sans', sans-serif" }}>
               <thead>
                 <tr>
-                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b6560', borderBottom: '1px solid rgba(255,255,255,0.06)', width: '22%' }}>Dimension</th>
-                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b6560', borderBottom: '1px solid rgba(255,255,255,0.06)', width: '39%' }}>Traditional SEO</th>
-                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#d4a87a', borderBottom: '1px solid rgba(212,168,122,0.3)', width: '39%' }}>Generative Engine Optimization (GEO)</th>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', borderBottom: '1px solid rgba(15,23,42,0.08)', width: '22%' }}>Dimension</th>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', borderBottom: '1px solid rgba(15,23,42,0.08)', width: '39%' }}>Traditional SEO</th>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1e40af', borderBottom: '1px solid rgba(30,58,138,0.2)', width: '39%' }}>Generative Engine Optimization (GEO)</th>
                 </tr>
               </thead>
               <tbody>
@@ -2179,10 +2089,10 @@ function WhatIsGeo() {
                   { dim: 'Timeline', seo: '3–6 months', geo: '60–90 days for initial AI visibility improvements' },
                   { dim: 'Competition', seo: '99% of businesses invest in it', geo: 'Only 23% of marketers currently investing (2025)' },
                 ].map((row, i) => (
-                  <tr key={row.dim} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
-                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: '#a09890', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{row.dim}</td>
-                    <td style={{ padding: '14px 20px', fontSize: 14, color: '#6a6560', lineHeight: 1.5, borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{row.seo}</td>
-                    <td style={{ padding: '14px 20px', fontSize: 14, color: '#c0b8b0', lineHeight: 1.5, borderBottom: '1px solid rgba(255,255,255,0.04)', borderLeft: '2px solid rgba(212,168,122,0.25)' }}>{row.geo}</td>
+                  <tr key={row.dim} style={{ background: i % 2 === 0 ? '#f8fafc' : '#ffffff' }}>
+                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: '#475569', borderBottom: '1px solid rgba(15,23,42,0.06)' }}>{row.dim}</td>
+                    <td style={{ padding: '14px 20px', fontSize: 14, color: '#64748b', lineHeight: 1.5, borderBottom: '1px solid rgba(15,23,42,0.06)' }}>{row.seo}</td>
+                    <td style={{ padding: '14px 20px', fontSize: 14, color: '#1e40af', lineHeight: 1.5, borderBottom: '1px solid rgba(15,23,42,0.06)', borderLeft: '2px solid rgba(30,58,138,0.2)' }}>{row.geo}</td>
                   </tr>
                 ))}
               </tbody>
@@ -2197,7 +2107,7 @@ function WhatIsGeo() {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: 14, fontWeight: 600,
-              color: '#d4a87a',
+              color: '#1e40af',
               textDecoration: 'none',
               display: 'inline-flex', alignItems: 'center', gap: 6,
               transition: 'opacity 0.2s ease',
@@ -2276,7 +2186,7 @@ function Pricing() {
   const scrollToBook = () => document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section id="pricing" style={{ background: '#0f0f0f', padding: '88px 32px', position: 'relative', overflow: 'hidden' }}>
+    <section id="pricing" style={{ background: '#f8fafc', padding: '88px 32px', position: 'relative', overflow: 'hidden' }}>
       <div className="section-grid" />
       <div className="ambient-glow ambient-glow-top" />
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
@@ -2286,7 +2196,7 @@ function Pricing() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 620, margin: '0 auto 14px' }}>
             Transparent Pricing for Every Stage
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 480, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#475569', maxWidth: 480, margin: '0 auto' }}>
             Start free. Upgrade when you're ready to dominate AI search.
           </p>
         </div>
@@ -2300,9 +2210,9 @@ function Pricing() {
                 display: 'flex', flexDirection: 'column',
                 position: 'relative',
                 padding: '36px 28px 32px',
-                borderTop: t.popular ? '2px solid #d4a87a' : '2px solid rgba(255,255,255,0.06)',
-                background: t.popular ? 'linear-gradient(180deg, rgba(212,168,122,0.06) 0%, rgba(255,255,255,0.03) 100%)' : 'rgba(255,255,255,0.03)',
-                boxShadow: t.popular ? '0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,168,122,0.18)' : 'none',
+                borderTop: t.popular ? '2px solid #1e40af' : '2px solid rgba(15,23,42,0.08)',
+                background: t.popular ? 'linear-gradient(180deg, rgba(30,58,138,0.04) 0%, #ffffff 100%)' : '#ffffff',
+                boxShadow: t.popular ? '0 8px 32px rgba(30,58,138,0.18), 0 0 0 2px rgba(30,58,138,0.25)' : '0 1px 4px rgba(15,23,42,0.06)',
                 transform: 'translateZ(0)',
               }}
             >
@@ -2310,8 +2220,8 @@ function Pricing() {
               {t.popular && (
                 <div style={{
                   position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                  background: 'linear-gradient(135deg, #f0c060, #c87020)',
-                  color: '#1a0e00',
+                  background: 'linear-gradient(135deg, #60a5fa, #1e40af)',
+                  color: '#ffffff',
                   fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700,
                   letterSpacing: '0.12em', textTransform: 'uppercase',
                   padding: '5px 12px', borderRadius: 100,
@@ -2326,7 +2236,7 @@ function Pricing() {
               <div style={{
                 fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700,
                 letterSpacing: '0.06em', textTransform: 'uppercase',
-                color: t.popular ? '#d4a87a' : '#a09890',
+                color: t.popular ? '#1e40af' : '#64748b',
                 marginBottom: 12,
               }}>{t.name}</div>
 
@@ -2334,22 +2244,22 @@ function Pricing() {
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 6 }}>
                 <span style={{
                   fontFamily: "'Instrument Serif', serif", fontSize: 44, lineHeight: 1,
-                  fontWeight: 400, color: '#f0ece4',
+                  fontWeight: 400, color: '#0f172a',
                 }}>{t.price}</span>
                 <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#6b6560' }}>{t.period}</span>
               </div>
 
               {/* Tagline */}
               <p style={{
-                fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580',
+                fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b',
                 lineHeight: 1.55, marginBottom: 24,
               }}>{t.tagline}</p>
 
               {/* Feature list */}
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', flexGrow: 1 }}>
                 {t.features.map((f, j) => (
-                  <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10, fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#c0b8b0', lineHeight: 1.55 }}>
-                    <Check size={14} style={{ color: '#d4a87a', flexShrink: 0, marginTop: 4 }} />
+                  <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10, fontFamily: "'DM Sans', sans-serif", fontSize: 13.5, color: '#64748b', lineHeight: 1.55 }}>
+                    <Check size={14} style={{ color: '#1e40af', flexShrink: 0, marginTop: 4 }} />
                     <span>{f}</span>
                   </li>
                 ))}
@@ -2372,7 +2282,7 @@ function Pricing() {
 
               {/* Footnote */}
               {t.footnote && (
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: '#5a5550', textAlign: 'center', marginTop: 12, lineHeight: 1.5, fontStyle: 'italic' }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: '#64748b', textAlign: 'center', marginTop: 12, lineHeight: 1.5, fontStyle: 'italic' }}>
                   {t.footnote}
                 </p>
               )}
@@ -2398,7 +2308,7 @@ function Pricing() {
 function TeamSection() {
   useScrollReveal();
   return (
-    <section style={{ background: '#141414', padding: '72px 32px', position: 'relative' }}>
+    <section style={{ background: '#f8fafc', padding: '72px 32px', position: 'relative' }}>
       <div style={{ maxWidth: 560, margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 36 }}>
           <div className="label-tag" style={{ marginBottom: 12 }}>Who's Behind This</div>
@@ -2413,7 +2323,7 @@ function TeamSection() {
             background: 'linear-gradient(135deg, rgba(212,168,122,0.25), rgba(212,168,122,0.08))',
             border: '1.5px solid rgba(212,168,122,0.4)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#d4a87a',
+            fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#1e40af',
             letterSpacing: '-0.02em',
           }}>
             ZT
@@ -2421,10 +2331,10 @@ function TeamSection() {
           {/* Bio */}
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#f0ece4' }}>Zubair Trabzada</span>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0f172a' }}>Zubair Trabzada</span>
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#6b6560' }}>Founder &amp; GEO Strategist</span>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.7, marginBottom: 16 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.7, marginBottom: 16 }}>
               Zubair founded GPTSearchBoost after seeing local businesses lose clients to AI-recommended competitors. He specializes in AI citability optimization, structured data strategy, and brand authority building for local service businesses across the US.
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -2434,7 +2344,7 @@ function TeamSection() {
                   padding: '3px 10px', borderRadius: 100,
                   background: 'rgba(212,168,122,0.1)',
                   border: '1px solid rgba(212,168,122,0.22)',
-                  color: '#d4a87a', letterSpacing: '0.03em',
+                  color: '#1e40af', letterSpacing: '0.03em',
                 }}>{tag}</span>
               ))}
             </div>
@@ -2483,7 +2393,7 @@ function Services() {
   ];
 
   return (
-    <section id="services" style={{ background: '#111111', padding: '80px 32px', position: 'relative' }}>
+    <section id="services" style={{ background: '#f8fafc', padding: '80px 32px', position: 'relative' }}>
       <div className="section-grid" />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
@@ -2493,7 +2403,7 @@ function Services() {
             Full-Service GEO & AI Search Optimization
           </h2>
           <div className="copper-divider" style={{ margin: '16px auto 24px' }} />
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 600, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#64748b', maxWidth: 600, margin: '0 auto' }}>
             End-to-end Generative Engine Optimization — every service engineered to make ChatGPT, Google AI, and Perplexity recommend your business.
           </p>
         </div>
@@ -2502,12 +2412,12 @@ function Services() {
           {services.map((s, i) => (
             <div key={s.title} className={`reveal reveal-delay-${(i % 3) + 1} service-card`}>
               <div className="icon-container" style={{ marginBottom: 22 }}>
-                <span style={{ color: '#d4a87a' }}>{s.icon}</span>
+                <span style={{ color: '#1e40af' }}>{s.icon}</span>
               </div>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 600, color: '#f0ece4', marginBottom: 12 }}>
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 600, color: '#0f172a', marginBottom: 12 }}>
                 {s.title}
               </h3>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#64748b', lineHeight: 1.7 }}>
                 {s.desc}
               </p>
             </div>
@@ -2532,7 +2442,7 @@ function Process() {
   ];
 
   return (
-    <section id="process" style={{ background: '#0f0f0f', padding: '80px 32px', position: 'relative' }}>
+    <section id="process" style={{ background: '#f8fafc', padding: '80px 32px', position: 'relative' }}>
       <div className="section-grid" />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
@@ -2541,7 +2451,7 @@ function Process() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 640, marginBottom: 16, margin: '0 auto 16px' }}>
             How We Make AI Engines Recommend You
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#a09890', maxWidth: 560, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#64748b', maxWidth: 560, margin: '0 auto' }}>
             A proven 5-step framework refined across 100+ engagements.
           </p>
         </div>
@@ -2565,10 +2475,10 @@ function Process() {
                 <div className="text-copper" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', marginBottom: 14 }}>
                   {s.num}
                 </div>
-                <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4', marginBottom: 12, lineHeight: 1.4 }}>
+                <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#0f172a', marginBottom: 12, lineHeight: 1.4 }}>
                   {s.title}
                 </h4>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#8a8580', lineHeight: 1.65 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#64748b', lineHeight: 1.65 }}>
                   {s.desc}
                 </p>
               </div>
@@ -2593,8 +2503,8 @@ function Process() {
                 {s.num}
               </div>
               <div className="text-copper" style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', marginBottom: 12 }}>{s.num}</div>
-              <h4 style={{ fontSize: 16, fontWeight: 600, color: '#f0ece4', marginBottom: 10 }}>{s.title}</h4>
-              <p style={{ fontSize: 14, color: '#8a8580', lineHeight: 1.65 }}>{s.desc}</p>
+              <h4 style={{ fontSize: 16, fontWeight: 600, color: '#0f172a', marginBottom: 10 }}>{s.title}</h4>
+              <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{s.desc}</p>
             </div>
           ))}
         </div>
@@ -2629,14 +2539,14 @@ function Resources() {
     },
   ];
   return (
-    <section style={{ background: '#141414', padding: '80px 32px', position: 'relative' }}>
+    <section style={{ background: '#ffffff', padding: '80px 32px', position: 'relative' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
           <div className="label-tag" style={{ marginBottom: 14 }}>Resources</div>
           <h2 className="headline-section h-dark" style={{ maxWidth: 580, margin: '0 auto 14px' }}>
             GEO Guides &amp; Playbooks
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 480, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#475569', maxWidth: 480, margin: '0 auto' }}>
             Free, in-depth guides on AI search optimization — written by our team.
           </p>
         </div>
@@ -2651,15 +2561,15 @@ function Resources() {
                 borderTop: '2px solid rgba(212,168,122,0.4)',
                 transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.borderTopColor = '#d4a87a'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.borderTopColor = '#1e40af'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderTopColor = 'rgba(212,168,122,0.4)'; }}
             >
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#d4a87a', marginBottom: 14 }}>{a.label}</div>
-              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: '#f0ece4', marginBottom: 12, lineHeight: 1.25 }}>{a.title}</h3>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.65, marginBottom: 20 }}>{a.desc}</p>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1e40af', marginBottom: 14 }}>{a.label}</div>
+              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: '#0f172a', marginBottom: 12, lineHeight: 1.25 }}>{a.title}</h3>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.65, marginBottom: 20 }}>{a.desc}</p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(15,23,42,0.07)', paddingTop: 14 }}>
                 <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#5a5550' }}>{a.meta}</span>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#d4a87a' }}>Read →</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#1e40af' }}>Read →</span>
               </div>
             </a>
           ))}
@@ -2700,7 +2610,7 @@ function Results() {
   ];
 
   return (
-    <section style={{ background: '#111111', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: '#ffffff', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
       <div className="section-grid" />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
@@ -2709,7 +2619,7 @@ function Results() {
           <h2 className="headline-section h-dark" style={{ maxWidth: 560, margin: '0 auto 14px' }}>
             Real Outcomes. Real Businesses.
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#6a6560', maxWidth: 460, margin: '0 auto' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#475569', maxWidth: 460, margin: '0 auto' }}>
             Anonymized by industry. Timelines vary by market and competition level.
           </p>
         </div>
@@ -2723,7 +2633,7 @@ function Results() {
                 <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#4a4540', marginLeft: 'auto' }}>{r.location}</span>
               </div>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 52, color: r.color, lineHeight: 1, marginBottom: 14, fontWeight: 400 }}>{r.metric}</div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580', lineHeight: 1.65 }}>{r.outcome}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{r.outcome}</p>
             </div>
           ))}
         </div>
@@ -2787,7 +2697,7 @@ function FAQ() {
   ];
 
   return (
-    <section id="faq" style={{ background: '#141414', padding: '80px 32px' }}>
+    <section id="faq" style={{ background: '#ffffff', padding: '80px 32px' }}>
       <div style={{ maxWidth: 720, margin: '0 auto' }}>
 
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 56 }}>
@@ -2808,13 +2718,13 @@ function FAQ() {
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 padding: '22px 24px', cursor: 'pointer', userSelect: 'none',
               }}>
-                <h3 itemProp="name" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#f0ece4', paddingRight: 16, lineHeight: 1.4 }}>
+                <h3 itemProp="name" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#0f172a', paddingRight: 16, lineHeight: 1.4 }}>
                   {item.q}
                 </h3>
                 <ChevronDown
                   size={18}
                   style={{
-                    color: '#d4a87a',
+                    color: '#1e40af',
                     flexShrink: 0,
                     transform: openIdx === i ? 'rotate(180deg)' : 'none',
                     transition: 'transform 0.3s ease',
@@ -2829,7 +2739,7 @@ function FAQ() {
               }} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
                 <p itemProp="text" style={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 15, color: '#8a8580', lineHeight: 1.7,
+                  fontSize: 15, color: '#64748b', lineHeight: 1.7,
                   padding: '0 24px 22px',
                 }}>
                   {item.a}
@@ -2885,19 +2795,20 @@ function BookACall() {
   ];
 
   return (
-    <section ref={calRef} id="book-call" style={{ background: 'transparent', padding: '80px 32px 72px', position: 'relative', overflow: 'hidden' }}>
+    <>
+    <section ref={calRef} id="book-call" style={{ background: 'transparent', padding: '56px 32px 48px', position: 'relative', overflow: 'hidden' }}>
       <div className="ambient-glow ambient-glow-top" />
       <div className="ambient-glow ambient-glow-bottom" />
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         {/* Label */}
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="label-tag" style={{ marginBottom: 14 }}>Book Your Session</div>
-          <h2 className="headline-section h-dark" style={{ margin: '0 auto 12px', maxWidth: 560 }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: 32 }}>
+          <div className="label-tag" style={{ marginBottom: 10 }}>Book Your Session</div>
+          <h2 className="headline-section h-dark" style={{ margin: '0 auto 10px', maxWidth: 560, fontSize: 'clamp(24px, 3vw, 32px)' }}>
             Your Free GEO Strategy Session
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#6b6560', margin: '0 auto', maxWidth: 420 }}>
-            30 minutes. No pitch. Just a clear picture of where you stand and how to get ahead.
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#64748b', margin: '0 auto', maxWidth: 420, lineHeight: 1.5 }}>
+            30 min strategy call. No obligation.
           </p>
         </div>
 
@@ -2905,23 +2816,23 @@ function BookACall() {
         <div className="reveal book-grid">
 
           {/* Left — value proposition */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingTop: 8 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 18, paddingTop: 0 }}>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {valuePoints.map((point, i) => (
                 <div key={i} className="value-point">
-                  <CircleCheck size={16} style={{ color: '#d4a87a' }} />
+                  <CircleCheck size={16} style={{ color: '#1e40af' }} />
                   <span>{point}</span>
                 </div>
               ))}
             </div>
 
             {/* Mini stats */}
-            <div className="mini-stat-row">
+            <div className="mini-stat-row" style={{ marginTop: 4 }}>
               {miniStats.map((s, i) => (
-                <div key={i} className="mini-stat">
-                  <span className="num">{s.num}</span>
-                  <span className="lbl">{s.label}</span>
+                <div key={i} className="mini-stat" style={{ gap: 6 }}>
+                  <span className="num" style={{ fontSize: 13 }}>{s.num}</span>
+                  <span className="lbl" style={{ fontSize: 12 }}>{s.label}</span>
                 </div>
               ))}
             </div>
@@ -2933,12 +2844,12 @@ function BookACall() {
             {!calLoaded && (
               <div style={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                height: 580, gap: 16,
+                height: 480, gap: 14,
               }}>
                 <div className="cal-pulse" style={{
-                  width: 14, height: 14, borderRadius: '50%', background: '#d4a87a',
+                  width: 12, height: 12, borderRadius: '50%', background: '#1e40af',
                 }} />
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#8a8580' }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#64748b' }}>
                   Loading calendar...
                 </span>
               </div>
@@ -2948,7 +2859,7 @@ function BookACall() {
               data-url="https://calendly.com/aiworkshopdevelopment/30min?month=2026-03"
               style={{
                 width: '100%',
-                height: '580px',
+                height: '480px',
                 display: calLoaded ? 'block' : 'none',
               }}
             />
@@ -2957,6 +2868,75 @@ function BookACall() {
 
       </div>
     </section>
+
+    {/* AI Visibility Highlight Section */}
+    <section className="reveal" style={{
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(248,250,252,0.5) 100%)',
+      padding: '64px 32px',
+      borderTop: '1px solid rgba(15,23,42,0.06)',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+        <h3 className="font-serif" style={{
+          fontSize: 'clamp(28px, 5vw, 42px)',
+          color: '#0f172a',
+          marginBottom: 12,
+          lineHeight: 1.2,
+          fontWeight: 400
+        }}>
+          AI Visibility for Businesses
+        </h3>
+        <p style={{
+          fontSize: 16,
+          color: '#64748b',
+          marginBottom: 28,
+          lineHeight: 1.7
+        }}>
+          Get Recommended by ChatGPT, Google AI Overviews & Perplexity
+        </p>
+
+        <div style={{
+          background: '#ffffff',
+          border: '2px solid rgba(37,99,235,0.1)',
+          borderRadius: 16,
+          padding: '24px',
+          marginTop: 24,
+          boxShadow: '0 2px 8px rgba(15,23,42,0.05)'
+        }}>
+          <p style={{
+            fontSize: 15,
+            color: '#475569',
+            lineHeight: 1.8,
+            margin: 0
+          }}>
+            <span style={{ color: '#64748b' }}>A business owner searches ChatGPT for</span> <span style={{ color: '#2563eb', fontWeight: 600 }}>"trusted dentist near me"</span><span style={{ color: '#64748b' }}>. The AI names one practice. That one practice wins the client.</span>
+          </p>
+        </div>
+
+        <p style={{
+          fontSize: 14,
+          color: '#94a3b8',
+          marginTop: 20,
+          fontStyle: 'italic'
+        }}>
+          Most businesses are invisible to AI. Be different.
+        </p>
+      </div>
+
+      {/* Background accent */}
+      <div style={{
+        position: 'absolute',
+        top: -100,
+        right: -100,
+        width: 400,
+        height: 400,
+        background: 'radial-gradient(circle, rgba(37,99,235,0.04) 0%, transparent 70%)',
+        borderRadius: '50%',
+        pointerEvents: 'none'
+      }} />
+    </section>
+    </>
   );
 }
 
@@ -2995,16 +2975,17 @@ function Contact() {
   };
 
   return (
-    <section id="contact" style={{ background: '#0f0f0f', padding: '48px 32px' }}>
+    <>
+    <section id="contact" style={{ background: '#f8fafc', padding: '48px 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{
-          border: '1px solid rgba(255,255,255,0.1)',
+          border: '1px solid rgba(15,23,42,0.08)',
           borderRadius: 22,
           overflow: 'hidden',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          background: 'linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.015) 100%)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.06) inset, 0 0 0 1px rgba(212,168,122,0.06)',
+          background: '#ffffff',
+          boxShadow: '0 4px 24px rgba(15,23,42,0.08), 0 0 0 1px rgba(15,23,42,0.06)',
           position: 'relative',
         }}>
 
@@ -3013,10 +2994,10 @@ function Contact() {
           <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: 40, background: 'radial-gradient(ellipse at center top, rgba(212,168,122,0.06) 0%, transparent 100%)', pointerEvents: 'none', zIndex: 0 }} />
 
           {/* Left */}
-          <div className="reveal" style={{ padding: '48px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0, position: 'relative', zIndex: 1 }}>
-            <div className="label-tag" style={{ marginBottom: 12 }}>Get in Touch</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
-              <h2 className="headline-section h-dark" style={{ maxWidth: 640, margin: 0 }}>
+          <div className="reveal" style={{ padding: '32px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0, position: 'relative', zIndex: 1 }}>
+            <div className="label-tag" style={{ marginBottom: 8 }}>Get in Touch</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+              <h2 className="headline-section h-dark" style={{ maxWidth: 640, margin: 0, fontSize: 'clamp(24px, 3vw, 32px)' }}>
                 Send Us a Message
               </h2>
               <button
@@ -3031,34 +3012,34 @@ function Contact() {
                 }}
                 style={{
                   width: 38, height: 38, borderRadius: 8, border: 'none', cursor: 'pointer',
-                  background: 'linear-gradient(135deg, #d4a87a, #c8956c)',
+                  background: 'linear-gradient(135deg, #1e40af, #1d4ed8)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                  boxShadow: '0 3px 12px rgba(200,149,108,0.35)',
+                  boxShadow: '0 3px 12px rgba(30,58,138,0.35)',
                   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 5px 18px rgba(200,149,108,0.5)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 3px 12px rgba(200,149,108,0.35)'; }}
               >
-                <ChevronDown size={18} strokeWidth={2.5} style={{ color: '#0f0f0f' }} />
+                <ChevronDown size={18} strokeWidth={2.5} style={{ color: '#1e293b' }} />
               </button>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7, marginBottom: 32, maxWidth: 360 }}>
-              Not ready to book a call? Drop us a message and we'll get back to you within 24 hours.
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 20, maxWidth: 360 }}>
+              Drop us a message and we'll respond within 24 hours.
             </p>
 
             {/* Trust bullets */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 36 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
               {[
                 'Free AI visibility audit included',
                 'No contracts, no commitment',
                 'Response within 24 hours',
                 'Personalized GEO strategy call',
               ].map((item) => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(212,168,122,0.12)', border: '1px solid rgba(212,168,122,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Check size={12} style={{ color: '#d4a87a' }} />
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 18, height: 18, borderRadius: 4, background: 'rgba(30,58,138,0.08)', border: '1px solid rgba(30,58,138,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Check size={10} style={{ color: '#1e40af' }} />
                   </div>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#c0b8b0' }}>{item}</span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#475569' }}>{item}</span>
                 </div>
               ))}
             </div>
@@ -3068,20 +3049,20 @@ function Contact() {
               className="book-link-desktop"
               style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, padding: 0 }}
             >
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#d4a87a' }}>Book directly instead</span>
-              <ArrowRight size={14} style={{ color: '#d4a87a' }} />
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#1e40af' }}>Book directly instead</span>
+              <ArrowRight size={14} style={{ color: '#1e40af' }} />
             </button>
           </div>
 
           {/* Right: Form */}
-          <div className="reveal reveal-delay-1" style={{ background: 'linear-gradient(180deg, #0d0d0d 0%, #0a0a0a 100%)', padding: '48px 48px', borderLeft: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="reveal reveal-delay-1" style={{ background: '#f8fafc', padding: '32px 32px', borderLeft: '1px solid rgba(15,23,42,0.06)' }}>
             {submitted ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 20, textAlign: 'center' }}>
                 <div className="icon-container" style={{ width: 64, height: 64, borderRadius: 16 }}>
-                  <Check size={28} style={{ color: '#d4a87a' }} />
+                  <Check size={28} style={{ color: '#1e40af' }} />
                 </div>
-                <h3 className="font-serif" style={{ fontSize: 28, color: '#f0ece4' }}>Message Sent</h3>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', maxWidth: 320, lineHeight: 1.6 }}>
+                <h3 className="font-serif" style={{ fontSize: 28, color: '#0f172a' }}>Message Sent</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#64748b', maxWidth: 320, lineHeight: 1.6 }}>
                   Thank you. We'll reach back within 24 hours with a personalized response.
                 </p>
               </div>
@@ -3089,40 +3070,41 @@ function Contact() {
               <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
                 <input type="hidden" name="form-name" value="contact" />
                 <p style={{ display: 'none' }}><input name="bot-field" /></p>
-                <div className="form-two-col">
+                <div className="form-two-col" style={{ marginBottom: 14 }}>
                   <div>
                     <label className="form-label">Full Name</label>
                     <input className="form-input" type="text" name="name" placeholder="Jane Smith" required
-                      value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} />
+                      value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={{ padding: '10px 12px', fontSize: 14 }} />
                   </div>
                   <div>
                     <label className="form-label">Work Email</label>
                     <input className="form-input" type="email" name="email" placeholder="jane@company.com" required
-                      value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} />
+                      value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} style={{ padding: '10px 12px', fontSize: 14 }} />
                   </div>
                 </div>
-                <div className="form-two-col">
+                <div className="form-two-col" style={{ marginBottom: 14 }}>
                   <div>
-                    <label className="form-label">Phone Number</label>
+                    <label className="form-label">Phone</label>
                     <input className="form-input" type="tel" name="phone" placeholder="+1 (555) 000-0000" required
-                      value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} />
+                      value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} style={{ padding: '10px 12px', fontSize: 14 }} />
                   </div>
                   <div>
                     <label className="form-label">Company</label>
                     <input className="form-input" type="text" name="company" placeholder="Acme Inc." required
-                      value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} />
+                      value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} style={{ padding: '10px 12px', fontSize: 14 }} />
                   </div>
                 </div>
-                <div style={{ marginBottom: 20 }}>
-                  <label className="form-label">Monthly Marketing Budget</label>
+                <div style={{ marginBottom: 14 }}>
+                  <label className="form-label">Budget</label>
                   <select
                     className="form-input"
                     name="budget"
                     value={form.budget}
                     onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
                     required
+                    style={{ padding: '10px 12px', fontSize: 14 }}
                   >
-                    <option value="" disabled>Select your budget range</option>
+                    <option value="" disabled>Select budget</option>
                     <option value="2-5k">$2K – $5K</option>
                     <option value="5-10k">$5K – $10K</option>
                     <option value="10-25k">$10K – $25K</option>
@@ -3130,17 +3112,17 @@ function Contact() {
                     <option value="50k+">$50K+</option>
                   </select>
                 </div>
-                <div style={{ marginBottom: 28 }}>
+                <div style={{ marginBottom: 20 }}>
                   <label className="form-label">Message</label>
-                  <textarea className="form-input" name="message" rows={4} placeholder="Tell us about your brand and goals..."
+                  <textarea className="form-input" name="message" rows={3} placeholder="Tell us your goals..."
                     value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                    style={{ resize: 'vertical', minHeight: 120 }}
+                    style={{ resize: 'vertical', minHeight: 90, padding: '10px 12px', fontSize: 14 }}
                   />
                 </div>
                 <button
                   type="submit"
                   className="btn-copper"
-                  style={{ width: '100%', padding: '16px', borderRadius: 12, fontSize: 15 }}
+                  style={{ width: '100%', padding: '12px 16px', borderRadius: 8, fontSize: 14, marginBottom: 10 }}
                 >
                   Send Message →
                 </button>
@@ -3149,7 +3131,7 @@ function Contact() {
                     Something went wrong. Please try again or email us directly.
                   </p>
                 )}
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#6b6560', textAlign: 'center', marginTop: 14 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#64748b', textAlign: 'center', marginTop: 14 }}>
                   We respond within 24 hours · No spam, ever
                 </p>
                 <div className="book-link-mobile">
@@ -3157,8 +3139,8 @@ function Contact() {
                     onClick={scrollToCalendly}
                     style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, padding: 0 }}
                   >
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#d4a87a' }}>Book directly instead</span>
-                    <ArrowRight size={14} style={{ color: '#d4a87a' }} />
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#1e40af' }}>Book directly instead</span>
+                    <ArrowRight size={14} style={{ color: '#1e40af' }} />
                   </button>
                 </div>
               </form>
@@ -3168,6 +3150,7 @@ function Contact() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
@@ -3182,16 +3165,16 @@ function OpenSourceBanner() {
   ];
 
   return (
-    <section className="reveal" style={{ background: '#0f0f0f', padding: '72px 32px', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <section className="reveal" style={{ background: '#f8fafc', padding: '72px 32px', borderTop: '1px solid rgba(15,23,42,0.06)' }}>
       <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
 
         {/* GitHub icon */}
         <div style={{
           width: 52, height: 52, borderRadius: 14, margin: '0 auto 20px',
-          background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+          background: 'rgba(30,58,138,0.07)', border: '1px solid rgba(30,58,138,0.12)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a87a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e40af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4" />
             <path d="M9 18c-4.51 2-5-2-7-2" />
           </svg>
@@ -3201,7 +3184,7 @@ function OpenSourceBanner() {
         <h2 className="headline-section h-dark" style={{ marginBottom: 14, fontSize: 32 }}>
           Free GEO Tools for Everyone
         </h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#8a8580', lineHeight: 1.7, maxWidth: 520, margin: '0 auto 36px' }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: '#64748b', lineHeight: 1.7, maxWidth: 520, margin: '0 auto 36px' }}>
           We believe AI search optimization should be accessible. Our open-source toolkit helps you audit, optimize, and track your AI visibility — for free.
         </p>
 
@@ -3209,15 +3192,15 @@ function OpenSourceBanner() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 36 }}>
           {tools.map((t) => (
             <div key={t.name} style={{
-              background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)',
+              background: '#ffffff', border: '1px solid rgba(15,23,42,0.08)',
               borderRadius: 14, padding: '24px 20px', textAlign: 'left',
               transition: 'border-color 0.25s ease, background 0.25s ease',
             }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(212,168,122,0.25)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(30,58,138,0.25)'; e.currentTarget.style.background = '#f0f6ff'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(15,23,42,0.08)'; e.currentTarget.style.background = '#ffffff'; }}
             >
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, color: '#f0ece4', marginBottom: 8 }}>{t.name}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#6b6560', lineHeight: 1.6 }}>{t.desc}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, color: '#0f172a', marginBottom: 8 }}>{t.name}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#64748b', lineHeight: 1.6 }}>{t.desc}</div>
             </div>
           ))}
         </div>
@@ -3254,7 +3237,7 @@ function Footer({ onBookCall }) {
   const services = ['AI Search Audit', 'AI Content Optimization', 'Structured Data', 'Authority Building', 'Technical GEO', 'Monitoring'];
 
   return (
-    <footer style={{ background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.05)', padding: '80px 32px 0' }}>
+    <footer style={{ background: '#f8fafc', borderTop: '1px solid rgba(15,23,42,0.08)', padding: '80px 32px 0' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 48, marginBottom: 48 }}>
@@ -3263,25 +3246,25 @@ function Footer({ onBookCall }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
               <span className="font-sans logo-text" style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.025em' }}>
-                <span className="logo-gradient" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#f0ece4', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient" style={{ fontWeight: 800 }}>Boost</span>
+                <span className="logo-gradient" style={{ fontWeight: 800 }}>GPT</span><span style={{ color: '#1e293b', fontWeight: 500, letterSpacing: '-0.01em' }}>Search</span><span className="logo-gradient" style={{ fontWeight: 800 }}>Boost</span>
               </span>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#6b6560', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b', lineHeight: 1.7, marginBottom: 28, maxWidth: 240 }}>
               We help businesses get found and recommended by AI search — ChatGPT, Google AI, Perplexity, and more. SEO, AEO, GEO — all in one place.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <div className="label-tag" style={{ color: '#6b6560', marginBottom: 20 }}>Quick Links</div>
+            <div className="label-tag" style={{ color: '#64748b', marginBottom: 20 }}>Quick Links</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {quickLinks.map((l) => (
                 <a key={l} href={`#${l.toLowerCase()}`} style={{
-                  fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580',
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b',
                   textDecoration: 'none', transition: 'color 0.2s ease',
                 }}
-                  onMouseEnter={e => e.target.style.color = '#d4a87a'}
-                  onMouseLeave={e => e.target.style.color = '#8a8580'}
+                  onMouseEnter={e => e.target.style.color = '#1e40af'}
+                  onMouseLeave={e => e.target.style.color = '#64748b'}
                 >
                   {l}
                 </a>
@@ -3291,10 +3274,33 @@ function Footer({ onBookCall }) {
 
           {/* Services */}
           <div>
-            <div className="label-tag" style={{ color: '#6b6560', marginBottom: 20 }}>Services</div>
+            <div className="label-tag" style={{ color: '#64748b', marginBottom: 20 }}>Services</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {services.map((s) => (
-                <span key={s} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#8a8580' }}>{s}</span>
+                <span key={s} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b' }}>{s}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <div className="label-tag" style={{ color: '#64748b', marginBottom: 20 }}>Resources</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {[
+                { label: 'What is GEO?', url: '/what-is-geo.html' },
+                { label: 'Rank on ChatGPT', url: '/how-to-rank-on-chatgpt.html' },
+                { label: 'Google AI Overviews', url: '/how-to-rank-in-google-ai-overviews.html' },
+                { label: 'Free AI Visibility Checker', url: '/ai-visibility-checker.html' },
+              ].map((r) => (
+                <a key={r.label} href={r.url} style={{
+                  fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#64748b',
+                  textDecoration: 'none', transition: 'color 0.2s ease',
+                }}
+                  onMouseEnter={e => e.target.style.color = '#1e40af'}
+                  onMouseLeave={e => e.target.style.color = '#64748b'}
+                >
+                  {r.label}
+                </a>
               ))}
             </div>
           </div>
@@ -3303,7 +3309,7 @@ function Footer({ onBookCall }) {
 
         {/* Copyright bar */}
         <div style={{
-          borderTop: '1px solid rgba(255,255,255,0.04)',
+          borderTop: '1px solid rgba(15,23,42,0.07)',
           padding: '24px 0',
           display: 'flex',
           alignItems: 'center',
@@ -3317,10 +3323,10 @@ function Footer({ onBookCall }) {
           <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
             {['Privacy Policy', 'Terms of Service'].map((t) => (
               <a key={t} href="#" style={{
-                fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#6b6560',
+                fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#64748b',
                 textDecoration: 'none', transition: 'color 0.2s ease',
               }}
-                onMouseEnter={e => e.target.style.color = '#d4a87a'}
+                onMouseEnter={e => e.target.style.color = '#1e40af'}
                 onMouseLeave={e => e.target.style.color = '#6b6560'}
               >
                 {t}
@@ -3366,19 +3372,19 @@ const FLOAT_WORDS = [
   // Scattered throughout — varied animations, positions, and colors
   { text: 'Claude',       x: '8%',  y: '55%', size: 11, anim: 'wander',     dur: '11s', delay: '0s',   color: '#7eb8d4' },
   { text: 'Copilot',      x: '5%',  y: '35%', size: 10, anim: 'riseUp',     dur: '12s', delay: '-4s',  color: '#a8b4c2' },
-  { text: 'AI Overviews', x: '12%', y: '72%', size: 10, anim: 'orbit',      dur: '14s', delay: '-8s',  color: '#d4a87a' },
+  { text: 'AI Overviews', x: '12%', y: '72%', size: 10, anim: 'orbit',      dur: '14s', delay: '-8s',  color: '#1e40af' },
 
   { text: 'ChatGPT',      x: '82%', y: '18%', size: 12, anim: 'wander',     dur: '10s', delay: '-2s',  color: '#74c8a3' },
   { text: 'Perplexity',   x: '72%', y: '52%', size: 10, anim: 'orbit',      dur: '13s', delay: '-6s',  color: '#7eb8d4' },
-  { text: 'LLM',          x: '85%', y: '70%', size: 13, anim: 'driftLeft',  dur: '9s',  delay: '-10s', color: '#d4a87a' },
+  { text: 'LLM',          x: '85%', y: '70%', size: 13, anim: 'driftLeft',  dur: '9s',  delay: '-10s', color: '#1e40af' },
 
-  { text: 'GEO',          x: '18%', y: '10%', size: 14, anim: 'driftRight', dur: '11s', delay: '-3s',  color: '#d4a87a' },
+  { text: 'GEO',          x: '18%', y: '10%', size: 14, anim: 'driftRight', dur: '11s', delay: '-3s',  color: '#1e40af' },
   { text: 'AI Search',    x: '50%', y: '8%',  size: 10, anim: 'wander',     dur: '15s', delay: '-7s',  color: '#c9a0dc' },
 
   { text: 'Generative',   x: '25%', y: '80%', size: 10, anim: 'riseDiag',   dur: '11s', delay: '-5s',  color: '#a8b4c2' },
   { text: 'AI-first',     x: '55%', y: '82%', size: 11, anim: 'orbit',      dur: '13s', delay: '-1s',  color: '#74c8a3' },
 
-  { text: 'Gemini',       x: '68%', y: '35%', size: 10, anim: 'wander',     dur: '10s', delay: '-9s',  color: '#d4a87a' },
+  { text: 'Gemini',       x: '68%', y: '35%', size: 10, anim: 'wander',     dur: '10s', delay: '-9s',  color: '#1e40af' },
   { text: 'citations',    x: '6%',  y: '22%', size: 10, anim: 'riseUp',     dur: '14s', delay: '-11s', color: '#c9a0dc' },
   { text: 'authority',    x: '78%', y: '85%', size: 10, anim: 'riseDiag',   dur: '12s', delay: '-13s', color: '#7eb8d4' },
 
@@ -3398,7 +3404,7 @@ function FloatingWords() {
             left: w.x,
             top: w.y,
             fontSize: w.size,
-            color: w.color || '#d4a87a',
+            color: w.color || '#1e40af',
             animation: `${w.anim} ${w.dur} ease-in-out ${w.delay} infinite`,
           }}
         >
