@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import BlogList from './pages/BlogList.jsx';
+import BlogPost from './pages/BlogPost.jsx';
+import { posts as blogPosts } from './blogPosts.js';
 import {
   Eye, Brain, Code2, Globe2, BarChart3, Shield,
   ChevronDown, Play, Star, Menu, X, Mail, Phone, MapPin,
@@ -1287,6 +1291,7 @@ function Navbar({ onBookCall }) {
   const links = [
     { label: 'Services', href: '#services' },
     { label: 'Process', href: '#process' },
+    { label: 'Blog', href: '/blog' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -1304,9 +1309,13 @@ function Navbar({ onBookCall }) {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex" style={{ alignItems: 'center', gap: 36 }}>
-            {links.map((l) => (
-              <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
-            ))}
+            {links.map((l) =>
+              l.href.startsWith('/') ? (
+                <Link key={l.label} to={l.href} className="nav-link" style={{ textDecoration: 'none' }}>{l.label}</Link>
+              ) : (
+                <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
+              )
+            )}
           </div>
 
           {/* Book a Call */}
@@ -1333,28 +1342,31 @@ function Navbar({ onBookCall }) {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {links.map((l, i) => (
-            <a
-              key={l.label}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 28,
-                fontWeight: 500,
-                color: '#f0ece4',
-                textDecoration: 'none',
-                padding: '12px 0',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
-                transition: 'color 0.2s ease',
-                animationDelay: `${i * 0.07}s`,
-              }}
-              onMouseEnter={e => e.target.style.color = '#d4a87a'}
-              onMouseLeave={e => e.target.style.color = '#f0ece4'}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l, i) => {
+            const style = {
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 28,
+              fontWeight: 500,
+              color: '#f0ece4',
+              textDecoration: 'none',
+              padding: '12px 0',
+              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              transition: 'color 0.2s ease',
+              animationDelay: `${i * 0.07}s`,
+              display: 'block',
+            };
+            return l.href.startsWith('/') ? (
+              <Link key={l.label} to={l.href} onClick={() => setMenuOpen(false)} style={style}
+                onMouseEnter={e => e.currentTarget.style.color = '#d4a87a'}
+                onMouseLeave={e => e.currentTarget.style.color = '#f0ece4'}
+              >{l.label}</Link>
+            ) : (
+              <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)} style={style}
+                onMouseEnter={e => e.target.style.color = '#d4a87a'}
+                onMouseLeave={e => e.target.style.color = '#f0ece4'}
+              >{l.label}</a>
+            );
+          })}
         </div>
         <div style={{ marginTop: 'auto' }}>
           <button
@@ -2201,6 +2213,84 @@ function Process() {
    SECTION 7: VIDEO SHOWCASE — DARK
 ───────────────────────────────────────────── */
 /* ─────────────────────────────────────────────
+   BLOG PREVIEW SECTION — DARK
+───────────────────────────────────────────── */
+function Blog() {
+  const preview = blogPosts.slice(0, 3);
+  return (
+    <section id="blog" style={{ background: '#0f0f0f', padding: '96px 0' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 64 }}>
+          <div className="label-tag" style={{ marginBottom: 16 }}>Resources</div>
+          <h2 className="font-serif" style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 400, color: '#f0ece4', lineHeight: 1.15, margin: 0 }}>
+            Learn GEO. <span style={{ color: '#c8956c', fontStyle: 'italic' }}>Stay Ahead.</span>
+          </h2>
+          <p className="font-sans" style={{ marginTop: 16, fontSize: 18, color: '#9a9189', maxWidth: 520, margin: '16px auto 0' }}>
+            Guides, playbooks, and tools to help your business get recommended by AI search engines.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 24, marginBottom: 48 }}>
+          {preview.map((post) => (
+            <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
+              <div
+                style={{
+                  background: '#141414',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  borderRadius: 16,
+                  padding: '28px 28px 24px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 14,
+                  transition: 'border-color 0.25s ease, transform 0.25s ease',
+                  cursor: 'pointer',
+                  height: '100%',
+                  boxSizing: 'border-box',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(200,149,108,0.4)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{
+                    fontSize: 11, fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+                    letterSpacing: '0.09em', textTransform: 'uppercase',
+                    color: post.tagColor, background: `${post.tagColor}18`,
+                    padding: '4px 10px', borderRadius: 6,
+                  }}>{post.tag}</span>
+                  <span style={{ fontSize: 12, color: '#6b6560', fontFamily: "'DM Sans', sans-serif" }}>{post.readTime}</span>
+                </div>
+                <h3 className="font-serif" style={{ fontSize: 20, fontWeight: 400, color: '#f0ece4', lineHeight: 1.35, margin: 0, flexGrow: 1 }}>
+                  {post.title}
+                </h3>
+                <p className="font-sans" style={{ fontSize: 14, color: '#8a837b', lineHeight: 1.65, margin: 0 }}>
+                  {post.excerpt}
+                </p>
+                <div style={{ color: '#c8956c', fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600 }}>
+                  Read article →
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <Link to="/blog" style={{
+            display: 'inline-block', textDecoration: 'none',
+            border: '1px solid rgba(200,149,108,0.4)',
+            color: '#c8956c', fontFamily: "'DM Sans', sans-serif",
+            fontSize: 14, fontWeight: 600, padding: '12px 28px', borderRadius: 10,
+            transition: 'background 0.2s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,149,108,0.08)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+            View All Articles →
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+/* ─────────────────────────────────────────────
    SECTION 9: FAQ — LIGHT (WARMER)
 ───────────────────────────────────────────── */
 function FAQ() {
@@ -2352,39 +2442,13 @@ function BookACall() {
           </p>
         </div>
 
-        {/* Two-column grid */}
-        <div className="reveal book-grid">
-
-          {/* Left — value proposition */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingTop: 8 }}>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {valuePoints.map((point, i) => (
-                <div key={i} className="value-point">
-                  <CircleCheck size={16} style={{ color: '#d4a87a' }} />
-                  <span>{point}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Mini stats */}
-            <div className="mini-stat-row">
-              {miniStats.map((s, i) => (
-                <div key={i} className="mini-stat">
-                  <span className="num">{s.num}</span>
-                  <span className="lbl">{s.label}</span>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-          {/* Right — Calendly embed */}
-          <div className="calendly-wrapper calendly-wrapper-dark">
+        {/* Calendly — full width, responsive */}
+        <div className="reveal" style={{ width: '100%', maxWidth: 720, margin: '0 auto' }}>
+          <div className="calendly-wrapper calendly-wrapper-dark" style={{ width: '100%' }}>
             {!calLoaded && (
               <div style={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                height: 580, gap: 16,
+                height: 'clamp(400px, 60vw, 580px)', gap: 16,
               }}>
                 <div className="cal-pulse" style={{
                   width: 14, height: 14, borderRadius: '50%', background: '#d4a87a',
@@ -2399,13 +2463,12 @@ function BookACall() {
               data-url="https://calendly.com/aiworkshopdevelopment/30min?month=2026-03"
               style={{
                 width: '100%',
-                height: '580px',
+                height: 'clamp(400px, 60vw, 580px)',
                 display: calLoaded ? 'block' : 'none',
               }}
             />
           </div>
         </div>
-
       </div>
     </section>
   );
@@ -2489,22 +2552,6 @@ function Contact() {
               Not ready to book a call? Drop us a message and we'll get back to you within 24 hours.
             </p>
 
-            {/* Trust bullets */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 36 }}>
-              {[
-                'Free AI visibility audit included',
-                'No contracts, no commitment',
-                'Response within 24 hours',
-                'Personalized GEO strategy call',
-              ].map((item) => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(212,168,122,0.12)', border: '1px solid rgba(212,168,122,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Check size={12} style={{ color: '#d4a87a' }} />
-                  </div>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#c0b8b0' }}>{item}</span>
-                </div>
-              ))}
-            </div>
 
             <button
               onClick={scrollToCalendly}
@@ -2554,23 +2601,6 @@ function Contact() {
                     <input className="form-input" type="text" name="company" placeholder="Acme Inc." required
                       value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} />
                   </div>
-                </div>
-                <div style={{ marginBottom: 20 }}>
-                  <label className="form-label">Monthly Marketing Budget</label>
-                  <select
-                    className="form-input"
-                    name="budget"
-                    value={form.budget}
-                    onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
-                    required
-                  >
-                    <option value="" disabled>Select your budget range</option>
-                    <option value="2.5-5k">$2.5K – $5K</option>
-                    <option value="5-10k">$5K – $10K</option>
-                    <option value="10-25k">$10K – $25K</option>
-                    <option value="25-50k">$25K – $50K</option>
-                    <option value="50k+">$50K+</option>
-                  </select>
                 </div>
                 <div style={{ marginBottom: 28 }}>
                   <label className="form-label">Message</label>
@@ -2973,20 +3003,14 @@ function FloatingParticles() {
 /* ─────────────────────────────────────────────
    MAIN APP
 ───────────────────────────────────────────── */
-export default function App() {
+function HomePage() {
   useScrollReveal();
-
   const scrollToBookCall = useCallback(() => {
     document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
   }, []);
-
   return (
     <>
-      <GlobalStyles />
-      <FloatingWords />
-      <FloatingParticles />
       <Navbar onBookCall={scrollToBookCall} />
-
       <Hero onBookCall={scrollToBookCall} />
       <Contact />
       <BookACall />
@@ -2996,11 +3020,24 @@ export default function App() {
       <WhatIsGeo />
       <Services />
       <Process />
+      <Blog />
       <FAQ />
       <OpenSourceBanner />
       <Footer onBookCall={scrollToBookCall} />
-
       <MobileFAB onBookCall={scrollToBookCall} />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <GlobalStyles />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
     </>
   );
 }
