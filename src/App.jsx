@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import BlogList from './pages/BlogList.jsx';
 import BlogPost from './pages/BlogPost.jsx';
 import { posts as blogPosts } from './blogPosts.js';
@@ -27,6 +27,12 @@ const GlobalStyles = () => (
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+    }
+
+    /* Off-screen sections rendered lazily */
+    section {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 600px;
     }
 
     /* Grain overlay */
@@ -60,26 +66,12 @@ const GlobalStyles = () => (
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: metallic-shift 4s ease-in-out infinite;
       filter: brightness(1.1);
     }
-    @keyframes metallic-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
 
-    /* Subtle float for logo accent words */
-    .logo-float-gpt {
+    /* Logo float — static, no animation */
+    .logo-float-gpt, .logo-float-boost {
       display: inline-block;
-      animation: logo-float 3s ease-in-out infinite;
-    }
-    .logo-float-boost {
-      display: inline-block;
-      animation: logo-float 3s ease-in-out infinite 1.5s;
-    }
-    @keyframes logo-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-2px); }
     }
 
     /* Logo text glow */
@@ -871,14 +863,9 @@ const GlobalStyles = () => (
       50% { opacity: 0; }
     }
 
-    /* Bounce-down arrow animation */
+    /* Bounce-down arrow — static */
     .bounce-down {
       display: inline-flex;
-      animation: bounceDown 1.5s ease-in-out infinite;
-    }
-    @keyframes bounceDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(3px); }
     }
 
     /* Floating mobile CTA — bottom-right pill, slides up on scroll */
@@ -918,71 +905,6 @@ const GlobalStyles = () => (
       .mobile-fab { display: none !important; }
     }
 
-    /* ── Floating keyword words — come & go animations ── */
-    /* Rise up and fade */
-    @keyframes riseUp {
-      0%   { transform: translateY(60px) translateX(0px);    opacity: 0; }
-      15%  { opacity: 0.28; }
-      50%  { opacity: 0.22; transform: translateY(10px) translateX(12px); }
-      80%  { opacity: 0.18; }
-      100% { transform: translateY(-40px) translateX(-8px);  opacity: 0; }
-    }
-    /* Drift right with wobble */
-    @keyframes driftRight {
-      0%   { transform: translateX(-50px) translateY(0px);   opacity: 0; }
-      15%  { opacity: 0.25; }
-      40%  { transform: translateX(0px) translateY(-15px);   opacity: 0.22; }
-      70%  { transform: translateX(30px) translateY(8px);    opacity: 0.18; }
-      100% { transform: translateX(50px) translateY(-12px);  opacity: 0; }
-    }
-    /* Drift left with wobble */
-    @keyframes driftLeft {
-      0%   { transform: translateX(50px)  translateY(10px);  opacity: 0; }
-      15%  { opacity: 0.25; }
-      35%  { transform: translateX(10px) translateY(-12px);  opacity: 0.22; }
-      65%  { transform: translateX(-20px) translateY(15px);  opacity: 0.18; }
-      100% { transform: translateX(-50px) translateY(-10px); opacity: 0; }
-    }
-    /* Wander — organic random path */
-    @keyframes wander {
-      0%   { transform: translate(0px, 0px);      opacity: 0; }
-      12%  { opacity: 0.26; }
-      25%  { transform: translate(25px, -20px);    opacity: 0.24; }
-      50%  { transform: translate(-15px, -35px);   opacity: 0.2; }
-      75%  { transform: translate(20px, -50px);    opacity: 0.16; }
-      100% { transform: translate(-10px, -65px);   opacity: 0; }
-    }
-    /* Orbit — circular float */
-    @keyframes orbit {
-      0%   { transform: translate(0px, 0px);      opacity: 0; }
-      10%  { opacity: 0.25; }
-      25%  { transform: translate(30px, -15px);    opacity: 0.22; }
-      50%  { transform: translate(10px, -35px);    opacity: 0.2; }
-      75%  { transform: translate(-25px, -18px);   opacity: 0.18; }
-      90%  { opacity: 0.12; }
-      100% { transform: translate(0px, 0px);       opacity: 0; }
-    }
-    /* Rise diagonally with curve */
-    @keyframes riseDiag {
-      0%   { transform: translateY(50px)  translateX(-20px); opacity: 0; }
-      18%  { opacity: 0.26; }
-      45%  { transform: translateY(10px) translateX(10px);   opacity: 0.22; }
-      78%  { opacity: 0.15; }
-      100% { transform: translateY(-35px) translateX(20px);  opacity: 0; }
-    }
-    .float-word {
-      position: fixed;
-      pointer-events: none;
-      user-select: none;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      font-size: 11px;
-      z-index: 1;
-      white-space: nowrap;
-      opacity: 0;
-    }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 6px; }
@@ -1006,31 +928,18 @@ const GlobalStyles = () => (
       box-shadow: 0 -1px 12px rgba(200,149,108,0.15), 0 0 40px rgba(200,149,108,0.05);
     }
 
-    /* Calendly loading pulse */
-    @keyframes calPulse {
-      0%, 100% { opacity: 0.4; transform: scale(0.9); }
-      50%       { opacity: 1;   transform: scale(1.1); }
-    }
-    .cal-pulse { animation: calPulse 1.6s ease-in-out infinite; }
+    .cal-pulse { opacity: 0.7; }
 
-    /* Hero grid overlay — animated drift */
-    @keyframes gridDrift {
-      0%   { background-position: 0 0, 0 0; }
-      100% { background-position: 60px 60px, 60px 60px; }
-    }
-    @keyframes gridShimmer {
-      0%, 100% { opacity: 0.65; }
-      50%       { opacity: 1; }
-    }
+    /* Hero grid overlay — static */
     .hero-grid {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(212,168,122,0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,168,122,0.1) 1px, transparent 1px);
+        linear-gradient(rgba(212,168,122,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,122,0.08) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
-      animation: gridDrift 14s linear infinite, gridShimmer 6s ease-in-out infinite;
+      opacity: 0.75;
       -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     }
@@ -1115,27 +1024,10 @@ const GlobalStyles = () => (
       z-index: 0;
     }
 
-    /* CTA button wrapper — ripple rings */
-    @keyframes btnRipple {
-      0%   { transform: scale(1);    opacity: 0.55; }
-      100% { transform: scale(1.75); opacity: 0; }
-    }
+    /* CTA button wrapper */
     .btn-pulse-wrap {
       position: relative;
       display: inline-flex;
-    }
-    .btn-pulse-wrap::before,
-    .btn-pulse-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 14px;
-      border: 2px solid rgba(224, 160, 48, 0.6);
-      animation: btnRipple 2.2s ease-out infinite;
-      pointer-events: none;
-    }
-    .btn-pulse-wrap::after {
-      animation-delay: 1.1s;
     }
 
     /* Hero radial glow */
@@ -1731,10 +1623,8 @@ function TheOpportunity() {
 /* ─────────────────────────────────────────────
    SECTION: GEO IN ACTION — ChatGPT mockup
 ───────────────────────────────────────────── */
-function GEOInAction() {
-  useScrollReveal();
-
-  const ChatWindow = ({ label, labelColor, messages }) => (
+function ChatWindow({ label, labelColor, messages }) {
+  return (
     <div style={{
       background: labelColor === 'bad'
         ? 'linear-gradient(160deg, rgba(196,92,69,0.07) 0%, rgba(15,12,12,1) 40%)'
@@ -1820,6 +1710,10 @@ function GEOInAction() {
       </div>
     </div>
   );
+}
+
+function GEOInAction() {
+  useScrollReveal();
 
   const beforeMessages = [
     { role: 'user', content: 'What\'s the best med spa for Botox near San Francisco?' },
